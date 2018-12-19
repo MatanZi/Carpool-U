@@ -17,10 +17,12 @@
         <TextView
             android:id="@+id/textViewUserEmail"
             android:layout_width="151dp"
-            android:layout_height="42dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            app:fontFamily="casual" />
 
         <Button
             android:id="@+id/buttonLogout"

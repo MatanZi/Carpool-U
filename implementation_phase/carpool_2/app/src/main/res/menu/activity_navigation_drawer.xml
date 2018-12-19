@@ -4,34 +4,31 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/results"
+            android:title="Last results" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/post_carpool"
+            android:title="Publish a trip" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/find_carpool"
+            android:title="Find a Carpool" />
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Account"
+        android:id="@+id/NameAccount" >
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/posts"
+                android:title="My Posts" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/profile"
+                android:title="My Profile" />
+            <item
+                android:id="@+id/signOut"
+                android:title="Sign Out" />
         </menu>
     </item>
 

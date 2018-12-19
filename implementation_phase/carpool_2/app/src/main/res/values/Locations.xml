@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <string-array name="city_array">
+            <item>city </item>
+            <item>Netanya </item>
+            <item>tlv</item>
+            <item>hedera</item>
+            <item>haifa</item>
+            <item>ashdod</item>
+            <item>jerusalem</item>
+            <item>Ariel</item>
+            <item>ely</item>
+        </string-array>
+
+    <string-array name="university_array">
+        <item>University </item>
+        <item>Ariel U </item>
+        <item>tlv U</item>
+        <item>Ben gurion U</item>
+        <item>Technion</item>
+        <item>haifa U</item>
+        <item>ashkelon U</item>
+        <item>jerusalem U</item>
+        <item>Wingate</item>
+    </string-array>
+
+</resources>

@@ -16,23 +16,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SignInActivity"
-            android:label="@string/title_activity_CarpoolU">
+            android:name=".MainActivity"
+            android:label="@string/title_activity_navigation"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MainActivity" />
         <activity
-            android:name=".NavigationActivity"
-            android:label="@string/title_activity_navigation"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:name=".SignInActivity"
+            android:label="@string/title_activity_Sign_In"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".SignUpActivity"
+            android:label="@string/title_activity_Sign_out"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_Profile"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".PublishActivity"
+            android:label="@string/title_activity_publish"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

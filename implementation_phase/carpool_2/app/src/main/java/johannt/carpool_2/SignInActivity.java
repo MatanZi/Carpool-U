@@ -1,5 +1,4 @@
 package johannt.carpool_2;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -27,7 +26,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private EditText editTextPassword;
     private TextView textViewSignup;
 
-
     //firebase auth object
     private FirebaseAuth firebaseAuth;
 
@@ -40,7 +38,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        //getting firebase auth object
+
+        // /getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
 
         //if the objects getcurrentuser method is not null
@@ -57,13 +56,15 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonSignIn = (Button) findViewById(R.id.buttonSignin);
         textViewSignup  = (TextView) findViewById(R.id.textViewSignin);
-
         progressDialog = new ProgressDialog(this);
-
         //attaching click listener
         buttonSignIn.setOnClickListener(this);
         textViewSignup.setOnClickListener(this);
+
     }
+
+
+
 
     //method for user login
     private void userLogin(){
@@ -126,8 +127,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         if(view == textViewSignup){
-            finish();
+            //finish();
             startActivity(new Intent(this, SignUpActivity.class));
         }
+    }
+
+    public static class Itinerary {
     }
 }
