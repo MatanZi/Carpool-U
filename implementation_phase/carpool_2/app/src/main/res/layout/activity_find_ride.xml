@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FindRideActivity">
+
+    <EditText
+        android:id="@+id/pickupTimeField"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="79dp"
+        android:ems="10"
+        android:hint="Enter pickup time"
+        android:inputType="time"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerCity"
+        app:layout_constraintEnd_toStartOf="@+id/arrivalTimeField"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateField" />
+
+    <EditText
+        android:id="@+id/arrivalTimeField"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter arrival time"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pickupTimeField"
+        tools:ignore="UnknownId"
+        tools:layout_editor_absoluteY="211dp" />
+
+
+    <EditText
+        android:id="@+id/dateField"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginRight="168dp"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:hint="enter date"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/pickupTimeField"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.233"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@tools:sample/date/ddmmyy" />
+
+    <Button
+        android:id="@+id/SearchBtn"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="117dp"
+        android:layout_marginLeft="117dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginRight="116dp"
+        android:text="Search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerUniversity" />
+
+    <Spinner
+        android:id="@+id/spinnerCity"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/city_array"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="316dp"></Spinner>
+
+    <Spinner
+        android:id="@+id/spinnerUniversity"
+        android:layout_width="374dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="126dp"
+        android:entries="@array/university_array"
+        app:layout_constraintBottom_toTopOf="@+id/SearchBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCity"></Spinner>
+
+    <EditText
+        android:id="@+id/priceField"
+        android:layout_width="189dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginLeft="168dp"
+        android:layout_marginTop="88dp"
+        android:ems="10"
+        android:hint="Enter price"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.982"
+        app:layout_constraintStart_toEndOf="@+id/dateField"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

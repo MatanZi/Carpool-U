@@ -10,10 +10,10 @@
             android:title="Last results" />
         <item
             android:id="@+id/post_carpool"
-            android:title="Publish a trip" />
+            android:title="Post a carpool" />
         <item
             android:id="@+id/find_carpool"
-            android:title="Find a Carpool" />
+            android:title="Find a carpool" />
 
     </group>
 

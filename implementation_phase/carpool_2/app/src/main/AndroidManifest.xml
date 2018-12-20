@@ -41,6 +41,7 @@
             android:name=".PublishActivity"
             android:label="@string/title_activity_publish"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FindRideActivity"></activity>
     </application>
 
 </manifest>

@@ -18,6 +18,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * A login screen that offers login via email/password.
  */
@@ -42,10 +45,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         firebaseAuth = FirebaseAuth.getInstance();
 
         //initializing views
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPassword);
 
-        buttonSignup = (Button) findViewById(R.id.buttonSignup);
+        buttonSignup = findViewById(R.id.buttonSignup);
 
         progressDialog = new ProgressDialog(this);
 
@@ -61,10 +64,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //updateUI(currentUser);
     }
     private void registerUser(){
-
         //getting email and password from edit texts
         String email = editTextEmail.getText().toString().trim();
         String password  = editTextPassword.getText().toString().trim();
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(email);
 
         //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
@@ -74,6 +79,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(matcher.matches() == false){
+            Toast.makeText(this,"Please enter valid mail address",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(password.length() < 6){
+            Toast.makeText(this,"Password must contain atleast 6 digits/characters",Toast.LENGTH_LONG).show();
             return;
         }
 

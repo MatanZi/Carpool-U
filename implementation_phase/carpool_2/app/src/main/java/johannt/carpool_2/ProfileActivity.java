@@ -19,6 +19,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     //view objects
     private TextView textViewUserEmail;
     private Button buttonLogout;
+    public Button FindRideBtn;
+    private Button PostRideBtn;
+
 
 
     @Override
@@ -36,27 +39,29 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //initializing views
-        textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
-        buttonLogout = (Button) findViewById(R.id.buttonLogout);
+        textViewUserEmail = findViewById(R.id.textViewUserEmail);
+        buttonLogout = findViewById(R.id.buttonLogout);
+        FindRideBtn = findViewById(R.id.FindRideBtn);
+        PostRideBtn = findViewById(R.id.PostRideBtn);
 
 
-        if(firebaseAuth.getCurrentUser() == null){
+        if (user == null) {
             //closing this activity
+            finish();
             //starting login activity
             startActivity(new Intent(this, SignInActivity.class));
-            //finish();
 
-        }
-        else {
+
+        } else {
             //displaying logged in user name
             textViewUserEmail.setText("Welcome " + user.getEmail());
+
+            //adding listener to button
+            buttonLogout.setOnClickListener(this);
+            FindRideBtn.setOnClickListener(this);
+            PostRideBtn.setOnClickListener(this);
         }
-        //adding listener to button
-        buttonLogout.setOnClickListener(this);
-
-
     }
-
 
 
     @Override
@@ -70,5 +75,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             //starting login activity
             startActivity(new Intent(this, SignInActivity.class));
         }
-    }
+
+        if(view == FindRideBtn){
+            startActivity(new Intent(this, FindRideActivity.class));
+        }
+
+        if(view == PostRideBtn){
+            startActivity(new Intent(this, PublishActivity.class));
+        }
+
+}
 }
