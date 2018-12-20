@@ -17,9 +17,6 @@ import java.util.regex.Pattern;
 
 public class FindRideActivity extends AppCompatActivity implements View.OnClickListener {
 
-
-
-
     private EditText editTextDate;
     private EditText editTextStartTime;
     private EditText editTextEndTime;
@@ -84,6 +81,7 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
 
         if(view == searchBtn){
             if(checker){
+
                 //send qurey to firebase
             }
         }
