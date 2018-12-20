@@ -80,8 +80,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         validator.checkEmail(email , this);
         validator.checkPassword(password ,this);
 
+        //Todo: insert the new user object to the firebase database
         User newUser = new User(firstname , lastname , email , password);
-        
+
 
         //if the email and password are not empty
         //displaying a progress dialog
