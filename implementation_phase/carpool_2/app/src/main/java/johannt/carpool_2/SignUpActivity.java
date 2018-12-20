@@ -29,6 +29,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     //defining view objects
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private EditText editTextFirstName;
+    private EditText editTextLastName;
     private Button buttonSignup;
     private ProgressDialog progressDialog;
 
@@ -47,6 +49,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //initializing views
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
+        editTextFirstName = findViewById(R.id.editTextFirstName);
+        editTextLastName = findViewById(R.id.editTextLastName);
 
         buttonSignup = findViewById(R.id.buttonSignup);
 
@@ -67,6 +71,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //getting email and password from edit texts
         String email = editTextEmail.getText().toString().trim();
         String password  = editTextPassword.getText().toString().trim();
+        String firstname = editTextFirstName.getText().toString().trim();
+        String lastname  = editTextLastName.getText().toString().trim();
         validator validator = new validator();
 
 
@@ -74,7 +80,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         validator.checkEmail(email , this);
         validator.checkPassword(password ,this);
 
-
+        User newUser = new User(firstname , lastname , email , password);
+        
 
         //if the email and password are not empty
         //displaying a progress dialog
