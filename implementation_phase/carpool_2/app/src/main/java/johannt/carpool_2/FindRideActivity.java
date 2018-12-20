@@ -12,7 +12,12 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class FindRideActivity extends AppCompatActivity implements View.OnClickListener {
+
+
 
 
     private EditText editTextDate;
@@ -61,52 +66,25 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
 
 
     //checking if date ,endTime , startTime , src and dst are empty
-    private boolean checkFields() {
-         date = editTextDate.getText().toString();
-         endTime = editTextEndTime.getText().toString();
-         startTime = editTextStartTime.getText().toString();
-         price = editTextPrice.getText().toString();
-         src = spinnerCity.getSelectedItem().toString();
-         dst = spinnerUniversity.getSelectedItem().toString();
-
-        if (TextUtils.isEmpty(date)) {
-            Toast.makeText(this, "Please enter date", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        else if (TextUtils.isEmpty(endTime)) {
-            Toast.makeText(this, "Please enter arrival time", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        else if (TextUtils.isEmpty(startTime)) {
-            Toast.makeText(this, "Please enter pickup time", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        else if (TextUtils.isEmpty(price)) {
-            Toast.makeText(this, "Please enter a price", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        else if (TextUtils.isEmpty(src)) {
-            Toast.makeText(this, "Please enter source place", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        else if (TextUtils.isEmpty(dst)) {
-            Toast.makeText(this, "Please enter destination place", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return  true;
-    }
-
-
-
     public void onClick(View view) {
+        date = editTextDate.getText().toString();
+        endTime = editTextEndTime.getText().toString();
+        startTime = editTextStartTime.getText().toString();
+        price = editTextPrice.getText().toString();
+        src = spinnerCity.getSelectedItem().toString();
+        dst = spinnerUniversity.getSelectedItem().toString();
+
+        validator validator = new validator();
+        boolean checker = validator.checkDate(date, this) &&
+                validator.checkdst(dst, this) &&
+                validator.checkSrc(src, this) &&
+                validator.checkPrice(price, this) &&
+                validator.checkTime(endTime, this) &&
+                validator.checkTime(startTime, this);
+
         if(view == searchBtn){
-            if(checkFields()){
-               //send qurey to firebase
+            if(checker){
+                //send qurey to firebase
             }
         }
     }

@@ -67,30 +67,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //getting email and password from edit texts
         String email = editTextEmail.getText().toString().trim();
         String password  = editTextPassword.getText().toString().trim();
-        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(email);
+        validator validator = new validator();
 
-        //checking if email and passwords are empty
-        if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
-            return;
-        }
 
-        if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
-            return;
-        }
+        // check email and password
+        validator.checkEmail(email , this);
+        validator.checkPassword(password ,this);
 
-        if(matcher.matches() == false){
-            Toast.makeText(this,"Please enter valid mail address",Toast.LENGTH_LONG).show();
-            return;
-        }
 
-        if(password.length() < 6){
-            Toast.makeText(this,"Password must contain atleast 6 digits/characters",Toast.LENGTH_LONG).show();
-            return;
-        }
 
         //if the email and password are not empty
         //displaying a progress dialog
