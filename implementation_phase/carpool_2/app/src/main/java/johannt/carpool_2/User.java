@@ -6,19 +6,24 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private static int id=0;
+    private String phoneNumber;
+    private String city;
+    private String university;
+    private String id; // id =0 reserved for admin.
 
 
     //--------------------------------- Constractor ---------------------------------
 
-    public User(String firstName, String lastName , String email , String password){
+    public User(String firstName, String lastName, String email, String password, String phoneNumber, String city, String university, String id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.id = ++id;
+        this.phoneNumber = phoneNumber;
+        this.city = city;
+        this.university = university;
+        this.id = id;
     }
-
 
 
     //--------------------------------- Getter / Setters ---------------------------------
@@ -55,14 +60,11 @@ public class User {
         this.password = password;
     }
 
-    public static int getId() {
+    public String getId() {
         return id;
     }
 
-    public static void setId(int id) {
-        User.id = id;
+    public void setId(String id) {
+        this.id = id;
     }
-
-
-
 }

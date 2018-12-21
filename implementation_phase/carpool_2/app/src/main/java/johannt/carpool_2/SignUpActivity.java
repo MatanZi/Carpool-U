@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,26 +18,46 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.xml.validation.Validator;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String password;
+    private String repeatPassword;
+    private String phoneNumber;
+    private String city;
+    private String university;
+    private String id;
+    private Boolean checker;
+
     //defining view objects
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextFirstName;
     private EditText editTextLastName;
+    private EditText editTextPhoneNumber;
+    private EditText editTextRepeatPassword;
+    private Spinner spinnerCity;
+    private Spinner spinnerUniversity;
     private Button buttonSignup;
     private ProgressDialog progressDialog;
 
 
     //defining firebaseauth object
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +66,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         //initializing firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
+        databaseUsers = FirebaseDatabase.getInstance().getReference("Users");
 
         //initializing views
-        editTextEmail = findViewById(R.id.editTextEmail);
-        editTextPassword = findViewById(R.id.editTextPassword);
         editTextFirstName = findViewById(R.id.editTextFirstName);
         editTextLastName = findViewById(R.id.editTextLastName);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        editTextRepeatPassword = findViewById(R.id.editTextRepeatPassword);
+        editTextPhoneNumber = findViewById(R.id.editTextPhoneNumber);
+        spinnerCity = findViewById(R.id.spinnerCity);
+        spinnerUniversity = findViewById(R.id.spinnerUniversity);
 
         buttonSignup = findViewById(R.id.buttonSignup);
 
@@ -69,45 +95,68 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
     private void registerUser(){
         //getting email and password from edit texts
-        String email = editTextEmail.getText().toString().trim();
-        String password  = editTextPassword.getText().toString().trim();
-        String firstname = editTextFirstName.getText().toString().trim();
-        String lastname  = editTextLastName.getText().toString().trim();
-        validator validator = new validator();
+         firstname = editTextFirstName.getText().toString().trim();
+         lastname  = editTextLastName.getText().toString().trim();
+         email = editTextEmail.getText().toString().trim();
+         password = editTextPassword.getText().toString().trim();
+         repeatPassword = editTextRepeatPassword.getText().toString().trim();
+         phoneNumber = editTextPhoneNumber.getText().toString().trim();
+         city = spinnerCity.getSelectedItem().toString().trim();
+         university = spinnerUniversity.getSelectedItem().toString().trim();
 
 
-        // check email and password
-        validator.checkEmail(email , this);
-        validator.checkPassword(password ,this);
-
-        //Todo: insert the new user object to the firebase database
-        User newUser = new User(firstname , lastname , email , password);
+         validator validator = new validator();
 
 
-        //if the email and password are not empty
-        //displaying a progress dialog
+        // check attributes
+        checker = validator.checkEmail(email , this) &&
+        validator.checkPassword(password ,this) &&
+        validator.checkRepeatPassword(repeatPassword, password,this) &&
+        validator.checkFirstName(firstname,this) &&
+        validator.checkLastName(lastname,this) &&
+        validator.checkPhonenumber(phoneNumber, this) &&
+        validator.checkSrc(city,this) &&
+        validator.checkdst(city,this);
 
-        progressDialog.setMessage("Registering Please Wait...");
-        progressDialog.show();
 
-        //creating a new user
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this,  new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        //checking if success
-                        if(task.isSuccessful()){
-                            //display some message here
-                            Toast.makeText(SignUpActivity.this,"Successfully registered",Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
 
-                        }else{
-                            //display some message here
-                            Toast.makeText(SignUpActivity.this,"Registration Error",Toast.LENGTH_LONG).show();
+
+        if(checker) {
+
+
+            //Todo: insert the new user object to the firebase database
+            id = databaseUsers.push().getKey();
+            User newUser = new User(firstname, lastname, email, password, phoneNumber , city , university, id);
+
+            //adding the new user to the database
+            databaseUsers.child(id).setValue(newUser);
+
+            //if the email and password are not empty
+            //displaying a progress dialog
+
+            progressDialog.setMessage("Registering Please Wait...");
+            progressDialog.show();
+
+            //creating a new user
+
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            //checking if success
+                            if (task.isSuccessful()) {
+                                //display some message here
+                                Toast.makeText(SignUpActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+
+                            } else {
+                                //display some message here
+                                Toast.makeText(SignUpActivity.this, "Registration Error", Toast.LENGTH_LONG).show();
+                            }
+                            progressDialog.dismiss();
                         }
-                        progressDialog.dismiss();
-                    }
-                });
+                    });
+        }
 
     }
 

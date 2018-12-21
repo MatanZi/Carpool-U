@@ -36,7 +36,7 @@ public class validator {
         return  true;
     }
 
-    //Date Email
+    //Email Validator
     public boolean checkEmail(String email , Activity act) {
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
@@ -55,7 +55,7 @@ public class validator {
         return true;
     }
 
-    //Date Password
+    //Password Validator
     public boolean checkPassword(String password , Activity act) {
         //check if password not empty
         if(TextUtils.isEmpty(password)){
@@ -71,6 +71,21 @@ public class validator {
         return  true;
     }
 
+    //Repeat password Validator
+    public boolean checkRepeatPassword(String repeatPassword , String password , Activity act) {
+        //check if password not empty
+        if(TextUtils.isEmpty(repeatPassword)){
+            Toast.makeText(act,"Please repeat the password",Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        //checking if password contain at least 6 digit
+        else if((repeatPassword.length() < 6) || (!(repeatPassword.equals(password)))){
+            Toast.makeText(act,"Passowrd doesnt match",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return  true;
+    }
 
     //Time Validator
     public boolean checkTime(String time , Activity act) {
@@ -112,6 +127,57 @@ public class validator {
         //checking if dst is university = src is empty
         if (dst == "university") {
             Toast.makeText(act, "Please pick a university", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    //firstName validator
+    public boolean checkFirstName(String firstName , Activity act){
+
+        //checking if firstName is empty
+        if (TextUtils.isEmpty(firstName)) {
+            Toast.makeText(act, "Please enter a first name", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        //checking if lastName is valid
+        else if(!(Pattern.matches("[a-zA-Z]+", firstName))){
+            Toast.makeText(act, "First name can olny contain letters", Toast.LENGTH_LONG).show();
+            return false;
+        }
+            return true;
+    }
+
+    //lastName validator
+    public boolean checkLastName(String lastName , Activity act){
+
+        //checking if lastName is empty
+        if (TextUtils.isEmpty(lastName)) {
+            Toast.makeText(act, "Please enter a last name", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        //checking if lastName is valid
+        else if(!(Pattern.matches("[a-zA-Z]+", lastName))){
+            Toast.makeText(act, "LastName can olny contain letters", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    //phoneNumber validator
+    public boolean checkPhonenumber(String phoneNumber , Activity act){
+
+        //checking if phoneNumber is empty
+        if (TextUtils.isEmpty(phoneNumber)) {
+            Toast.makeText(act, "Please enter a phone number", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        //checking if phone number is valid
+        else if(!(Pattern.matches("[0-9]+", phoneNumber))){
+            Toast.makeText(act, "Phone number can olny contain numbers", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
