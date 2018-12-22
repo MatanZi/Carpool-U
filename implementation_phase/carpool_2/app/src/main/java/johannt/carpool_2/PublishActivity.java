@@ -92,8 +92,9 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
         if(view == addRideBtn){
             if(checker){
                 //todo: get the user name and last name from the firebase users database
-                carpool = new carpool(date , startTime , endTime , price , freeSits , src , dst);
+                //carpool = new carpool(date , startTime , endTime , price , freeSits , src , dst);
                 //todo:insert data firebase
+
             }
         }
     }
