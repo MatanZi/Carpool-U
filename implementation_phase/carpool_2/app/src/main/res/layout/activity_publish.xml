@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_publish"
     android:layout_width="match_parent"
@@ -11,34 +12,123 @@
     tools:context=".PublishActivity">
 
 
+    <EditText
+        android:id="@+id/pickupTimeFieldAddRide"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="Enter pickup time"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddRide" />
 
     <EditText
-        android:id="@+id/editTextName"
-        android:layout_width="match_parent"
+        android:id="@+id/priceFieldAddRide"
+        android:layout_width="172dp"
         android:layout_height="wrap_content"
-        android:hint="Enter name" />
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Enter price"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pickupTimeFieldAddRide" />
 
+    <EditText
+        android:id="@+id/freeSitFieldAddRide"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Enter free sits"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arrivalTimeFieldAddRide" />
+
+    <EditText
+        android:id="@+id/dateFieldAddRide"
+        android:layout_width="172dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:hint="enter date"
+        android:inputType="date"
+        app:layout_constraintEnd_toStartOf="@+id/pickupTimeFieldAddRide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddRide"
+        tools:text="@tools:sample/date/ddmmyy" />
+
+    <EditText
+        android:id="@+id/arrivalTimeFieldAddRide"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:hint="Enter arrival time"
+        android:inputType="time"
+        app:layout_constraintEnd_toStartOf="@+id/priceFieldAddRide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateFieldAddRide"
+        tools:ignore="UnknownId" />
 
     <Spinner
-        android:id="@+id/spinnerCity"
-        android:layout_width="match_parent"
+        android:id="@+id/spinnerCityAddRide"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextName"
-        android:entries="@array/city_array"></Spinner>
-
-    <Spinner
-        android:id="@+id/spinnerUniv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/spinnerCity"
-        android:entries="@array/university_array"></Spinner>
+        android:layout_marginTop="300dp"
+        android:entries="@array/city_array"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSearchRide"
+        app:layout_constraintTop_toTopOf="parent"></Spinner>
 
     <Button
-        android:id="@+id/buttonAddArtist"
-        android:layout_width="match_parent"
+        android:id="@+id/addRideBtn"
+        android:layout_width="361dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spinnerUniv"
-        android:text="Add" />
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="448dp"
+        android:text="Add Ride"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinnerUniversityAddRide"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddRide" />
 
+    <TextView
+        android:id="@+id/textViewAddRide"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:autoText="true"
+        android:text="Add a ride"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+    <Spinner
+        android:id="@+id/spinnerUniversityAddRide"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:entries="@array/university_array"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCityAddRide"></Spinner>
+</android.support.constraint.ConstraintLayout>

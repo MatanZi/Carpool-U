@@ -6,6 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".FindRideActivity">
 
+    <TextView
+        android:id="@+id/textViewSearchRide"
+        android:layout_width="333dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:autoText="true"
+        android:text="Search for a ride"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/pickupTimeField"
         android:layout_width="180dp"
@@ -40,7 +59,7 @@
         android:id="@+id/dateField"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="164dp"
         android:layout_marginRight="164dp"
         android:ems="10"
@@ -49,31 +68,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHeader"
-        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSearchRide"
         tools:text="@tools:sample/date/ddmmyy" />
 
     <Button
         android:id="@+id/SearchBtn"
         android:layout_width="378dp"
         android:layout_height="0dp"
-        android:layout_marginTop="436dp"
+        android:layout_marginTop="396dp"
         android:text="Search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSearchRide" />
 
     <Spinner
         android:id="@+id/spinnerCity"
         android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="232dp"
         android:entries="@array/city_array"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHeader"></Spinner>
+        app:layout_constraintTop_toBottomOf="@+id/textViewSearchRide"></Spinner>
 
     <Spinner
         android:id="@+id/spinnerUniversity"
@@ -91,27 +108,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="164dp"
         android:layout_marginLeft="164dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="60dp"
         android:ems="10"
         android:hint="Enter price"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/dateField"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSearchRide" />
 
-    <TextView
-        android:id="@+id/textViewHeader"
-        android:layout_width="156dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="163dp"
-        android:layout_marginLeft="163dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="163dp"
-        android:layout_marginRight="163dp"
-        android:text="Search for a ride"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Search for a ride" />
 </android.support.constraint.ConstraintLayout>

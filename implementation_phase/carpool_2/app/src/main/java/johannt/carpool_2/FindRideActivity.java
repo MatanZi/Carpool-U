@@ -25,7 +25,7 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
     private Spinner spinnerUniversity;
     private Button searchBtn;
 
-    public String date, endTime, startTime, price, src, dst;
+    private String date, endTime, startTime, price, src, dst;
 
 
     private FirebaseAuth firebaseAuth;
@@ -87,10 +87,10 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    @Override
+/**    @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
-    }
+    }**/
 }
 
 

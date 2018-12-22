@@ -2,61 +2,98 @@ package johannt.carpool_2;
 
 public class carpool {
 
-    private String carpoolId;
-    private String driverId;
-    private int numfreeplace;
-    private int participation;
-    private Itinerary itinerary;
+    private String firstName , lastName ,  date, endTime, startTime, price, freeSits, src, dst;
 
+    //--------------------------------- Constractor ---------------------------------
 
-    public carpool() {
+    public carpool(String firstName, String lastName, String date, String endTime, String startTime, String price, String freeSits, String src, String dst) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.date = date;
+        this.endTime = endTime;
+        this.startTime = startTime;
+        this.price = price;
+        this.freeSits = freeSits;
+        this.src = src;
+        this.dst = dst;
     }
 
-    public carpool(String carpoolId, String driverId, int numfreeplace, int participation, Itinerary itinerary) {
-        this.carpoolId = carpoolId;
-        this.driverId = driverId;
-        this.numfreeplace = numfreeplace;
-        this.participation = participation;
-        this.itinerary = itinerary;
+
+    //--------------------------------- Getter / Setters ---------------------------------
+
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getCarpoolId() {
-        return carpoolId;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setCarpoolId(String carpoolId) {
-        this.carpoolId = carpoolId;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getDriverId() {
-        return driverId;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setDriverId(String driverId) {
-        this.driverId = driverId;
+    public String getDate() {
+        return date;
     }
 
-    public int getNumfreeplace() {
-        return numfreeplace;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public void setNumfreeplace(int numfreeplace) {
-        this.numfreeplace = numfreeplace;
+    public String getEndTime() {
+        return endTime;
     }
 
-    public int getParticipation() {
-        return participation;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
-    public void setParticipation(int participation) {
-        this.participation = participation;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public Itinerary getItinerary() {
-        return itinerary;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public void setItinerary(Itinerary itinerary) {
-        this.itinerary = itinerary;
+    public String getPrice() {
+        return price;
     }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getFreeSits() {
+        return freeSits;
+    }
+
+    public void setFreeSits(String freeSits) {
+        this.freeSits = freeSits;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
+
+    public String getDst() {
+        return dst;
+    }
+
+    public void setDst(String dst) {
+        this.dst = dst;
+    }
+
+
+
 }
