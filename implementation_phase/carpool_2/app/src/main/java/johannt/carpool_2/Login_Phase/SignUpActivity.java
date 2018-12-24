@@ -92,6 +92,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         //updateUI(currentUser);
     }
+
+
     private void registerUser(){
         //getting email and password from edit texts
          firstname = editTextFirstName.getText().toString().trim();

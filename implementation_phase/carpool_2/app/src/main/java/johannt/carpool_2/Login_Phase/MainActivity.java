@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        
+
         //closing this activity and opening signin activity.
         finish();
         startActivity(new Intent(this, ProfileActivity.class));
