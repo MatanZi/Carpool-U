@@ -1,4 +1,4 @@
-package johannt.carpool_2;
+package johannt.carpool_2.Users;
 
 public class Admin extends User {
     private boolean isAdmin;

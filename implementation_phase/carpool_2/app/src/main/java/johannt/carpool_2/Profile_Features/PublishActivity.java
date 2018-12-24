@@ -1,9 +1,7 @@
-package johannt.carpool_2;
+package johannt.carpool_2.Profile_Features;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,6 +12,11 @@ import android.widget.Spinner;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import johannt.carpool_2.Login_Phase.SignInActivity;
+import johannt.carpool_2.R;
+import johannt.carpool_2.Rides_And_Validator.carpool;
+import johannt.carpool_2.Rides_And_Validator.validator;
 
 public class PublishActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,7 +30,7 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
     private Button addRideBtn;
 
     private String id,firstName , lastName , date, endTime, startTime, price, freeSits, src, dst;
-    private carpool carpool;
+    private johannt.carpool_2.Rides_And_Validator.carpool carpool;
 
 
     private FirebaseAuth firebaseAuth;

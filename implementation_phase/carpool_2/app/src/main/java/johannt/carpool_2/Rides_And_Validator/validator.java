@@ -1,4 +1,4 @@
-package johannt.carpool_2;
+package johannt.carpool_2.Rides_And_Validator;
 
 import android.app.Activity;
 import android.text.TextUtils;

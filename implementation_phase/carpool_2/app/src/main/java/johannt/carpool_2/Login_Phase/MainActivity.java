@@ -1,12 +1,7 @@
-package johannt.carpool_2;
+package johannt.carpool_2.Login_Phase;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +13,11 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import johannt.carpool_2.Profile_Features.FindRideActivity;
+import johannt.carpool_2.Profile_Features.ProfileActivity;
+import johannt.carpool_2.Profile_Features.PublishActivity;
+import johannt.carpool_2.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

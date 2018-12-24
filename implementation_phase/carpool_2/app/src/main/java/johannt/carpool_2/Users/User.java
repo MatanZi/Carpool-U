@@ -1,4 +1,4 @@
-package johannt.carpool_2;
+package johannt.carpool_2.Users;
 
 public class User {
 

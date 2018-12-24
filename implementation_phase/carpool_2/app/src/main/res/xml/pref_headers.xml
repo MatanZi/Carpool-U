@@ -3,17 +3,17 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="johannt.carpool_2.PublishActivity$GeneralPreferenceFragment"
+        android:fragment="johannt.carpool_2.Profile_Features.PublishActivity$GeneralPreferenceFragment"
         android:icon="@drawable/ic_info_black_24dp"
         android:title="@string/pref_header_general" />
 
     <header
-        android:fragment="johannt.carpool_2.PublishActivity$NotificationPreferenceFragment"
+        android:fragment="johannt.carpool_2.Profile_Features.PublishActivity$NotificationPreferenceFragment"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/pref_header_notifications" />
 
     <header
-        android:fragment="johannt.carpool_2.PublishActivity$DataSyncPreferenceFragment"
+        android:fragment="johannt.carpool_2.Profile_Features.PublishActivity$DataSyncPreferenceFragment"
         android:icon="@drawable/ic_sync_black_24dp"
         android:title="@string/pref_header_data_sync" />
 

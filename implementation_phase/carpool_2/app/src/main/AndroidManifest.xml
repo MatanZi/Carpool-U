@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Login_Phase.MainActivity"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -32,23 +32,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignInActivity"
+            android:name=".Login_Phase.SignInActivity"
             android:label="@string/title_activity_Sign_In"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".Login_Phase.MainActivity" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".Login_Phase.SignUpActivity"
             android:label="@string/title_activity_Sign_out"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".Login_Phase.MainActivity" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".Profile_Features.ProfileActivity"
             android:label="@string/title_activity_Profile"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".Login_Phase.MainActivity" />
         <activity
-            android:name=".PublishActivity"
+            android:name=".Profile_Features.PublishActivity"
             android:label="@string/title_activity_publish"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FindRideActivity" />
-        <activity android:name=".PasswordReset"></activity>
+        <activity android:name=".Profile_Features.FindRideActivity" />
+        <activity android:name=".Login_Phase.PasswordReset"></activity>
     </application>
 
 </manifest>

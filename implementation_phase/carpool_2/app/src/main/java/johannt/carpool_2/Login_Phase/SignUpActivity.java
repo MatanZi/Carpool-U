@@ -1,4 +1,4 @@
-package johannt.carpool_2;
+package johannt.carpool_2.Login_Phase;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +20,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.xml.validation.Validator;
+import johannt.carpool_2.Profile_Features.ProfileActivity;
+import johannt.carpool_2.R;
+import johannt.carpool_2.Users.User;
+import johannt.carpool_2.Rides_And_Validator.validator;
 
 /**
  * A login screen that offers login via email/password.

@@ -1,4 +1,4 @@
-package johannt.carpool_2;
+package johannt.carpool_2.Rides_And_Validator;
 
 public class carpool {
 
