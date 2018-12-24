@@ -125,11 +125,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
             //Todo: insert the new user object to the firebase database
-            //id = databaseUsers.push().getKey();
+            id = databaseUsers.push().getKey();
             User newUser = new User(firstname, lastname, email, password, phoneNumber , city , university, id);
 
             //adding the new user to the database
-            databaseUsers.setValue(newUser);
+            databaseUsers.child(id).setValue(newUser);
 
             //if the email and password are not empty
             //displaying a progress dialog

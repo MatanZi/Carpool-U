@@ -2,13 +2,14 @@ package johannt.carpool_2;
 
 public class carpool {
 
-    private String firstName , lastName ,  date, endTime, startTime, price, freeSits, src, dst;
+    private String id , firstName , lastName ,  date, endTime, startTime, price, freeSits, src, dst;
 
     //--------------------------------- Constractor ---------------------------------
 
-    public carpool(String firstName, String lastName, String date, String endTime, String startTime, String price, String freeSits, String src, String dst) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public carpool(String id, String date, String endTime, String startTime, String price, String freeSits, String src, String dst) {
+        this.id = id;
+        //this.firstName = firstName;
+        //this.lastName = lastName;
         this.date = date;
         this.endTime = endTime;
         this.startTime = startTime;
@@ -21,6 +22,14 @@ public class carpool {
 
     //--------------------------------- Getter / Setters ---------------------------------
 
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;

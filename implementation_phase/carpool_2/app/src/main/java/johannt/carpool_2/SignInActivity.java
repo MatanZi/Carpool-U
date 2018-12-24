@@ -26,6 +26,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView textViewSignup;
+    private TextView textViewPasswordReset;
 
     //firebase auth object
     private FirebaseAuth firebaseAuth;
@@ -57,10 +58,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonSignIn = findViewById(R.id.buttonSignin);
         textViewSignup  = findViewById(R.id.textViewSignin);
+        textViewPasswordReset  = findViewById(R.id.textViewPasswordReset);
         progressDialog = new ProgressDialog(this);
         //attaching click listener
         buttonSignIn.setOnClickListener(this);
         textViewSignup.setOnClickListener(this);
+        textViewPasswordReset.setOnClickListener(this);
 
     }
 
@@ -121,6 +124,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
+
+
     @Override
     public void onClick(View view) {
         if(view == buttonSignIn){
@@ -132,8 +137,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             //finish();
             startActivity(new Intent(this, SignUpActivity.class));
         }
+
+        if(view == textViewPasswordReset){
+            //finish();
+            startActivity(new Intent(this, PasswordReset.class));
+        }
     }
 
-    public static class Itinerary {
-    }
 }

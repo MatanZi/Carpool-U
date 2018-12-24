@@ -100,4 +100,5 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_find_ride">FindRideActivity</string>
+    <string name="title_activity_password_reset">PasswordReset</string>
 </resources>

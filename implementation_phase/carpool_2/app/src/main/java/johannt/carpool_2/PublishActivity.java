@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class PublishActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,11 +26,13 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
     private Spinner spinnerUniversity;
     private Button addRideBtn;
 
-    private String date, endTime, startTime, price, freeSits, src, dst;
+    private String id,firstName , lastName , date, endTime, startTime, price, freeSits, src, dst;
     private carpool carpool;
 
 
     private FirebaseAuth firebaseAuth;
+
+    private DatabaseReference firebaseDatabaseCarpool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +95,11 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
 
         if(view == addRideBtn){
             if(checker){
+                firebaseDatabaseCarpool = FirebaseDatabase.getInstance().getReference("Users");
+                id = firebaseDatabaseCarpool.push().getKey();
                 //todo: get the user name and last name from the firebase users database
-                //carpool = new carpool(date , startTime , endTime , price , freeSits , src , dst);
+                carpool = new carpool(id , date , startTime , endTime , price , freeSits , src , dst);
+                firebaseDatabaseCarpool.child(id).setValue(carpool);
                 //todo:insert data firebase
 
             }
