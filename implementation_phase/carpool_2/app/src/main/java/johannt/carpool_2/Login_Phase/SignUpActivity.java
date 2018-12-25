@@ -2,16 +2,16 @@ package johannt.carpool_2.Login_Phase;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,8 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import johannt.carpool_2.Profile_Features.ProfileActivity;
 import johannt.carpool_2.R;
-import johannt.carpool_2.Users.User;
 import johannt.carpool_2.Rides_And_Validator.validator;
+import johannt.carpool_2.Users.User;
 
 /**
  * A login screen that offers login via email/password.
@@ -57,6 +57,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     //defining firebaseauth object
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseUsers;
+    private FirebaseDatabase databaseCarPool;
+    private Firebase Carpool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         //initializing firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
-        databaseUsers = FirebaseDatabase.getInstance().getReference("Users");
+        databaseCarPool = FirebaseDatabase.getInstance();
+        databaseUsers = databaseCarPool.getReference("Users");
+        //Carpool = new Firebase("https://carpool-u.firebaseio.com/");
+
 
         //initializing views
         editTextFirstName = findViewById(R.id.editTextFirstName);
@@ -123,14 +128,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
         if(checker) {
-
-
             //Todo: insert the new user object to the firebase database
             id = databaseUsers.push().getKey();
             User newUser = new User(firstname, lastname, email, password, phoneNumber , city , university, id);
 
+            //databaseUsers;
+            //databaseUsers.child(email).push();
+            //databaseUsers.child(id).push();
+
+
+
             //adding the new user to the database
-            databaseUsers.child(id).setValue(newUser);
+            databaseUsers.child(firstname+" "+lastname).setValue(newUser);
 
             //if the email and password are not empty
             //displaying a progress dialog

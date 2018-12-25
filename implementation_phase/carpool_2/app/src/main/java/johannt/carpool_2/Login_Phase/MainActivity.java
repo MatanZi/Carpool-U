@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         //closing this activity and opening signin activity.
+
         finish();
         startActivity(new Intent(this, ProfileActivity.class));
 
