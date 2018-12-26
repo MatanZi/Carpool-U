@@ -1,7 +1,5 @@
 package johannt.carpool_2.Users;
 
-import com.google.firebase.auth.FirebaseUser;
-
 public class User {
 
     private String firstName;
@@ -12,12 +10,12 @@ public class User {
     private String city;
     private String university;
     private String id; // id =0 reserved for admin.
-    private String UID;
+    private String Uid;
 
 
     //--------------------------------- Constractor ---------------------------------
 
-    public User(String firstName, String lastName, String email, String password, String phoneNumber, String city, String university, String id,UID){
+    public User(String firstName, String lastName, String email, String password, String phoneNumber, String city, String university, String id,String Uid){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -26,7 +24,7 @@ public class User {
         this.city = city;
         this.university = university;
         this.id = id;
-        this.UID = UID;
+        this.Uid = Uid;
     }
 
 
@@ -58,11 +56,11 @@ public class User {
     }
 
     public String getUID() {
-        return UID;
+        return Uid;
     }
 
     public void setUID(String UID) {
-        this.UID = UID;
+        this.Uid = UID;
     }
 
     public String getFirstName() {

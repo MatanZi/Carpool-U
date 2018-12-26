@@ -127,19 +127,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
         if(checker) {
-            //Todo: insert the new user object to the firebase database
-            id = databaseUsers.push().getKey();
-            User newUser = new User(firstname, lastname, email, password, phoneNumber , city , university, id, firebaseUser.getUid());
-
-            //databaseUsers;
-            //databaseUsers.child(email).push();
-            //databaseUsers.child(id).push();
-
-
-
-            //adding the new user to the database
-            databaseUsers.child(firstname+" "+lastname).setValue(newUser);
-
             //if the email and password are not empty
             //displaying a progress dialog
 
@@ -156,6 +143,21 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             if (task.isSuccessful()) {
                                 //display some message here
                                 Toast.makeText(SignUpActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
+                                //Todo: insert the new user object to the firebase database
+                                firebaseUser = firebaseAuth.getCurrentUser();
+                                id = databaseUsers.push().getKey();
+
+                                User newUser = new User(firstname, lastname, email, password, phoneNumber , city , university, id, firebaseUser.getUid());
+
+                                //databaseUsers;
+                                //databaseUsers.child(email).push();
+                                //databaseUsers.child(id).push();
+
+
+
+                                //adding the new user to the database
+                                databaseUsers.child(firstname+" "+lastname).setValue(newUser);
+
                                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
 
                             } else {

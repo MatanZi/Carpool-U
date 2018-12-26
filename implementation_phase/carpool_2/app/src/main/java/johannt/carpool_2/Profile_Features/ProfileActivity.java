@@ -17,11 +17,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     //firebase auth object
     private FirebaseAuth firebaseAuth;
+    private  FirebaseUser firebaseUser;
 
     //view objects
     private TextView textViewUserEmail;
     private Button buttonLogout;
-    public Button FindRideBtn;
+    private Button FindRideBtn;
     private Button PostRideBtn;
 
 
@@ -38,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         //that means current user will return null
 
         //getting current user
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         //initializing views
         textViewUserEmail = findViewById(R.id.textViewUserEmail);
@@ -47,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         PostRideBtn = findViewById(R.id.PostRideBtn);
 
 
-        if (user == null) {
+        if (firebaseUser == null) {
             //closing this activity
             finish();
             //starting login activity
@@ -56,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         } else {
             //displaying logged in user name
-            textViewUserEmail.setText("Welcome " + user.getEmail());
+            textViewUserEmail.setText("Welcome " + firebaseUser.getDisplayName());
 
             //adding listener to button
             buttonLogout.setOnClickListener(this);

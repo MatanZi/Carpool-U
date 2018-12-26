@@ -6,7 +6,7 @@ public class carpool {
 
     //--------------------------------- Constructor ---------------------------------
 
-    public carpool(String id, String firstName, String lastName, String date, String endTime, String startTime, String price, String freeSits, String src, String dst) {
+    public carpool(String id, String firstName, String lastName, String date, String startTime , String endTime, String price, String freeSits, String src, String dst) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

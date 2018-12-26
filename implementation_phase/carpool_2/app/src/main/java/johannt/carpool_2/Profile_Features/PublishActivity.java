@@ -2,8 +2,10 @@ package johannt.carpool_2.Profile_Features;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,12 +13,17 @@ import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
+import johannt.carpool_2.Rides_And_Validator.carpool;
 import johannt.carpool_2.Rides_And_Validator.validator;
+import johannt.carpool_2.Users.User;
 
 public class PublishActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,12 +38,15 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
 
     private String id,firstName , lastName , date, endTime, startTime, price, freeSits, src, dst;
     private johannt.carpool_2.Rides_And_Validator.carpool carpool;
+    private User user;
 
 
+    //defining firebaseauth object
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference firebaseDatabaseCarpool;
-    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseRides;
+    private FirebaseDatabase databaseCarPool;
     private FirebaseUser firebaseUser;
+    private DatabaseReference databaseUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +59,12 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
         // /getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+
+        //initializing firebase auth object
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseCarPool = FirebaseDatabase.getInstance();
+        databaseRides = databaseCarPool.getReference("Rides");
+        databaseUsers = databaseCarPool.getReference("Users");
 
         //if the objects getcurrentuser method is not null
         //means user is already logged in
@@ -81,6 +97,8 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
 
 
 
+
+
     //checking if date ,endTime , startTime , src and dst are empty
     public void onClick(View view) {
         date = editTextDate.getText().toString();
@@ -100,11 +118,30 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
 
         if(view == addRideBtn){
             if(checker){
-                firebaseDatabaseCarpool = FirebaseDatabase.getInstance().getReference("Rides");
-                id = firebaseDatabaseCarpool.push().getKey();
+                id = databaseRides.push().getKey();
+
+                databaseUsers.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren() ){
+                            User secondUser = userSnapshot.getValue(User.class);
+                            if(firebaseUser.getUid() == secondUser.getUID()){
+                                firstName = secondUser.getFirstName();
+                                lastName = secondUser.getFirstName();
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Failed to read value
+                        Log.w("Failed to read value.", databaseError.toException());
+                    }
+                });
                 //todo: get the user name and last name from the firebase users database
-                //carpool = new carpool(id , firebaseUser.getClass().get, date , startTime , endTime , price , freeSits , src , dst);
-                //firebaseDatabaseCarpool.child(id).setValue(carpool);
+                carpool = new carpool(id , firstName, lastName, date , startTime , endTime , price , freeSits , src , dst);
+                databaseRides.child(firstName+" "+ lastName).setValue(carpool);
                 //todo:insert data firebase
 
             }
