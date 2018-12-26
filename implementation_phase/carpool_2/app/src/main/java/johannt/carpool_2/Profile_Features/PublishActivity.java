@@ -10,12 +10,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
-import johannt.carpool_2.Rides_And_Validator.carpool;
 import johannt.carpool_2.Rides_And_Validator.validator;
 
 public class PublishActivity extends AppCompatActivity implements View.OnClickListener {
@@ -34,8 +34,9 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
 
 
     private FirebaseAuth firebaseAuth;
-
     private DatabaseReference firebaseDatabaseCarpool;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +48,11 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
         //check for empty fields
         // /getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         //if the objects getcurrentuser method is not null
         //means user is already logged in
-        if(firebaseAuth.getCurrentUser() == null){
+        if(firebaseUser == null){
             //close this activity
             finish();
             //opening SignIn activity
@@ -98,11 +100,11 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
 
         if(view == addRideBtn){
             if(checker){
-                firebaseDatabaseCarpool = FirebaseDatabase.getInstance().getReference("Users");
+                firebaseDatabaseCarpool = FirebaseDatabase.getInstance().getReference("Rides");
                 id = firebaseDatabaseCarpool.push().getKey();
                 //todo: get the user name and last name from the firebase users database
-                carpool = new carpool(id , date , startTime , endTime , price , freeSits , src , dst);
-                firebaseDatabaseCarpool.child(id).setValue(carpool);
+                //carpool = new carpool(id , firebaseUser.getClass().get, date , startTime , endTime , price , freeSits , src , dst);
+                //firebaseDatabaseCarpool.child(id).setValue(carpool);
                 //todo:insert data firebase
 
             }

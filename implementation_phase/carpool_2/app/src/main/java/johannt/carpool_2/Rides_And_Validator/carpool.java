@@ -6,10 +6,10 @@ public class carpool {
 
     //--------------------------------- Constractor ---------------------------------
 
-    public carpool(String id, String date, String endTime, String startTime, String price, String freeSits, String src, String dst) {
+    public carpool(String id, String firstName, String lastName, String date, String endTime, String startTime, String price, String freeSits, String src, String dst) {
         this.id = id;
-        //this.firstName = firstName;
-        //this.lastName = lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.date = date;
         this.endTime = endTime;
         this.startTime = startTime;
