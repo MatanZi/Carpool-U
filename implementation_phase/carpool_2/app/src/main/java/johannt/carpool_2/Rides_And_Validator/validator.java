@@ -1,16 +1,13 @@
 package johannt.carpool_2.Rides_And_Validator;
 
-import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Toast;
 
-import java.sql.Time;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class validator {
+public class Validator {
 
 
     private Pattern pattern;

@@ -1,7 +1,5 @@
 package johannt.carpool_2.Users;
 
-import com.google.firebase.auth.FirebaseUser;
-
 public class User {
 
     private String firstName;
@@ -17,7 +15,12 @@ public class User {
 
     //--------------------------------- Constractor ---------------------------------
 
-    public User(String firstName, String lastName, String email, String password, String phoneNumber, String city, String university, String id,UID){
+
+    public User() {
+    }
+
+
+    public User(String firstName, String lastName, String email, String password, String phoneNumber, String city, String university, String id, String UID){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

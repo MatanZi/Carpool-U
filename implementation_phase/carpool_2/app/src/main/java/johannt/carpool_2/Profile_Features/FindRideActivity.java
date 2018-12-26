@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
-import johannt.carpool_2.Rides_And_Validator.validator;
+import johannt.carpool_2.Rides_And_Validator.Validator;
 
 public class FindRideActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -70,7 +70,7 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
         src = spinnerCity.getSelectedItem().toString();
         dst = spinnerUniversity.getSelectedItem().toString();
 
-        validator validator = new validator();
+        Validator validator = new Validator();
         boolean checker = validator.checkDate(date, this) &&
                 validator.checkdst(dst, this) &&
                 validator.checkSrc(src, this) &&

@@ -1,12 +1,12 @@
 package johannt.carpool_2.Rides_And_Validator;
 
-public class carpool {
+public class Carpool {
 
     private String id , firstName , lastName ,  date, endTime, startTime, price, freeSits, src, dst;
 
     //--------------------------------- Constructor ---------------------------------
 
-    public carpool(String id, String firstName, String lastName, String date, String endTime, String startTime, String price, String freeSits, String src, String dst) {
+    public Carpool(String id, String firstName, String lastName, String date, String endTime, String startTime, String price, String freeSits, String src, String dst) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

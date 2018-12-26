@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import johannt.carpool_2.Profile_Features.ProfileActivity;
 import johannt.carpool_2.R;
-import johannt.carpool_2.Rides_And_Validator.validator;
+import johannt.carpool_2.Rides_And_Validator.Validator;
 import johannt.carpool_2.Users.User;
 
 /**
@@ -110,7 +110,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
          university = spinnerUniversity.getSelectedItem().toString().trim();
 
 
-         validator validator = new validator();
+         Validator validator = new Validator();
 
 
         // check attributes
@@ -127,18 +127,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
         if(checker) {
-            //Todo: insert the new user object to the firebase database
-            id = databaseUsers.push().getKey();
-            User newUser = new User(firstname, lastname, email, password, phoneNumber , city , university, id, firebaseUser.getUid());
-
-            //databaseUsers;
-            //databaseUsers.child(email).push();
-            //databaseUsers.child(id).push();
-
-
-
-            //adding the new user to the database
-            databaseUsers.child(firstname+" "+lastname).setValue(newUser);
 
             //if the email and password are not empty
             //displaying a progress dialog
@@ -156,6 +144,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             if (task.isSuccessful()) {
                                 //display some message here
                                 Toast.makeText(SignUpActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
+                                //Todo: insert the new user object to the firebase database
+                                id = databaseUsers.push().getKey();
+                                firebaseUser = firebaseAuth.getCurrentUser();
+                                User newUser = new User(firstname, lastname, email, password, phoneNumber , city , university, id, firebaseUser.getUid());
+
+
+                                //adding the new user to the database
+                                databaseUsers.child(firstname+" "+lastname).setValue(newUser);
+
                                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
 
                             } else {

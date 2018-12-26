@@ -13,93 +13,193 @@
 
 
     <EditText
-        android:id="@+id/pickupTimeFieldAddRide"
-        android:layout_width="172dp"
+        android:id="@+id/arrivalTimeFieldAddRide"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:ems="10"
-        android:hint="Enter pickup time"
+        android:hint="Enter arrival time"
         android:inputType="time"
+        app:layout_constraintBottom_toTopOf="@+id/priceFieldAddRide"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAddRide" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pickupTimeFieldAddRide"
+        tools:ignore="UnknownId" />
 
-    <EditText
-        android:id="@+id/priceFieldAddRide"
-        android:layout_width="172dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Enter price"
-        android:inputType="number"
+    <Spinner
+        android:id="@+id/spinnerFreePlace"
+        android:layout_width="77dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:entries="@array/numOfFreePLace"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pickupTimeFieldAddRide" />
+        app:layout_constraintStart_toEndOf="@+id/textViewFreePLace2"
+        app:layout_constraintTop_toBottomOf="@+id/priceFieldAddRide"></Spinner>
+
+    <TextView
+        android:id="@+id/textViewFreePLace2"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginRight="45dp"
+        android:text="free places :"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerFreePlace"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceFieldAddRide" />
+
+    <ImageButton
+        android:id="@+id/swapSrcDstBtn"
+        android:layout_width="42dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="130dp"
+        app:layout_constraintBottom_toTopOf="@+id/addRideBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinnerDestAddRide"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerFreePlace"
+        app:srcCompat="@drawable/ic_outline_swap_vert_24px" />
 
     <EditText
         android:id="@+id/dateFieldAddRide"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:ems="10"
         android:hint="enter date"
-        android:inputType="datetime"
-        app:layout_constraintEnd_toStartOf="@+id/pickupTimeFieldAddRide"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/pickupTimeFieldAddRide"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAddRide"
         tools:text="@tools:sample/date/ddmmyy" />
 
     <EditText
-        android:id="@+id/arrivalTimeFieldAddRide"
-        android:layout_width="0dp"
+        android:id="@+id/priceFieldAddRide"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:ems="10"
-        android:hint="Enter arrival time"
-        android:inputType="time"
-        app:layout_constraintEnd_toStartOf="@+id/priceFieldAddRide"
+        android:hint="Enter price"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerFreePlace"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateFieldAddRide"
-        tools:ignore="UnknownId" />
+        app:layout_constraintTop_toBottomOf="@+id/arrivalTimeFieldAddRide" />
 
     <Spinner
         android:id="@+id/spinnerSrcAddRide"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
         android:entries="@array/city_array"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewSrc"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFreePLace"></Spinner>
+        app:layout_constraintBottom_toTopOf="@+id/spinnerDestAddRide"
+        app:layout_constraintEnd_toStartOf="@+id/swapSrcDstBtn"
+        app:layout_constraintStart_toEndOf="@+id/textViewSrc2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFreePLace2"></Spinner>
+
+    <TextView
+        android:id="@+id/textViewSrc2"
+        android:layout_width="59dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="From:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDest2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFreePLace2" />
+
+    <TextView
+        android:id="@+id/textViewDest2"
+        android:layout_width="49dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="130dp"
+        android:text="To:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/addRideBtn"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerDestAddRide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSrc2" />
+
+    <Spinner
+        android:id="@+id/spinnerDestAddRide"
+        android:layout_width="150dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="130dp"
+        android:entries="@array/university_array"
+        app:layout_constraintBottom_toTopOf="@+id/addRideBtn"
+        app:layout_constraintEnd_toStartOf="@+id/swapSrcDstBtn"
+        app:layout_constraintStart_toEndOf="@+id/textViewDest2"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSrcAddRide"></Spinner>
+
+    <EditText
+        android:id="@+id/pickupTimeFieldAddRide"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:ems="10"
+        android:hint="Enter pickup time"
+        android:inputType="time"
+        app:layout_constraintBottom_toTopOf="@+id/arrivalTimeFieldAddRide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateFieldAddRide" />
 
     <Button
         android:id="@+id/addRideBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="456dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="480dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
         android:text="Add Ride"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAddRide" />
-
-    <ImageButton
-        android:id="@+id/swapSrcDstBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="44dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerFreePlace"
-        app:srcCompat="@drawable/ic_outline_swap_vert_24px" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewAddRide"
@@ -108,77 +208,18 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
+        android:layout_marginBottom="16dp"
         android:autoText="true"
         android:text="Add a ride"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintBottom_toTopOf="@+id/dateFieldAddRide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/spinnerDestAddRide"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:entries="@array/university_array"
-        app:layout_constraintStart_toEndOf="@+id/textViewSrc"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSrc"></Spinner>
-
-    <Spinner
-        android:id="@+id/spinnerFreePlace"
-        android:layout_width="77dp"
-        android:layout_height="34dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:entries="@array/numOfFreePLace"
-        app:layout_constraintStart_toEndOf="@+id/textViewFreePLace"
-        app:layout_constraintTop_toBottomOf="@+id/arrivalTimeFieldAddRide"></Spinner>
-
-    <TextView
-        android:id="@+id/textViewFreePLace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="free places :"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/arrivalTimeFieldAddRide" />
-
-    <TextView
-        android:id="@+id/textViewSrc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="From:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFreePLace" />
-
-    <TextView
-        android:id="@+id/textViewDest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="To:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSrc" />
 
 
 </android.support.constraint.ConstraintLayout>
