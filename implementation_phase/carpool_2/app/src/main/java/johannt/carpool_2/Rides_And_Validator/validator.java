@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 
 public class Validator {
 
+    public Validator() {
+    }
 
     private Pattern pattern;
     private Matcher matcher;
@@ -32,6 +34,15 @@ public class Validator {
             Toast.makeText(context, "Invalid date", Toast.LENGTH_SHORT).show();
         }
         return  true;
+    }
+
+    //Between dates validator
+    public  Boolean checkBetweenTime(String time1 , String time2){
+        return time1.compareTo(time2) >= 0 ? true :false;
+    }
+
+    public Boolean matchDates(String date1 , String date2){
+        return date1.compareTo(date2) == 0? true : false;
     }
 
     //Email Validator
@@ -179,6 +190,11 @@ public class Validator {
             return false;
         }
         return true;
+    }
+
+    //price validator
+    public Boolean checkPrice(String price1 , String price2){
+        return price1.compareTo(price2)<=0 ? true : false;
     }
 
 

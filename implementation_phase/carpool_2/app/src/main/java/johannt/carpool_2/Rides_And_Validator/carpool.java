@@ -2,6 +2,9 @@ package johannt.carpool_2.Rides_And_Validator;
 
 public class Carpool {
 
+    public Carpool() {
+    }
+
     private String id , firstName , lastName ,  date, endTime, startTime, price, freeSits, src, dst;
 
     //--------------------------------- Constructor ---------------------------------

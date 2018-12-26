@@ -37,7 +37,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
     private ImageButton swapSrcDstBtn;
     private String id, firstName, lastName, date, endTime, startTime, price, freeSits, src, dst, currentUID , databaseUserUID;
     private Carpool carpool;
-    private boolean swap ,found;
+    private boolean swap;
     private User secondUser;
 
 
@@ -53,7 +53,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
         setContentView(R.layout.activity_publish);
         swap = true;
 
-        //check for empty fields
+
         // /getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -140,15 +140,14 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                 firebaseDatabaseUsers.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for(DataSnapshot rideSnapshot : dataSnapshot.getChildren()){
-                            User secondUser = rideSnapshot.getValue(User.class);
+                        for(DataSnapshot userSnapshot : dataSnapshot.getChildren()){
+                            User secondUser = userSnapshot.getValue(User.class);
                             firebaseUser = firebaseAuth.getCurrentUser();
                             currentUID = firebaseUser.getUid();
                             databaseUserUID = secondUser.getUID();
                             if(currentUID.equals(databaseUserUID)){
                                 firstName = secondUser.getFirstName();
                                 lastName = secondUser.getLastName();
-                                found = true;
                                 break;
                             }
                         }
@@ -162,10 +161,8 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                     }
                 });
 
-                //todo: get the user name and last name from the firebase users database
                 carpool = new Carpool(id,firstName , lastName, date, startTime, endTime, price, freeSits, src, dst);
                 firebaseDatabaseRides.child(firstName+" "+lastName).setValue(carpool);
-                //todo:insert data firebase
 
             }
         }

@@ -1,17 +1,28 @@
 package johannt.carpool_2.Profile_Features;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
+import johannt.carpool_2.Rides_And_Validator.Carpool;
 import johannt.carpool_2.Rides_And_Validator.Validator;
 
 public class FindRideActivity extends AppCompatActivity implements View.OnClickListener {
@@ -25,9 +36,16 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
     private Button searchBtn;
 
     private String date, endTime, startTime, price, src, dst;
+    private Carpool ride;
+    private boolean checker, checkDates;
+    private Validator validator;
+    private ArrayList<Carpool> carpoolList = new ArrayList<>();
 
 
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference firebaseDatabaseRides;
+    private FirebaseDatabase databaseCarPool;
+    private FirebaseUser firebaseUser;
 
 
     @Override
@@ -35,10 +53,12 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_ride);
 
-
-        //check for empty fields
+        //send qurey to firebase
         // /getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        databaseCarPool = FirebaseDatabase.getInstance();
+        firebaseDatabaseRides = databaseCarPool.getReference("Rides");
 
         //if the objects getcurrentuser method is not null
         //means user is already logged in
@@ -58,6 +78,9 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
         //attaching click listener
         searchBtn = findViewById(R.id.SearchBtn);
         searchBtn.setOnClickListener(this);
+
+        validator = new Validator();
+
     }
 
 
@@ -70,8 +93,8 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
         src = spinnerCity.getSelectedItem().toString();
         dst = spinnerUniversity.getSelectedItem().toString();
 
-        Validator validator = new Validator();
-        boolean checker = validator.checkDate(date, this) &&
+
+        checker = validator.checkDate(date, this) &&
                 validator.checkdst(dst, this) &&
                 validator.checkSrc(src, this) &&
                 validator.checkPrice(price, this) &&
@@ -80,8 +103,28 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
 
         if(view == searchBtn){
             if(checker){
+                firebaseDatabaseRides.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for(DataSnapshot rideSnapshot : dataSnapshot.getChildren()){
+                                ride = rideSnapshot.getValue(Carpool.class);
+                                checkDates = validator.matchDates(ride.getDate(),date) &&
+                                        validator.checkBetweenTime(ride.getStartTime(), date) &&
+                                        validator.checkBetweenTime(date , endTime) &&
+                                        validator.checkPrice(price , ride.getPrice());
+                                if(checkDates){
+                                    carpoolList.add(ride);
+                                }
+                            }
+                        }
 
-                //send qurey to firebase
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Failed to read value
+                            Log.w("Failed to read value.", databaseError.toException());
+
+                        }
+                    });
             }
         }
     }
