@@ -85,8 +85,6 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
 
         validator = new Validator();
         ListView listView = (ListView) findViewById(R.id.ResultList);
-
-        //todo might not work! need to check
         carpoolAdapter = new ArrayAdapter<Carpool>(this,android.R.layout.simple_list_item_1, carpoolList);
 
 

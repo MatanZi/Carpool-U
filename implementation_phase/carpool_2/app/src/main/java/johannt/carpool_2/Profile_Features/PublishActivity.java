@@ -43,7 +43,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
     private User secondUser;
     private ProgressDialog progressDialog;
 
-
+    //firebase object
     private FirebaseAuth firebaseAuth;
     private DatabaseReference firebaseDatabaseRides;
     private DatabaseReference firebaseDatabaseUsers;
