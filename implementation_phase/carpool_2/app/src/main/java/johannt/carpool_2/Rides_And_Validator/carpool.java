@@ -4,7 +4,7 @@ public class carpool {
 
     private String id , firstName , lastName ,  date, endTime, startTime, price, freeSits, src, dst;
 
-    //--------------------------------- Constractor ---------------------------------
+    //--------------------------------- Constructor ---------------------------------
 
     public carpool(String id, String firstName, String lastName, String date, String endTime, String startTime, String price, String freeSits, String src, String dst) {
         this.id = id;
