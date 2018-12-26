@@ -1,5 +1,6 @@
 package johannt.carpool_2.Profile_Features;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,6 +41,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
     private Carpool carpool;
     private boolean swap;
     private User secondUser;
+    private ProgressDialog progressDialog;
 
 
     private FirebaseAuth firebaseAuth;
@@ -85,6 +88,8 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
         swapSrcDstBtn = findViewById(R.id.swapSrcDstBtn);
         addRideBtn.setOnClickListener(this);
         swapSrcDstBtn.setOnClickListener(this);
+
+        progressDialog = new ProgressDialog(this);
 
     }
 
@@ -161,6 +166,12 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                 carpool = new Carpool(id,firstName , lastName, date, startTime, endTime, price, freeSits, src, dst);
                 firebaseDatabaseRides.child(firstName+" "+lastName).setValue(carpool);
 
+                progressDialog.setMessage("Loading Please Wait...");
+                progressDialog.show();
+
+                Toast.makeText(PublishActivity.this, "Ride added successfully", Toast.LENGTH_LONG).show();
+
+                progressDialog.dismiss();
             }
         }
     }
