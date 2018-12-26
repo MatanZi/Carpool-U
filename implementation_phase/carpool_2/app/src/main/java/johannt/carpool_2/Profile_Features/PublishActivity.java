@@ -141,11 +141,8 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for(DataSnapshot userSnapshot : dataSnapshot.getChildren()){
-                            User secondUser = userSnapshot.getValue(User.class);
-                            firebaseUser = firebaseAuth.getCurrentUser();
-                            currentUID = firebaseUser.getUid();
-                            databaseUserUID = secondUser.getUID();
-                            if(currentUID.equals(databaseUserUID)){
+                            secondUser = userSnapshot.getValue(User.class);
+                            if(firebaseUser.getUid().equals(secondUser.getUID())){
                                 firstName = secondUser.getFirstName();
                                 lastName = secondUser.getLastName();
                                 break;

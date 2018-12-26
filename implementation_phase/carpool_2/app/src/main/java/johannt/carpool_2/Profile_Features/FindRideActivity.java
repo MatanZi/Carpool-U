@@ -6,8 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,12 +36,14 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
     private Spinner spinnerCity;
     private Spinner spinnerUniversity;
     private Button searchBtn;
+    private ListView listView;
 
     private String date, endTime, startTime, price, src, dst;
     private Carpool ride;
     private boolean checker, checkDates;
     private Validator validator;
     private ArrayList<Carpool> carpoolList = new ArrayList<>();
+    private ArrayAdapter<Carpool> carpoolAdapter;
 
 
     private FirebaseAuth firebaseAuth;
@@ -80,6 +84,11 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
         searchBtn.setOnClickListener(this);
 
         validator = new Validator();
+        ListView listView = (ListView) findViewById(R.id.ResultList);
+
+        //todo might not work! need to check
+        carpoolAdapter = new ArrayAdapter<Carpool>(this,android.R.layout.simple_list_item_1, carpoolList);
+        listView.setAdapter(carpoolAdapter);
 
     }
 
