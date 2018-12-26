@@ -78,16 +78,16 @@
 
     <Button
         android:id="@+id/addRideBtn"
-        android:layout_width="361dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="448dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="456dp"
         android:text="Add Ride"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinnerUniversityAddRide"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAddRide" />
 
     <ImageButton
@@ -128,7 +128,7 @@
         android:layout_marginTop="16dp"
         android:entries="@array/university_array"
         app:layout_constraintStart_toEndOf="@+id/textViewSrc"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSrcAddRide"></Spinner>
+        app:layout_constraintTop_toBottomOf="@+id/textViewSrc"></Spinner>
 
     <Spinner
         android:id="@+id/spinnerFreePlace"
@@ -178,8 +178,21 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerDestAddRide" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSrc" />
 
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="269dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/addRideBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.734"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

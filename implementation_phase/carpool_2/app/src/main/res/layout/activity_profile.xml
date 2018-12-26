@@ -21,11 +21,10 @@
         android:id="@+id/textViewUserEmail"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="8px"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="74dp"
         android:autoText="true"
         android:text="user name"
         android:textAlignment="center"
@@ -34,31 +33,30 @@
 
     <Button
         android:id="@+id/buttonLogout"
-        android:layout_width="100dp"
+        android:layout_width="99dp"
         android:layout_height="38dp"
-        android:layout_alignBaseline="@+id/textViewUserEmail"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginEnd="15dp"
+        android:layout_marginTop="12dp"
+        android:layout_toStartOf="@+id/FindRideBtn"
         android:text="logout" />
 
     <Button
         android:id="@+id/FindRideBtn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="100dp"
-        android:layout_marginStart="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="172dp"
         android:text="Find Ride" />
 
     <Button
         android:id="@+id/PostRideBtn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/FindRideBtn"
-        android:layout_marginEnd="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="154dp"
         android:text="Post Ride" />
 
 
