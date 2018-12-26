@@ -88,7 +88,7 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
 
         //todo might not work! need to check
         carpoolAdapter = new ArrayAdapter<Carpool>(this,android.R.layout.simple_list_item_1, carpoolList);
-        listView.setAdapter(carpoolAdapter);
+
 
     }
 
@@ -125,6 +125,9 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
                                     carpoolList.add(ride);
                                 }
                             }
+                            //todo line 129 bugs
+                            listView.setAdapter(carpoolAdapter);
+                            setContentView(R.layout.activity_result);
                         }
 
                         @Override
