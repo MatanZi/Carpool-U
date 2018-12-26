@@ -16,12 +16,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
-import johannt.carpool_2.Rides_And_Validator.carpool;
 import johannt.carpool_2.Rides_And_Validator.validator;
 
 import static johannt.carpool_2.R.id.activity_publish;
@@ -43,8 +43,9 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
 
 
     private FirebaseAuth firebaseAuth;
-
     private DatabaseReference firebaseDatabaseCarpool;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +56,11 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
         //check for empty fields
         // /getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         //if the objects getcurrentuser method is not null
         //means user is already logged in
-        if(firebaseAuth.getCurrentUser() == null){
+        if(firebaseUser == null){
             //close this activity
             finish();
             //opening SignIn activity
@@ -144,6 +146,34 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
 
 
 
+<<<<<<< HEAD
+=======
+    //checking if date ,endTime , startTime , src and dst are empty
+    public void onClick(View view) {
+        date = editTextDate.getText().toString();
+        endTime = editTextEndTime.getText().toString();
+        startTime = editTextStartTime.getText().toString();
+        price = editTextPrice.getText().toString();
+        src = spinnerCity.getSelectedItem().toString();
+        dst = spinnerUniversity.getSelectedItem().toString();
+
+        validator validator = new validator();
+        boolean checker = validator.checkDate(date, this) &&
+                validator.checkdst(dst, this) &&
+                validator.checkSrc(src, this) &&
+                validator.checkPrice(price, this) &&
+                validator.checkTime(endTime, this) &&
+                validator.checkTime(startTime, this);
+
+        if(view == addRideBtn){
+            if(checker){
+                firebaseDatabaseCarpool = FirebaseDatabase.getInstance().getReference("Rides");
+                id = firebaseDatabaseCarpool.push().getKey();
+                //todo: get the user name and last name from the firebase users database
+                //carpool = new carpool(id , firebaseUser.getClass().get, date , startTime , endTime , price , freeSits , src , dst);
+                //firebaseDatabaseCarpool.child(id).setValue(carpool);
+                //todo:insert data firebase
+>>>>>>> a6ac1a7b8b34593b3fe58aae0a0bd07111eda622
 
 
 }

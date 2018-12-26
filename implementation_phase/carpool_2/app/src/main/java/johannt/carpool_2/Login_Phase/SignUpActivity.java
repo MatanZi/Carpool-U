@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -58,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseUsers;
     private FirebaseDatabase databaseCarPool;
-    private Firebase Carpool;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +93,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        firebaseUser = firebaseAuth.getCurrentUser();
         //updateUI(currentUser);
     }
 
@@ -130,7 +129,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         if(checker) {
             //Todo: insert the new user object to the firebase database
             id = databaseUsers.push().getKey();
-            User newUser = new User(firstname, lastname, email, password, phoneNumber , city , university, id);
+            User newUser = new User(firstname, lastname, email, password, phoneNumber , city , university, id, firebaseUser.getUid());
 
             //databaseUsers;
             //databaseUsers.child(email).push();
