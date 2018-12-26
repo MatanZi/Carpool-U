@@ -65,6 +65,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         buttonLogout = findViewById(R.id.buttonLogout);
         FindRideBtn = findViewById(R.id.FindRideBtn);
         PostRideBtn = findViewById(R.id.PostRideBtn);
+        textViewUserEmail.setText("Welcome " + user.getDisplayName());
+
 
 
         if (user == null) {
@@ -89,6 +91,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     for(DataSnapshot userSnapshot : dataSnapshot.getChildren()){
                         secondUser = userSnapshot.getValue(User.class);
                         if(firebaseUser.getUid().equals(secondUser.getUID())){
+                            //displaying logged in user name
                             textViewUserEmail.setText("Welcome " + secondUser.getFirstName() +" "+ secondUser.getLastName());
                             break;
                         }
@@ -102,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                 }
             });
-            //displaying logged in user name
+
 
             //adding listener to button
             buttonLogout.setOnClickListener(this);
