@@ -22,6 +22,7 @@ import johannt.carpool_2.Profile_Features.ProfileActivity;
 import johannt.carpool_2.R;
 import johannt.carpool_2.Users.User;
 
+import static johannt.carpool_2.Profile_Features.ProfileActivity.email;
 import static johannt.carpool_2.Profile_Features.ProfileActivity.firstName;
 
 public class ProfileSettingActivity extends AppCompatActivity implements View.OnClickListener{
@@ -64,15 +65,8 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         spinnerCity = findViewById(R.id.spinnerCity);
         spinnerUniversity = findViewById(R.id.spinnerUniversity);
 
-        editTextFirstName.setText(firstName);
-        editTextLastName.setText(ProfileActivity.lastName);
-        editTextPhoneNumber.setText(ProfileActivity.phoneNumber);
-        spinnerCity.setSelection(getIndex(spinnerCity, ProfileActivity.city));
-        spinnerUniversity.setSelection(getIndex(spinnerUniversity, ProfileActivity.university));
 
         // FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-
-
         buttonSave = findViewById(R.id.buttonSave);
 
         progressDialog = new ProgressDialog(this);
@@ -81,7 +75,11 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         buttonSave.setOnClickListener(this);
     }
 
-    //private method of your class
+    /**
+     * @param spinner
+     * @param myString
+     * @return the index of the item corresponding to myString
+     */
     private int getIndex(Spinner spinner, String myString){
         for (int i=0;i<spinner.getCount();i++){
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
@@ -89,6 +87,14 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
             }
         }
         return 0;
+    }
+
+    public void setCurrentsValues(){
+        editTextFirstName.setText(firstName);
+        editTextLastName.setText(ProfileActivity.lastName);
+        editTextPhoneNumber.setText(ProfileActivity.phoneNumber);
+        spinnerCity.setSelection(getIndex(spinnerCity, ProfileActivity.city));
+        spinnerUniversity.setSelection(getIndex(spinnerUniversity, ProfileActivity.university));
     }
 
     @Override
@@ -99,16 +105,31 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         firebaseUser = firebaseAuth.getCurrentUser();
         id = firebaseUser.getUid();
         //updateUI(currentUser);
+        setCurrentsValues();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setCurrentsValues();
+    }
+
+
+    /**
+     *
+     * @param firstname
+     * @param lastname
+     * @param phoneNumber
+     * @return
+     */
     private boolean updateUser(String firstname, String lastname, String phoneNumber) {
         //getting the specified user reference
         //DatabaseReference dR = FirebaseDatabase.getInstance().getReference("user").child(id);
 
         try {
-            databaseUsersRef.child(firstName+" "+ lastname).child("firstName").setValue(firstname);
-            databaseUsersRef.child(firstName+" "+ lastname).child("lastName").setValue(lastname);
-            databaseUsersRef.child(firstName+" "+ lastname).child("phoneNumber").setValue(phoneNumber);
+            databaseUsersRef.child(email).child("firstName").setValue(firstname);
+            databaseUsersRef.child(email).child("lastName").setValue(lastname);
+            databaseUsersRef.child(email).child("phoneNumber").setValue(phoneNumber);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -129,7 +150,9 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
 
             updateUser(firstname,lastname,phoneNumber);
 
-            startActivity(new Intent(this, ProfileActivity.class));
+           startActivity(new Intent(this, ProfileActivity.class));
+
+            finish();
         }
     }
 }
