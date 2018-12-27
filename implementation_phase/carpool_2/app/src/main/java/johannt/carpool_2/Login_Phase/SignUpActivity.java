@@ -157,7 +157,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                             } else {
                                 //display some message here
-                                Toast.makeText(SignUpActivity.this, "Username is already exists", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SignUpActivity.this, "Wrong Email:already exists", Toast.LENGTH_LONG).show();
                             }
                             progressDialog.dismiss();
                         }
