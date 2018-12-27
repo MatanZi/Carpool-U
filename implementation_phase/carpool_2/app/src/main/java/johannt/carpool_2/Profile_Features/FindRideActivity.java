@@ -1,5 +1,6 @@
 package johannt.carpool_2.Profile_Features;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
 import johannt.carpool_2.Rides_And_Validator.Carpool;
+import johannt.carpool_2.Rides_And_Validator.ResultActivity;
 import johannt.carpool_2.Rides_And_Validator.Validator;
 
 public class FindRideActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,9 +45,8 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
     private Carpool ride;
     private boolean checker, checkDates;
     private Validator validator;
-    private ArrayList<Carpool> carpoolList = new ArrayList<>();
-    private ArrayAdapter<Carpool> carpoolAdapter;
-
+    public ArrayList<Carpool> carpoolList = new ArrayList<>();
+    private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference firebaseDatabaseRides;
@@ -64,6 +66,7 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
         databaseCarPool = FirebaseDatabase.getInstance();
         firebaseDatabaseRides = databaseCarPool.getReference("Rides");
 
+        progressDialog = new ProgressDialog(this);
         //if the objects getcurrentuser method is not null
         //means user is already logged in
         if(firebaseAuth.getCurrentUser() == null){
@@ -84,8 +87,8 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
         searchBtn.setOnClickListener(this);
 
         validator = new Validator();
-        ListView listView = (ListView) findViewById(R.id.ResultList);
-        carpoolAdapter = new ArrayAdapter<Carpool>(this,android.R.layout.simple_list_item_1, carpoolList);
+        //ListView listView = (ListView) findViewById(R.id.ResultList);
+        //carpoolAdapter = new ArrayAdapter<Carpool>(this,android.R.layout.simple_list_item_1, carpoolList);
 
 
     }
@@ -109,6 +112,8 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
                 validator.checkTime(startTime, this);
 
         if(view == searchBtn){
+            progressDialog.setMessage("Searching please wait...");
+            progressDialog.show();
             if(checker){
                 firebaseDatabaseRides.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -118,14 +123,23 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
                                 checkDates = validator.matchDates(ride.getDate(),date) &&
                                         validator.checkBetweenTime(ride.getStartTime(), date) &&
                                         validator.checkBetweenTime(date , endTime) &&
-                                        validator.checkPrice(price , ride.getPrice());
+                                        validator.checkPrice(price , ride.getPrice()) &&
+                                        ride.getSrc().equals(src) &&
+                                        ride.getDst().equals(dst);
                                 if(checkDates){
                                     carpoolList.add(ride);
                                 }
                             }
-                            //todo line 129 bugs
-                            listView.setAdapter(carpoolAdapter);
-                            setContentView(R.layout.activity_result);
+                            progressDialog.dismiss();
+                            if(carpoolList.isEmpty()){
+                                Toast.makeText(FindRideActivity.this, "No rides were found", Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                Intent intent = new Intent(FindRideActivity.this, ResultActivity.class);
+                                intent.putExtra("carpoolList", carpoolList);
+                                startActivity(intent);
+                            }
+
                         }
 
                         @Override

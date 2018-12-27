@@ -49,7 +49,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Profile_Features.FindRideActivity" />
         <activity android:name=".Login_Phase.PasswordReset" />
+<<<<<<< HEAD
         <activity android:name=".Users.MyDrives"></activity>
+=======
+        <activity
+            android:name=".Rides_And_Validator.ResultActivity"
+            android:label="@string/title_activity_result"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+>>>>>>> 4e90ee3a3039108d71549279f82e27dbd07c15eb
     </application>
 
 </manifest>
