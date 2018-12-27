@@ -46,7 +46,6 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
     private boolean checker, checkDates;
     private Validator validator;
     public ArrayList<Carpool> carpoolList = new ArrayList<>();
-    private ArrayAdapter<Carpool> carpoolAdapter;
     private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
@@ -124,7 +123,9 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
                                 checkDates = validator.matchDates(ride.getDate(),date) &&
                                         validator.checkBetweenTime(ride.getStartTime(), date) &&
                                         validator.checkBetweenTime(date , endTime) &&
-                                        validator.checkPrice(price , ride.getPrice());
+                                        validator.checkPrice(price , ride.getPrice()) &&
+                                        ride.getSrc().equals(src) &&
+                                        ride.getDst().equals(dst);
                                 if(checkDates){
                                     carpoolList.add(ride);
                                 }
@@ -138,8 +139,7 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
                                 intent.putExtra("carpoolList", carpoolList);
                                 startActivity(intent);
                             }
-                           // listView.setAdapter(carpoolAdapter);
-                           // setContentView(R.layout.activity_result);
+
                         }
 
                         @Override

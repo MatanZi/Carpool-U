@@ -37,7 +37,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
     private Spinner spinnerSrc, spinnerDest , spinnerFreePlace;
     private Button addRideBtn;
     private ImageButton swapSrcDstBtn;
-    private String id, firstName, lastName, date, endTime, startTime, price, freeSits, src, dst, currentUID , databaseUserUID;
+    private String id, firstName, lastName, date, endTime, startTime, price, freeSits, src, dst,phoneNumber;
     private Carpool carpool;
     private boolean swap;
     private User secondUser;
@@ -150,6 +150,8 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                             if(firebaseUser.getUid().equals(secondUser.getUID())){
                                 firstName = secondUser.getFirstName();
                                 lastName = secondUser.getLastName();
+                                phoneNumber = secondUser.getPhoneNumber();
+
                                 break;
                             }
                         }
@@ -163,7 +165,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                     }
                 });
 
-                carpool = new Carpool(id,firstName , lastName, date, startTime, endTime, price, freeSits, src, dst);
+                carpool = new Carpool(id,firstName , lastName, date, startTime, endTime, price, freeSits, src, dst, phoneNumber);
                 firebaseDatabaseRides.child(firstName+" "+lastName).setValue(carpool);
 
                 progressDialog.setMessage("Loading Please Wait...");

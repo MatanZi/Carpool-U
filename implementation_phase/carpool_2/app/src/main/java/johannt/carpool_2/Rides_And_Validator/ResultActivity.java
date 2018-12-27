@@ -7,6 +7,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -15,6 +17,8 @@ import johannt.carpool_2.R;
 public class ResultActivity extends AppCompatActivity {
 
     private ArrayList<Carpool> carpoolList;
+    private ArrayAdapter<Carpool> carpoolAdapter;
+    private ListView carpoolListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +30,9 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         carpoolList = (ArrayList<Carpool>)intent.getSerializableExtra("carpoolList");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        carpoolListView = findViewById(R.id.carpoolListView);
+
+        RideInfoAdapter rideInfoAdapter = new RideInfoAdapter(ResultActivity.this ,carpoolList);
+        carpoolListView.setAdapter(carpoolAdapter);
     }
 }
