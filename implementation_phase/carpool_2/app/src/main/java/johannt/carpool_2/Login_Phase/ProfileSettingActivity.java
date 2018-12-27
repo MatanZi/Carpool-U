@@ -106,9 +106,9 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         //DatabaseReference dR = FirebaseDatabase.getInstance().getReference("user").child(id);
 
         try {
-            databaseUsersRef.child(id).child("firstName").setValue(firstname);
-            databaseUsersRef.child(id).child("lastName").setValue(lastname);
-            databaseUsersRef.child(id).child("phoneNumber").setValue(phoneNumber);
+            databaseUsersRef.child(firstName+" "+ lastname).child("firstName").setValue(firstname);
+            databaseUsersRef.child(firstName+" "+ lastname).child("lastName").setValue(lastname);
+            databaseUsersRef.child(firstName+" "+ lastname).child("phoneNumber").setValue(phoneNumber);
         } catch (Exception e) {
             e.printStackTrace();
         }
