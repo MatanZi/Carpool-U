@@ -16,7 +16,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/carpool_logo_layer"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -37,7 +37,7 @@
             android:parentActivityName=".Login_Phase.MainActivity" />
         <activity
             android:name=".Login_Phase.SignUpActivity"
-            android:label="@string/title_activity_Sign_out"
+            android:label="@string/title_activity_Sign_up"
             android:parentActivityName=".Login_Phase.MainActivity" />
         <activity
             android:name=".Profile_Features.ProfileActivity"
@@ -49,6 +49,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Profile_Features.FindRideActivity" />
         <activity android:name=".Login_Phase.PasswordReset" />
+        <activity android:name=".Users.MyDrives"></activity>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -122,6 +123,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         if(view == PostRideBtn){
+            // check if the second user
+            if (secondUser.getPhoneNumber().equals("")){
+                Toast.makeText(ProfileActivity.this, "Please set your phone number in profil setting to post a drive !", Toast.LENGTH_LONG).show();
+            }
+            else
             startActivity(new Intent(this, PublishActivity.class));
         }
 

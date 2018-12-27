@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 public class Validator {
 
+    //constructor
     public Validator() {
     }
 
@@ -179,16 +180,15 @@ public class Validator {
     public boolean checkPhonenumber(String phoneNumber ,  Context context){
 
         //checking if phoneNumber is empty
-        if (TextUtils.isEmpty(phoneNumber)) {
-            Toast.makeText(context, "Please enter a phone number", Toast.LENGTH_LONG).show();
+        if (phoneNumber.length() > 10 || (phoneNumber.length() < 10 && phoneNumber.length() > 0 )) {
+            Toast.makeText(context, "please enter a valid number", Toast.LENGTH_LONG).show();
             return false;
         }
-
         //checking if phone number is valid
-        else if(!(Pattern.matches("[0-9]+", phoneNumber))){
-            Toast.makeText(context, "Phone number can olny contain numbers", Toast.LENGTH_LONG).show();
-            return false;
-        }
+//        else if(!(Pattern.matches("[0-9]+", phoneNumber))){
+//            Toast.makeText(context, "Phone number can olny contain numbers", Toast.LENGTH_LONG).show();
+//            return false;
+//        }
         return true;
     }
 
