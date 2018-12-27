@@ -94,7 +94,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             phoneNumber = secondUser.getPhoneNumber();
                             email = secondUser.getEmail();
                             textViewUserEmail.setText("Welcome " + firstName +" "+ lastName);
-                            textViewUserEmail.setVisibility(View.VISIBLE);
                             break;
                         }
                     }
@@ -124,14 +123,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if (view == settingProfileBtn ){
             startActivity(new Intent(this, ProfileSettingActivity.class));
 
-            finish();
-
         }
 
         if(view == buttonLogout){
             //logging out the user
             firebaseAuth.signOut();
-            textViewUserEmail.setVisibility(View.INVISIBLE);
 
             //closing activity
             finish();

@@ -1,5 +1,6 @@
 package johannt.carpool_2.Profile_Features;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.wdullaer.materialdatetimepicker.date.DayPickerView;
+
+import java.time.Month;
+import java.time.Year;
+import java.util.Calendar;
 
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
@@ -36,10 +42,12 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
     private EditText editTextPrice;
     private Spinner spinnerSrc, spinnerDest , spinnerFreePlace;
     private Button addRideBtn;
-    private ImageButton swapSrcDstBtn;
-    private String id, firstName, lastName, date, endTime, startTime, price, freeSits, src, dst,phoneNumber;
+    private ImageButton swapSrcDstBtn , calendarBtn;
+    private String id, firstName, lastName, date, endTime, startTime, price, freeSits, src, dst,phoneNumber, calendarDate;
+    private int Day,Month,Year;
     private Carpool carpool;
     private boolean swap;
+    private Calendar calendar;
     private User secondUser;
     private ProgressDialog progressDialog;
 
@@ -56,6 +64,10 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
         setContentView(R.layout.activity_publish);
         swap = true;
 
+        calendar = Calendar.getInstance();
+        int Day = calendar.get(Calendar.DAY_OF_MONTH);
+        int Month = calendar.get(Calendar.MONTH);
+        int Year = calendar.get(Calendar.YEAR);
 
         // /getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
@@ -86,8 +98,10 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
         //attaching click listener
         addRideBtn = findViewById(R.id.addRideBtn);
         swapSrcDstBtn = findViewById(R.id.swapSrcDstBtn);
+        calendarBtn = findViewById(R.id.calendarButton);
         addRideBtn.setOnClickListener(this);
         swapSrcDstBtn.setOnClickListener(this);
+        calendarBtn.setOnClickListener(this);
 
         progressDialog = new ProgressDialog(this);
 
@@ -98,6 +112,17 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
     public void onClick(View v) {
 
 
+        if( v == calendarBtn ) {
+            com.wdullaer.materialdatetimepicker.date.DatePickerDialog dialog =
+                    com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                            calendarDate = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
+                            editTextDate.setText(calendarDate);
+                        }
+                    }, Year, Month, Day);
+            dialog.show(getFragmentManager(), "DatePickerDialog");
+        }
         if (v == swapSrcDstBtn) {
 
             // Create an ArrayAdapter using the string array and a default spinner layout

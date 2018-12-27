@@ -77,19 +77,17 @@
 
     <EditText
         android:id="@+id/dateFieldAddRide"
-        android:layout_width="300dp"
+        android:layout_width="166dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="enter date"
         android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/pickupTimeFieldAddRide"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/calendarButton"
         app:layout_constraintTop_toBottomOf="@+id/textViewAddRide"
         tools:text="@tools:sample/date/ddmmyy" />
 
@@ -220,6 +218,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/calendarButton"
+        android:layout_width="64dp"
+        android:layout_height="52dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/pickupTimeFieldAddRide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_date_range_black_24dp" />
 
 
 </android.support.constraint.ConstraintLayout>

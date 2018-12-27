@@ -122,7 +122,7 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
      * @param phoneNumber
      * @return
      */
-    private boolean updateUser(String firstname, String lastname, String phoneNumber) {
+    private boolean updateUser(String firstname, String lastname, String phoneNumber, String city, String university) {
         //getting the specified user reference
         //DatabaseReference dR = FirebaseDatabase.getInstance().getReference("user").child(id);
 
@@ -130,6 +130,9 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
             databaseUsersRef.child(id).child("firstName").setValue(firstname);
             databaseUsersRef.child(id).child("lastName").setValue(lastname);
             databaseUsersRef.child(id).child("phoneNumber").setValue(phoneNumber);
+            databaseUsersRef.child(id).child("city").setValue(city);
+            databaseUsersRef.child(id).child("university").setValue(university);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -148,10 +151,12 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
             String firstname = editTextFirstName.getText().toString();
             String lastname = editTextLastName.getText().toString();
             String phoneNumber = editTextPhoneNumber.getText().toString();
+            String city = spinnerCity.getSelectedItem().toString();
+            String university = spinnerUniversity.getSelectedItem().toString();
 
             progressDialog.setMessage("Updating...");
             progressDialog.show();
-            updateUser(firstname,lastname,phoneNumber);
+            updateUser(firstname,lastname,phoneNumber,city,university);
 
            startActivity(new Intent(this, ProfileActivity.class));
 
