@@ -39,13 +39,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private User secondUser;
     private String  firstName, lastName;
 
-
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,9 +58,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         buttonLogout = findViewById(R.id.buttonLogout);
         FindRideBtn = findViewById(R.id.FindRideBtn);
         PostRideBtn = findViewById(R.id.PostRideBtn);
-        textViewUserEmail.setText("Welcome " + user.getDisplayName());
-
-
 
         if (user == null) {
             //closing this activity
