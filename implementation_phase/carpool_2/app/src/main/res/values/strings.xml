@@ -19,7 +19,9 @@
     <string name="title_activity_Sign_In">Sign in</string>
     <string name="title_activity_Sign_out">Sign out</string>
     <string name="title_activity_Sign_up">Sign up</string>
+    <string name="title_activity_profile_setting">Profile Setting</string>
     <string name="title_activity_Profile">Profile</string>
+    <string name="title_activity_My_drives">My Drives</string>
     <string name="title_activity_navigation">Navigation Activity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

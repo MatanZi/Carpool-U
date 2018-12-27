@@ -59,5 +59,15 @@
         android:layout_marginBottom="154dp"
         android:text="Post Ride" />
 
+    <ImageButton
+        android:id="@+id/settingProfileButton"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/buttonLogout"
+        android:layout_marginEnd="13dp"
+        app:srcCompat="@drawable/ic_settings_black_24dp" />
+
 
 </RelativeLayout>

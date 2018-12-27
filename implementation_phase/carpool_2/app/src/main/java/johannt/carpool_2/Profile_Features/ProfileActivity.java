@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +19,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import johannt.carpool_2.Login_Phase.ProfileSettingActivity;
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
+import johannt.carpool_2.Users.MyDrives;
 import johannt.carpool_2.Users.User;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
@@ -34,11 +37,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     //view objects
     private TextView textViewUserEmail;
     private Button buttonLogout;
-    public Button FindRideBtn;
-    private Button PostRideBtn;
+    public Button FindRideBtn ,PostRideBtn;
+    private ImageButton settingProfileBtn;
 
     private User secondUser;
-    private String  firstName, lastName;
+    public static String  firstName, lastName, city, university, phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         buttonLogout = findViewById(R.id.buttonLogout);
         FindRideBtn = findViewById(R.id.FindRideBtn);
         PostRideBtn = findViewById(R.id.PostRideBtn);
+        settingProfileBtn = findViewById(R.id.settingProfileButton);
 
         if (user == null) {
             //closing this activity
@@ -83,7 +87,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         secondUser = userSnapshot.getValue(User.class);
                         if(firebaseUser.getUid().equals(secondUser.getUID())){
                             //displaying logged in user name
-                            textViewUserEmail.setText("Welcome " + secondUser.getFirstName() +" "+ secondUser.getLastName());
+                            firstName = secondUser.getFirstName();
+                            lastName = secondUser.getLastName();
+                            city = secondUser.getCity();
+                            university = secondUser.getUniversity();
+                            phoneNumber = secondUser.getPhoneNumber();
+                            textViewUserEmail.setText("Welcome " + firstName +" "+ lastName);
                             break;
                         }
                     }
@@ -102,6 +111,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             buttonLogout.setOnClickListener(this);
             FindRideBtn.setOnClickListener(this);
             PostRideBtn.setOnClickListener(this);
+            settingProfileBtn.setOnClickListener(this);
         }
     }
 
@@ -109,6 +119,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         //if logout is pressed
+        if (view == settingProfileBtn ){
+            startActivity(new Intent(this, ProfileSettingActivity.class));
+
+        }
+
         if(view == buttonLogout){
             //logging out the user
             firebaseAuth.signOut();
@@ -130,6 +145,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             else
             startActivity(new Intent(this, PublishActivity.class));
         }
+
+
 
 }
 }
