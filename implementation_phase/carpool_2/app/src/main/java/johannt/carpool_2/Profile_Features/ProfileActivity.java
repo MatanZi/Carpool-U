@@ -146,7 +146,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if(view == PostRideBtn){
             // check if the second user
             if (secondUser.getPhoneNumber().equals("")){
-                Toast.makeText(ProfileActivity.this, "Please set your phone number in profil setting to post a drive !", Toast.LENGTH_LONG).show();
+                Toast.makeText(ProfileActivity.this, "Please set your phone number in profile setting to post a drive !", Toast.LENGTH_LONG).show();
             }
             else
             startActivity(new Intent(this, PublishActivity.class));

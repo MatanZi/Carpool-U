@@ -143,21 +143,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             //checking if success
                             if (task.isSuccessful()) {
                                 //display some message here
-                                Toast.makeText(SignUpActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
-                                //Todo: insert the new user object to the firebase database
                                 id = databaseUsers.push().getKey();
                                 firebaseUser = firebaseAuth.getCurrentUser();
                                 User newUser = new User(firstname, lastname, email, password, phoneNumber , city , university, id, firebaseUser.getUid());
 
 
                                 //adding the new user to the database
-                                databaseUsers.child(firstname+" "+lastname).setValue(newUser);
-
+                                databaseUsers.child(firebaseUser.getUid()).setValue(newUser);
+                                Toast.makeText(SignUpActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
 
                             } else {
                                 //display some message here
-                                Toast.makeText(SignUpActivity.this, "Wrong Email:already exists", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SignUpActivity.this, "Email already in use", Toast.LENGTH_LONG).show();
                             }
                             progressDialog.dismiss();
                         }

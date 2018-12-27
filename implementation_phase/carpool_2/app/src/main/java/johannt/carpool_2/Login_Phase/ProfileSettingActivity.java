@@ -127,14 +127,15 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         //DatabaseReference dR = FirebaseDatabase.getInstance().getReference("user").child(id);
 
         try {
-            databaseUsersRef.child(email).child("firstName").setValue(firstname);
-            databaseUsersRef.child(email).child("lastName").setValue(lastname);
-            databaseUsersRef.child(email).child("phoneNumber").setValue(phoneNumber);
+            databaseUsersRef.child(id).child("firstName").setValue(firstname);
+            databaseUsersRef.child(id).child("lastName").setValue(lastname);
+            databaseUsersRef.child(id).child("phoneNumber").setValue(phoneNumber);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-      //  Toast.makeText(this, "Artist Updated", Toast.LENGTH_LONG).show();
+        progressDialog.dismiss();
+        Toast.makeText(this, "Profile Updated", Toast.LENGTH_LONG).show();
         return true;
     }
 
@@ -148,6 +149,8 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
             String lastname = editTextLastName.getText().toString();
             String phoneNumber = editTextPhoneNumber.getText().toString();
 
+            progressDialog.setMessage("Updating...");
+            progressDialog.show();
             updateUser(firstname,lastname,phoneNumber);
 
            startActivity(new Intent(this, ProfileActivity.class));

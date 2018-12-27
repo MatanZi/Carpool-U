@@ -166,7 +166,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                 });
 
                 carpool = new Carpool(id,firstName , lastName, date, startTime, endTime, price, freeSits, src, dst, phoneNumber);
-                firebaseDatabaseRides.child(firstName+" "+lastName).setValue(carpool);
+                firebaseDatabaseRides.child(id).setValue(carpool);
 
                 progressDialog.setMessage("Loading Please Wait...");
                 progressDialog.show();

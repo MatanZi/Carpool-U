@@ -34,13 +34,15 @@ public class MainActivity extends AppCompatActivity  {
         //initializing firebase authentication object
         firebaseAuth = FirebaseAuth.getInstance();
         //getting current user
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                final Intent mainIntent = new Intent(MainActivity.this, ProfileActivity.class);
-                MainActivity.this.startActivity(mainIntent);
+                if(user == null){
+                    startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                }
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                 MainActivity.this.finish();
             }
         }, 2000);
