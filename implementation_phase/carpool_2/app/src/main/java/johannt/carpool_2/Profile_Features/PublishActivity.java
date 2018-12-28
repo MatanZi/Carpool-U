@@ -27,6 +27,7 @@ import com.wdullaer.materialdatetimepicker.date.DayPickerView;
 import java.time.Month;
 import java.time.Year;
 import java.util.Calendar;
+import java.util.Date;
 
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
@@ -50,6 +51,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
     private Calendar calendar;
     private User secondUser;
     private ProgressDialog progressDialog;
+    private Date currentDate;
 
     //firebase object
     private FirebaseAuth firebaseAuth;
@@ -68,6 +70,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
         int Day = calendar.get(Calendar.DAY_OF_MONTH);
         int Month = calendar.get(Calendar.MONTH);
         int Year = calendar.get(Calendar.YEAR);
+
 
         // /getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
@@ -116,11 +119,16 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
             com.wdullaer.materialdatetimepicker.date.DatePickerDialog dialog =
                     com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
                         @Override
+
                         public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
                             calendarDate = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
                             editTextDate.setText(calendarDate);
                         }
                     }, Year, Month, Day);
+
+            Calendar minDate = calendar;
+            minDate.setTime(calendar.getTime());
+            dialog.setMinDate(minDate);
             dialog.show(getFragmentManager(), "DatePickerDialog");
         }
         if (v == swapSrcDstBtn) {
