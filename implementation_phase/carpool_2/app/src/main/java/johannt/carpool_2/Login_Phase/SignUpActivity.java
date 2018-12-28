@@ -121,7 +121,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         validator.checkLastName(lastname,this) &&
         validator.checkPhonenumber(phoneNumber, this) &&
         validator.checkSrc(city,this) &&
-        validator.checkdst(city,this);
+        validator.checkdst(university,this);
 
 
 

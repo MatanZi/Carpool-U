@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import johannt.carpool_2.Profile_Features.ProfileActivity;
 import johannt.carpool_2.R;
+import johannt.carpool_2.Rides_And_Validator.Validator;
 import johannt.carpool_2.Users.User;
 
 import static johannt.carpool_2.Profile_Features.ProfileActivity.email;
@@ -47,6 +48,7 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
     private FirebaseDatabase databaseCarPool;
     private FirebaseUser firebaseUser;
     private User user;
+    private Validator validator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,19 +150,32 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
 
         if (v == buttonSave) {
 
+
+
             String firstname = editTextFirstName.getText().toString();
             String lastname = editTextLastName.getText().toString();
             String phoneNumber = editTextPhoneNumber.getText().toString();
             String city = spinnerCity.getSelectedItem().toString();
             String university = spinnerUniversity.getSelectedItem().toString();
 
-            progressDialog.setMessage("Updating...");
-            progressDialog.show();
-            updateUser(firstname,lastname,phoneNumber,city,university);
+            validator = new Validator();
 
-           startActivity(new Intent(this, ProfileActivity.class));
+            checker = validator.checkFirstName(firstname, this) &&
+                    validator.checkLastName(lastname, this) &&
+                    validator.checkPhonenumber(phoneNumber, this) &&
+                    validator.checkSrc(city, this) &&
+                    validator.checkdst(university, this);
 
-            finish();
+            if(checker){
+                progressDialog.setMessage("Updating...");
+                progressDialog.show();
+                updateUser(firstname,lastname,phoneNumber,city,university);
+
+                startActivity(new Intent(this, ProfileActivity.class));
+
+                finish();
+            }
+
         }
     }
 }

@@ -2,6 +2,7 @@ package johannt.carpool_2.Rides_And_Validator;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.regex.Matcher;
@@ -116,7 +117,10 @@ public class Validator {
             Toast.makeText(context, "Please enter a price", Toast.LENGTH_LONG).show();
             return false;
         }
-        //Todo: price validator
+        else if(price.compareTo("0")<0){
+            Toast.makeText(context, "price cannot be less than 0", Toast.LENGTH_LONG).show();
+            return false;
+        }
         return true;
     }
 
@@ -124,7 +128,7 @@ public class Validator {
     public boolean checkSrc(String src ,  Context context){
 
         //checking if src is city = src is empty
-        if (src == "city") {
+        if (src.equals("City")) {
             Toast.makeText(context, "Please pick a city", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -135,7 +139,7 @@ public class Validator {
     public boolean checkdst(String dst , Context context){
 
         //checking if dst is university = src is empty
-        if (dst == "university") {
+        if (dst.equals("University")) {
             Toast.makeText(context, "Please pick a university", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -180,15 +184,16 @@ public class Validator {
     public boolean checkPhonenumber(String phoneNumber ,  Context context){
 
         //checking if phoneNumber is empty
-        if (phoneNumber.length() > 10 || (phoneNumber.length() < 10 && phoneNumber.length() > 0 )) {
+        if (phoneNumber.length() > 10) {
             Toast.makeText(context, "please enter a valid number", Toast.LENGTH_LONG).show();
             return false;
         }
         //checking if phone number is valid
-//        else if(!(Pattern.matches("[0-9]+", phoneNumber))){
-//            Toast.makeText(context, "Phone number can olny contain numbers", Toast.LENGTH_LONG).show();
-//            return false;
-//        }
+        else if(!phoneNumber.isEmpty() && !(Pattern.matches("[0-9]+", phoneNumber))){
+            Toast.makeText(context, "Phone number can olny contain numbers", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
         return true;
     }
 
