@@ -172,6 +172,9 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                     validator.checkTime(startTime, this);
 
             if (checker) {
+                progressDialog.setMessage("Loading Please Wait...");
+                progressDialog.show();
+                
                 id = firebaseDatabaseRides.push().getKey();
                 secondUser= new User();
 
@@ -184,12 +187,10 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                                 firstName = secondUser.getFirstName();
                                 lastName = secondUser.getLastName();
                                 phoneNumber = secondUser.getPhoneNumber();
-
                                 break;
                             }
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         // Failed to read value
@@ -201,8 +202,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                 carpool = new Carpool(id,firstName , lastName, date, startTime, endTime, price, freeSits, src, dst, phoneNumber);
                 firebaseDatabaseRides.child(id).setValue(carpool);
 
-                progressDialog.setMessage("Loading Please Wait...");
-                progressDialog.show();
+
 
                 Toast.makeText(PublishActivity.this, "Ride added successfully", Toast.LENGTH_LONG).show();
 

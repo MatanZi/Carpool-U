@@ -10,21 +10,22 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import johannt.carpool_2.R;
 
 public class RideInfoAdapter extends ArrayAdapter<Carpool> {
 
     private Activity context;
-    private ArrayList<Carpool> carpoolList;
+    private List<Carpool> carpoolList;
     private View listview;
     private  TextView fullName , freeSits, phoneNumber;
     private Carpool carpool;
 
-    public RideInfoAdapter(Activity context, ArrayList<Carpool> carpoolList) {
+    public RideInfoAdapter(Activity context, List<Carpool> carpoolList) {
         super(context, R.layout.ride_list_view, carpoolList);
         this.context = context;
-        carpoolList = carpoolList;
+        this.carpoolList = carpoolList;
     }
 
     @NonNull
@@ -38,9 +39,9 @@ public class RideInfoAdapter extends ArrayAdapter<Carpool> {
         phoneNumber = (TextView)listview.findViewById(R.id.textViewPhoneNumber);
 
         carpool = carpoolList.get(position);
-        fullName.setText(carpool.getFirstName() +" "+ carpool.getLastName());
-        freeSits.setText(carpool.getFreeSits());
-        phoneNumber.setText(carpool.getPhoneNumber());
+        fullName.setText("Full name: "+ carpool.getFirstName() +" "+ carpool.getLastName());
+        freeSits.setText("Free sits: "+ carpool.getFreeSits());
+        phoneNumber.setText("Phone Number: "+ carpool.getPhoneNumber());
 
         return listview;
     }

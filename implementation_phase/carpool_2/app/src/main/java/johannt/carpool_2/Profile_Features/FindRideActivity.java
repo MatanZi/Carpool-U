@@ -59,22 +59,6 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_ride);
 
-        //send qurey to firebase
-        // /getting firebase auth object
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-        databaseCarPool = FirebaseDatabase.getInstance();
-        firebaseDatabaseRides = databaseCarPool.getReference("Rides");
-
-        progressDialog = new ProgressDialog(this);
-        //if the objects getcurrentuser method is not null
-        //means user is already logged in
-        if(firebaseAuth.getCurrentUser() == null){
-            //close this activity
-            finish();
-            //opening SignIn activity
-            startActivity(new Intent(getApplicationContext(), SignInActivity.class));
-        }
 
         editTextDate = findViewById(R.id.dateField);
         editTextEndTime = findViewById(R.id.arrivalTimeField);
@@ -96,61 +80,28 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
 
     //checking if date ,endTime , startTime , src and dst are empty
     public void onClick(View view) {
-        date = editTextDate.getText().toString();
-        endTime = editTextEndTime.getText().toString();
-        startTime = editTextStartTime.getText().toString();
-        price = editTextPrice.getText().toString();
-        src = spinnerCity.getSelectedItem().toString();
-        dst = spinnerUniversity.getSelectedItem().toString();
+        if(view == searchBtn) {
+            date = editTextDate.getText().toString();
+            endTime = editTextEndTime.getText().toString();
+            startTime = editTextStartTime.getText().toString();
+            price = editTextPrice.getText().toString();
+            src = spinnerCity.getSelectedItem().toString();
+            dst = spinnerUniversity.getSelectedItem().toString();
 
+            Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+            intent.putExtra("date", date);
+            intent.putExtra("endTime", endTime);
+            intent.putExtra("startTime", startTime);
+            intent.putExtra("price", price);
+            intent.putExtra("src", src);
+            intent.putExtra("dst", dst);
 
-        checker = validator.checkDate(date, this) &&
-                validator.checkdst(dst, this) &&
-                validator.checkSrc(src, this) &&
-                validator.checkPrice(price, this) &&
-                validator.checkTime(endTime, this) &&
-                validator.checkTime(startTime, this);
-
-        if(view == searchBtn){
-            progressDialog.setMessage("Searching please wait...");
-            progressDialog.show();
-            if(checker){
-                firebaseDatabaseRides.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for(DataSnapshot rideSnapshot : dataSnapshot.getChildren()){
-                                ride = rideSnapshot.getValue(Carpool.class);
-                                checkDates = validator.matchDates(ride.getDate(),date) &&
-                                        validator.checkBetweenTime(ride.getStartTime(), date) &&
-                                        validator.checkBetweenTime(date , endTime) &&
-                                        validator.checkPrice(price , ride.getPrice()) &&
-                                        ride.getSrc().equals(src) &&
-                                        ride.getDst().equals(dst);
-                                if(checkDates){
-                                    carpoolList.add(ride);
-                                }
-                            }
-                            progressDialog.dismiss();
-                            if(carpoolList.isEmpty()){
-                                Toast.makeText(FindRideActivity.this, "No rides were found", Toast.LENGTH_LONG).show();
-                            }
-                            else{
-                                Intent intent = new Intent(FindRideActivity.this, ResultActivity.class);
-                                intent.putExtra("carpoolList", carpoolList);
-                                startActivity(intent);
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            // Failed to read value
-                            Log.w("Failed to read value.", databaseError.toException());
-
-                        }
-                    });
-            }
+            startActivity(intent);
+            finish();
         }
+
+
+
     }
 
 /**    @Override
