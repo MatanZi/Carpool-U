@@ -2,9 +2,8 @@ package johannt.carpool_2.Login_Phase;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,17 +12,14 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import johannt.carpool_2.Profile_Features.ProfileActivity;
 import johannt.carpool_2.R;
 import johannt.carpool_2.Rides_And_Validator.Validator;
 import johannt.carpool_2.Users.User;
 
-import static johannt.carpool_2.Profile_Features.ProfileActivity.email;
 import static johannt.carpool_2.Profile_Features.ProfileActivity.firstName;
 
 public class ProfileSettingActivity extends AppCompatActivity implements View.OnClickListener{

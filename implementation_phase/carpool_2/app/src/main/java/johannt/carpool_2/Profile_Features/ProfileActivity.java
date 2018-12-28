@@ -1,9 +1,9 @@
 package johannt.carpool_2.Profile_Features;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 import johannt.carpool_2.Login_Phase.ProfileSettingActivity;
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
-import johannt.carpool_2.Users.MyDrives;
 import johannt.carpool_2.Users.User;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {

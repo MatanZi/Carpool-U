@@ -1,7 +1,7 @@
 package johannt.carpool_2.Users;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import johannt.carpool_2.R;
 

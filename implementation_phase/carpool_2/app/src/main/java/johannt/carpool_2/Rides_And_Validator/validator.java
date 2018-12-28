@@ -2,7 +2,6 @@ package johannt.carpool_2.Rides_And_Validator;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.regex.Matcher;
@@ -40,11 +39,11 @@ public class Validator {
 
     //Between dates validator
     public  Boolean checkBetweenTime(String time1 , String time2){
-        return time1.compareTo(time2) >= 0 ? true :false;
+        return time1.compareTo(time2) >= 0;
     }
 
     public Boolean matchDates(String date1 , String date2){
-        return date1.compareTo(date2) == 0? true : false;
+        return date1.compareTo(date2) == 0;
     }
 
     //Email Validator
@@ -199,7 +198,7 @@ public class Validator {
 
     //price validator
     public Boolean checkPrice(String price1 , String price2){
-        return price1.compareTo(price2)<=0 ? true : false;
+        return price1.compareTo(price2) <= 0;
     }
 
 
@@ -230,20 +229,10 @@ public class Validator {
                 else if (month.equals("2") || month.equals("02")) {
                     //leap year
                     if(year % 4==0){
-                        if(day.equals("30") || day.equals("31")){
-                            return false;
-                        }
-                        else{
-                            return true;
-                        }
+                        return !day.equals("30") && !day.equals("31");
                     }
                     else{
-                        if(day.equals("29")||day.equals("30")||day.equals("31")){
-                            return false;
-                        }
-                        else{
-                            return true;
-                        }
+                        return !day.equals("29") && !day.equals("30") && !day.equals("31");
                     }
                 }
 

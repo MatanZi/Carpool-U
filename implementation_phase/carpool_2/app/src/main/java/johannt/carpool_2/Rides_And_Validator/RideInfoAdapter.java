@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import johannt.carpool_2.R;
@@ -34,9 +33,9 @@ public class RideInfoAdapter extends ArrayAdapter<Carpool> {
         LayoutInflater inflater = context.getLayoutInflater();
         listview = inflater.inflate(R.layout.ride_list_view,null,true);
 
-        fullName = (TextView)listview.findViewById(R.id.textViewFullName);
-        freeSits = (TextView)listview.findViewById(R.id.textViewFreeSits);
-        phoneNumber = (TextView)listview.findViewById(R.id.textViewPhoneNumber);
+        fullName = listview.findViewById(R.id.textViewFullName);
+        freeSits = listview.findViewById(R.id.textViewFreeSits);
+        phoneNumber = listview.findViewById(R.id.textViewPhoneNumber);
 
         carpool = carpoolList.get(position);
         fullName.setText("Full name: "+ carpool.getFirstName() +" "+ carpool.getLastName());
