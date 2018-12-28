@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity  {
                 if(user == null){
                     startActivity(new Intent(MainActivity.this, SignInActivity.class));
                 }
-                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                else{
+                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                }
                 MainActivity.this.finish();
             }
         }, 2000);
