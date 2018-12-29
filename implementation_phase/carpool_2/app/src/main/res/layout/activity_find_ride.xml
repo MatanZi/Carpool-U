@@ -61,32 +61,68 @@
 
     <EditText
         android:id="@+id/dateField"
-        android:layout_width="0dp"
+        android:layout_width="123dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginLeft="85dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="84dp"
+        android:layout_marginLeft="17dp"
         android:layout_marginRight="84dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="enter date"
         android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/pickupTimeField"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/calendarButton"
         app:layout_constraintTop_toBottomOf="@+id/textViewSearchRide"
         app:layout_constraintVertical_chainStyle="spread_inside"
         tools:text="@tools:sample/date/ddmmyy" />
 
     <Button
         android:id="@+id/SearchBtn"
-        android:layout_width="378dp"
+        android:layout_width="239dp"
         android:layout_height="0dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="396dp"
         android:text="Search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSearchRide" />
+
+    <ImageButton
+        android:id="@+id/swapSrcDstBtn"
+        android:layout_width="42dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="75dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerUniversity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinnerCity"
+        app:layout_constraintTop_toTopOf="@+id/spinnerCity"
+        app:srcCompat="@drawable/ic_outline_swap_vert_24px" />
+
+    <ImageButton
+        android:id="@+id/calendarButton"
+        android:layout_width="64dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/pickupTimeField"
+        app:layout_constraintEnd_toStartOf="@+id/dateField"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSearchRide"
+        app:srcCompat="@drawable/ic_date_range_black_24dp" />
+
 
     <Spinner
         android:id="@+id/spinnerCity"

@@ -152,6 +152,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                 databaseUsers.child(firebaseUser.getUid()).setValue(newUser);
                                 Toast.makeText(SignUpActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                                finish();
 
                             } else {
                                 //display some message here

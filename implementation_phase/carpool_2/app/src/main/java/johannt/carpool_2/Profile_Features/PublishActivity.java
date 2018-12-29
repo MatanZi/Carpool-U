@@ -31,6 +31,8 @@ import johannt.carpool_2.Rides_And_Validator.Carpool;
 import johannt.carpool_2.Rides_And_Validator.Validator;
 import johannt.carpool_2.Users.User;
 
+import static johannt.carpool_2.Profile_Features.ProfileActivity.firstName;
+
 public class PublishActivity extends AppCompatActivity  implements View.OnClickListener {
 
     private EditText editTextDate;
@@ -111,6 +113,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
             });
         }
 
+
         editTextDate = findViewById(R.id.dateFieldAddRide);
         editTextEndTime = findViewById(R.id.arrivalTimeFieldAddRide);
         editTextStartTime = findViewById(R.id.pickupTimeFieldAddRide);
@@ -131,6 +134,35 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
 
         progressDialog = new ProgressDialog(this);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setCityToUniversity();
+    }
+
+    /**
+     * @param spinner
+     * @param myString
+     * @return the index of the item corresponding to myString
+     */
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public void setCityToUniversity(){
+        spinnerSrc.setSelection(getIndex(spinnerSrc, ProfileActivity.city));
+        spinnerDest.setSelection(getIndex(spinnerDest, ProfileActivity.university));
+    }
+    public void setUniversityToCity(){
+        spinnerSrc.setSelection(getIndex(spinnerSrc, ProfileActivity.university));
+        spinnerDest.setSelection(getIndex(spinnerDest, ProfileActivity.city));
     }
 
     // class addArideOnClickListener implements View.OnClickListener {
@@ -169,10 +201,12 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
             if (swap == true) {
                 spinnerSrc.setAdapter(universityAdapter);
                 spinnerDest.setAdapter(cityAdapter);
+                setUniversityToCity();
                 swap = false;
             } else {
                 spinnerSrc.setAdapter(cityAdapter);
                 spinnerDest.setAdapter(universityAdapter);
+                setCityToUniversity();
                 swap = true;
             }
         }
