@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 import johannt.carpool_2.Profile_Features.ProfileActivity;
 import johannt.carpool_2.R;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MenuItem Useritem =  findViewById(R.id.NameAccount);
+        MenuItem Useritem = findViewById(R.id.NameAccount);
         //initializing firebase authentication object
         firebaseAuth = FirebaseAuth.getInstance();
         //getting current user
@@ -30,20 +30,17 @@ public class MainActivity extends AppCompatActivity  {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(user == null){
+                if (user == null) {
+                    //closing this activity and opening signin activity.
                     startActivity(new Intent(MainActivity.this, SignInActivity.class));
-                }
-                else{
+                } else {
                     startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                 }
                 MainActivity.this.finish();
             }
         }, 2000);
-//        //closing this activity and opening signin activity.
-//
-//        startActivity(new Intent(this, ProfileActivity.class));
-
     }
+}
 
 
 
@@ -79,4 +76,3 @@ public class MainActivity extends AppCompatActivity  {
 //        drawer.closeDrawer(GravityCompat.START);
 //        return true;
 //    }
-}

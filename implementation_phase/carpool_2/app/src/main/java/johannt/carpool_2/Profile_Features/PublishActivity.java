@@ -40,7 +40,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
     private Spinner spinnerSrc, spinnerDest , spinnerFreePlace;
     private Button addRideBtn;
     private ImageButton swapSrcDstBtn , calendarBtn;
-    private String id, firstName, lastName, date, endTime, startTime, price, freeSits, src, dst,phoneNumber, calendarDate;
+    private String id, firstName, lastName, date, endTime, startTime, price, freeSits, src, dst,phoneNumber, calendarDate , UID;
     private int Day,Month,Year;
     private Carpool carpool;
     private boolean swap;
@@ -96,6 +96,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                             firstName = secondUser.getFirstName();
                             lastName = secondUser.getLastName();
                             phoneNumber = secondUser.getPhoneNumber();
+                            UID = secondUser.getUID();
                             break;
                         }
                     }
@@ -197,12 +198,8 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                 progressDialog.setMessage("Loading Please Wait...");
                 progressDialog.show();
 
-
-
-                carpool = new Carpool(id,firstName , lastName, date, startTime, endTime, price, freeSits, src, dst, phoneNumber);
+                carpool = new Carpool(id,firstName , lastName, date, startTime, endTime, price, freeSits, src, dst, phoneNumber , UID);
                 firebaseDatabaseRides.child(id).setValue(carpool);
-
-
 
                 Toast.makeText(PublishActivity.this, "Ride added successfully", Toast.LENGTH_LONG).show();
 

@@ -38,6 +38,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button buttonLogout;
     public Button FindRideBtn ,PostRideBtn;
     private ImageButton settingProfileBtn;
+    private Button MyRideHistoyButton;
 
     private User secondUser;
     public static String  firstName, lastName, city, university, phoneNumber, email;
@@ -62,6 +63,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         FindRideBtn = findViewById(R.id.FindRideBtn);
         PostRideBtn = findViewById(R.id.PostRideBtn);
         settingProfileBtn = findViewById(R.id.settingProfileButton);
+        MyRideHistoyButton = findViewById(R.id.MyRideHistoyButton);
 
         if (user == null) {
             //closing this activity
@@ -112,6 +114,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             FindRideBtn.setOnClickListener(this);
             PostRideBtn.setOnClickListener(this);
             settingProfileBtn.setOnClickListener(this);
+            MyRideHistoyButton.setOnClickListener(this);
         }
     }
 
@@ -146,8 +149,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             else
             startActivity(new Intent(this, PublishActivity.class));
         }
-
-
-
+        if(view == MyRideHistoyButton){
+            startActivity(new Intent(this, ProfileRidesHistory.class));
+        }
 }
 }

@@ -107,7 +107,6 @@ public class ResultActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     if (carpoolList.isEmpty()) {
                         Toast.makeText(ResultActivity.this, "No rides were found", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), FindRideActivity.class));
                     } else {
                         carpoolAdapter = new RideInfoAdapter(ResultActivity.this, carpoolList);
                         carpoolListView.setAdapter(carpoolAdapter);

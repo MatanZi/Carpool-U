@@ -6,11 +6,11 @@ public class Carpool {
     public Carpool() {
     }
 
-    private String id , firstName , lastName ,  date, endTime, startTime, price, freeSits, src, dst, phoneNumber;
+    private String id , firstName , lastName ,  date, endTime, startTime, price, freeSits, src, dst, phoneNumber , UID;
 
     //--------------------------------- Constructor ---------------------------------
 
-    public Carpool(String id, String firstName, String lastName, String date, String endTime, String startTime, String price, String freeSits, String src, String dst , String phoneNumber) {
+    public Carpool(String id, String firstName, String lastName, String date, String endTime, String startTime, String price, String freeSits, String src, String dst , String phoneNumber , String UID) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,11 +22,20 @@ public class Carpool {
         this.src = src;
         this.dst = dst;
         this.phoneNumber = phoneNumber;
+        this.UID = UID;
     }
 
 
     //--------------------------------- Getter / Setters ---------------------------------
 
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;

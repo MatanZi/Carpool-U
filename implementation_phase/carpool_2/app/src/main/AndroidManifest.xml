@@ -49,19 +49,17 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Profile_Features.FindRideActivity" />
         <activity android:name=".Login_Phase.PasswordReset" />
-        <activity android:name=".Users.MyDrives"
+        <activity
+            android:name=".Users.MyDrives"
             android:label="@string/title_activity_My_drives" />
-
         <activity
             android:name=".Login_Phase.ProfileSettingActivity"
             android:label="@string/title_activity_profile_setting" />
-
         <activity
             android:name=".Rides_And_Validator.ResultActivity"
             android:label="@string/title_activity_result"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
+        <activity android:name=".Profile_Features.ProfileRidesHistory"></activity>
     </application>
 
 </manifest>
