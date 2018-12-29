@@ -2,7 +2,7 @@ package johannt.carpool_2.Rides_And_Validator;
 
 public class Carpool {
 
-   // constructor
+   // empty constructor of for the object carpool
     public Carpool() {
     }
 
