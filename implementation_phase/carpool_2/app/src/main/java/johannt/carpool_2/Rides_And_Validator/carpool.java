@@ -6,7 +6,7 @@ public class Carpool {
     public Carpool() {
     }
 
-    private String id , firstName , lastName ,  date, endTime, startTime, price, freeSits, src, dst, phoneNumber , UID;
+    private String id , firstName , lastName ,  date,  startTime ,endTime, price, freeSits, src, dst, phoneNumber , UID;
 
     //--------------------------------- Constructor ---------------------------------
 
