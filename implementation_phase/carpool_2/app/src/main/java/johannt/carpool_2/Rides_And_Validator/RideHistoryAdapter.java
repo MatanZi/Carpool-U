@@ -31,13 +31,13 @@ public class RideHistoryAdapter extends ArrayAdapter<Carpool> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        listview = inflater.inflate(R.layout.ride_list_view,null,true);
+        listview = inflater.inflate(R.layout.ride_history_list_view,null,true);
 
-        Date = listview.findViewById(R.id.textViewFullName);
+        Date = listview.findViewById(R.id.textViewDate);
         startTime = listview.findViewById(R.id.textViewStartTimeHistory);
         endTime = listview.findViewById(R.id.textViewEndTimeHistory);
-        From = listview.findViewById(R.id.textViewFreeSits);
-        To = listview.findViewById(R.id.textViewPhoneNumber);
+        From = listview.findViewById(R.id.textViewFrom);
+        To = listview.findViewById(R.id.textViewTo);
         price = listview.findViewById(R.id.textViewPriceHistory);
 
         carpool = carpoolList.get(position);

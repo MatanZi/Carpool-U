@@ -59,7 +59,10 @@
             android:name=".Rides_And_Validator.ResultActivity"
             android:label="@string/title_activity_result"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Profile_Features.ProfileRidesHistory"></activity>
+        <activity
+            android:name=".Profile_Features.RidesHistory"
+            android:label="@string/title_activity_rides_history"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

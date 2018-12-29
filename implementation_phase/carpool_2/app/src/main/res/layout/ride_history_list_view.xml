@@ -69,8 +69,9 @@
         android:visibility="visible" />
 
     <Space
+        style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="match_parent"
-        android:layout_height="23dp" />
+        android:layout_height="25dp" />
 
 
 </LinearLayout>

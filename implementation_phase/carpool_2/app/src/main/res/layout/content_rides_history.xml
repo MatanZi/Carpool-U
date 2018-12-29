@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Rides_And_Validator.ResultActivity"
-    tools:showIn="@layout/activity_result">
+    tools:context=".Profile_Features.RidesHistory"
+    tools:showIn="@layout/activity_rides_history">
 
     <ListView
-        android:id="@+id/carpoolListView"
+        android:id="@+id/carpoolListViewHistory"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

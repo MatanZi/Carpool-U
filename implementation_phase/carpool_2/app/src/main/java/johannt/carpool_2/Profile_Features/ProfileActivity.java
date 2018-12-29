@@ -150,7 +150,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(this, PublishActivity.class));
         }
         if(view == MyRideHistoyButton){
-            startActivity(new Intent(this, ProfileRidesHistory.class));
+            startActivity(new Intent(this, RidesHistory.class));
         }
 }
 }

@@ -1,10 +1,9 @@
 package johannt.carpool_2.Profile_Features;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -22,16 +21,13 @@ import java.util.List;
 
 import johannt.carpool_2.R;
 import johannt.carpool_2.Rides_And_Validator.Carpool;
-import johannt.carpool_2.Rides_And_Validator.ResultActivity;
 import johannt.carpool_2.Rides_And_Validator.RideHistoryAdapter;
-import johannt.carpool_2.Rides_And_Validator.RideInfoAdapter;
-import johannt.carpool_2.Rides_And_Validator.Validator;
 
-public class ProfileRidesHistory extends AppCompatActivity {
+public class RidesHistory extends AppCompatActivity {
+
 
     private ListView carpoolListViewHistory;
 
-    private String date, endTime, startTime, price, src, dst;
     private Carpool ride;
     private List<Carpool> carpoolListHistory;
     private ProgressDialog progressDialog;
@@ -45,7 +41,7 @@ public class ProfileRidesHistory extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_rides_history);
+        setContentView(R.layout.activity_rides_history);
 
         // /getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
@@ -59,13 +55,11 @@ public class ProfileRidesHistory extends AppCompatActivity {
 
 
         carpoolListHistory = new ArrayList<>();
-    }
-
-    protected void onStart() {
-        super.onStart();
 
         progressDialog.setMessage("Searching please wait...");
         progressDialog.show();
+
+        ride = new Carpool();
 
         firebaseDatabaseRides.addValueEventListener(new ValueEventListener() {
             @Override
@@ -78,12 +72,11 @@ public class ProfileRidesHistory extends AppCompatActivity {
                 }
                 progressDialog.dismiss();
                 if (carpoolListHistory.isEmpty()) {
-                    Toast.makeText(ProfileRidesHistory.this, "No rides were found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RidesHistory.this, "No rides were found", Toast.LENGTH_LONG).show();
                 } else {
-                    carpoolHistoryAdapter = new RideHistoryAdapter(ProfileRidesHistory.this, carpoolListHistory);
+                    carpoolHistoryAdapter = new RideHistoryAdapter(RidesHistory.this, carpoolListHistory);
                     carpoolListViewHistory.setAdapter(carpoolHistoryAdapter);
                 }
-
             }
 
             @Override
