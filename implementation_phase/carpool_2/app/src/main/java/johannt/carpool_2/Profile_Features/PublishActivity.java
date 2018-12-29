@@ -83,6 +83,32 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
             //opening SignIn activity
             startActivity(new Intent(getApplicationContext(), SignInActivity.class));
         }
+        else{
+            id = firebaseDatabaseRides.push().getKey();
+            secondUser= new User();
+
+            firebaseDatabaseUsers.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for(DataSnapshot userSnapshot : dataSnapshot.getChildren()){
+                        secondUser = userSnapshot.getValue(User.class);
+                        if(firebaseUser.getUid().equals(secondUser.getUID())){
+                            firstName = secondUser.getFirstName();
+                            lastName = secondUser.getLastName();
+                            phoneNumber = secondUser.getPhoneNumber();
+                            break;
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Failed to read value
+                    Log.w("Failed to read value.", databaseError.toException());
+
+                }
+            });
+        }
 
         editTextDate = findViewById(R.id.dateFieldAddRide);
         editTextEndTime = findViewById(R.id.arrivalTimeFieldAddRide);
@@ -171,29 +197,7 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                 progressDialog.setMessage("Loading Please Wait...");
                 progressDialog.show();
 
-                id = firebaseDatabaseRides.push().getKey();
-                secondUser= new User();
 
-                firebaseDatabaseUsers.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for(DataSnapshot userSnapshot : dataSnapshot.getChildren()){
-                            secondUser = userSnapshot.getValue(User.class);
-                            if(firebaseUser.getUid().equals(secondUser.getUID())){
-                                firstName = secondUser.getFirstName();
-                                lastName = secondUser.getLastName();
-                                phoneNumber = secondUser.getPhoneNumber();
-                                break;
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        // Failed to read value
-                        Log.w("Failed to read value.", databaseError.toException());
-
-                    }
-                });
 
                 carpool = new Carpool(id,firstName , lastName, date, startTime, endTime, price, freeSits, src, dst, phoneNumber);
                 firebaseDatabaseRides.child(id).setValue(carpool);

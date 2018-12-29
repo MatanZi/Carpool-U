@@ -61,7 +61,8 @@
             tools:layout_conversion_absoluteHeight="30dp"
             tools:layout_conversion_absoluteWidth="74dp"
             tools:layout_editor_absoluteX="139dp"
-            tools:layout_editor_absoluteY="16dp" />
+            tools:layout_editor_absoluteY="16dp"
+            tools:ignore="MissingConstraints" />
 
         <EditText
             android:id="@+id/editTextLastName"

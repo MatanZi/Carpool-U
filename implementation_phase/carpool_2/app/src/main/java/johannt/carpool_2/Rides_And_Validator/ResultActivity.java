@@ -36,7 +36,7 @@ public class ResultActivity extends AppCompatActivity {
     private Validator validator;
     private List<Carpool> carpoolList;
     private ProgressDialog progressDialog;
-    private ArrayAdapter<Carpool> carpoolAdapter;
+    private RideInfoAdapter carpoolAdapter;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference firebaseDatabaseRides;
@@ -56,7 +56,7 @@ public class ResultActivity extends AppCompatActivity {
         databaseCarPool = FirebaseDatabase.getInstance();
         firebaseDatabaseRides = databaseCarPool.getReference("Rides");
 
-        carpoolListView = findViewById(R.id.carpoolListView);
+        carpoolListView = findViewById(R.id.list_view_carpool);
 
         progressDialog = new ProgressDialog(this);
 
@@ -109,7 +109,7 @@ public class ResultActivity extends AppCompatActivity {
                         Toast.makeText(ResultActivity.this, "No rides were found", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(getApplicationContext(), FindRideActivity.class));
                     } else {
-                        RideInfoAdapter carpoolAdapter = new RideInfoAdapter(ResultActivity.this, carpoolList);
+                        carpoolAdapter = new RideInfoAdapter(ResultActivity.this, carpoolList);
                         carpoolListView.setAdapter(carpoolAdapter);
                     }
 
