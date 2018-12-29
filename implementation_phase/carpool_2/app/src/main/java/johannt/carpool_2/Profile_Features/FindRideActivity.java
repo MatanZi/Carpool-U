@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -169,20 +170,33 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
             src = spinnerSrc.getSelectedItem().toString();
             dst = spinnerDest.getSelectedItem().toString();
 
-            Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-            intent.putExtra("date", date);
-            intent.putExtra("endTime", endTime);
-            intent.putExtra("startTime", startTime);
-            intent.putExtra("price", price);
-            intent.putExtra("src", src);
-            intent.putExtra("dst", dst);
+            validator = new Validator();
 
-            startActivity(intent);
-            finish();
+            try {
+                checker = validator.checkDate(date, this) &&
+                        validator.checkdst(dst, this) &&
+                        validator.checkSrc(src, this) &&
+                        validator.checkPrice(price, this) &&
+                        validator.checkTime(endTime, this) &&
+                        validator.checkTime(startTime, this);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+            if (checker) {
+                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                intent.putExtra("date", date);
+                intent.putExtra("endTime", endTime);
+                intent.putExtra("startTime", startTime);
+                intent.putExtra("price", price);
+                intent.putExtra("src", src);
+                intent.putExtra("dst", dst);
+
+                startActivity(intent);
+                finish();
+            }
         }
-
-
-
     }
 
 /**    @Override

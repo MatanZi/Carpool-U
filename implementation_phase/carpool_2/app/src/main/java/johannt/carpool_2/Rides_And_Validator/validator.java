@@ -4,26 +4,21 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validator {
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yy");
 
     //constructor
     public Validator() {
     }
 
-    private Pattern pattern;
-    private Matcher matcher;
-
-    private static final String DATE_PATTERN =
-            "(0?[1-9]|1[012]) [/.-] (0?[1-9]|[12][0-9]|3[01]) [/.-] ((19|20)\\d\\d)";
 
     //Date Validator
-    public boolean checkDate(String date ,  Context context) {
-
-        matcher = Pattern.compile(DATE_PATTERN).matcher(date);
-
+    public boolean checkDate(String date ,  Context context) throws ParseException {
         //checking if date is empty
         if (TextUtils.isEmpty(date)) {
             Toast.makeText(context, "Please enter date", Toast.LENGTH_LONG).show();
@@ -31,8 +26,14 @@ public class Validator {
         }
 
         //checking if the date is valid
-        else if (!matcher.matches() || !(validateDate(date))) {
-            Toast.makeText(context, "Invalid date", Toast.LENGTH_SHORT).show();
+
+        else {
+            try{
+                sdf.parse(date.trim());
+            }catch (ParseException pe){
+                Toast.makeText(context, "Invalid date", Toast.LENGTH_SHORT).show();
+                return false;
+            }
         }
         return  true;
     }
@@ -75,7 +76,7 @@ public class Validator {
 
         //checking if password contain at least 6 digit
         else if(password.length() < 6){
-            Toast.makeText(context,"Password must contain atleast 6 digits/charcontexters",Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"Password must contain atleast 6 digits",Toast.LENGTH_LONG).show();
             return false;
         }
         return  true;
@@ -200,55 +201,4 @@ public class Validator {
     public Boolean checkPrice(String price1 , String price2){
         return price1.compareTo(price2) <= 0;
     }
-
-
-    /**
-     * Validate date format with regular expression
-     * @param date date address for validation
-     * @return true valid date format, false invalid date format
-     */
-    public boolean validateDate(final String date){
-
-        matcher = pattern.matcher(date);
-
-        if(matcher.matches()){
-            matcher.reset();
-
-            if(matcher.find()){
-                String day = matcher.group(1);
-                String month = matcher.group(2);
-                int year = Integer.parseInt(matcher.group(3));
-
-                if (day.equals("31") &&
-                        (month.equals("4") || month .equals("6") || month.equals("9") ||
-                                month.equals("11") || month.equals("04") || month .equals("06") ||
-                                month.equals("09"))) {
-                    return false; // only 1,3,5,7,8,10,12 has 31 days
-                }
-
-                else if (month.equals("2") || month.equals("02")) {
-                    //leap year
-                    if(year % 4==0){
-                        return !day.equals("30") && !day.equals("31");
-                    }
-                    else{
-                        return !day.equals("29") && !day.equals("30") && !day.equals("31");
-                    }
-                }
-
-                else{
-                    return true;
-                }
-            }
-
-            else{
-                return false;
-            }
-        }
-        else{
-            return false;
-        }
-    }
-
-
 }

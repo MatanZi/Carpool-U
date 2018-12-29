@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -221,12 +222,17 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
             freeSits = spinnerFreePlace.getSelectedItem().toString();
 
             Validator validator = new Validator();
-            boolean checker = validator.checkDate(date, this) &&
-                    validator.checkdst(dst, this) &&
-                    validator.checkSrc(src, this) &&
-                    validator.checkPrice(price, this) &&
-                    validator.checkTime(endTime, this) &&
-                    validator.checkTime(startTime, this);
+            boolean checker = false;
+            try {
+                checker = validator.checkDate(date, this) &&
+                        validator.checkdst(dst, this) &&
+                        validator.checkSrc(src, this) &&
+                        validator.checkPrice(price, this) &&
+                        validator.checkTime(endTime, this) &&
+                        validator.checkTime(startTime, this);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
             if (checker) {
                 progressDialog.setMessage("Loading Please Wait...");

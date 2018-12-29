@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private String date, endTime, startTime, price, src, dst;
     private Carpool ride;
-    private boolean checker , checkDates;
+    private boolean checker, checkDates;
     private Validator validator;
     private List<Carpool> carpoolList;
     private ProgressDialog progressDialog;
@@ -50,6 +51,11 @@ public class ResultActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        progressDialog = new ProgressDialog(this);
+
+        progressDialog.setMessage("Searching please wait...");
+        progressDialog.show();
+
         // /getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -58,16 +64,9 @@ public class ResultActivity extends AppCompatActivity {
 
         carpoolListView = findViewById(R.id.list_view_carpool);
 
-        progressDialog = new ProgressDialog(this);
-
-        validator = new Validator();
 
         carpoolList = new ArrayList<>();
 
-    }
-
-    protected void onStart(){
-        super.onStart();
 
         Intent intent = getIntent();
         date = intent.getStringExtra("date");
@@ -77,50 +76,39 @@ public class ResultActivity extends AppCompatActivity {
         src = intent.getStringExtra("src");
         dst = intent.getStringExtra("dst");
 
-        checker = validator.checkDate(date, this) &&
-                validator.checkdst(dst, this) &&
-                validator.checkSrc(src, this) &&
-                validator.checkPrice(price, this) &&
-                validator.checkTime(endTime, this) &&
-                validator.checkTime(startTime, this);
+        ride = new Carpool();
 
-        progressDialog.setMessage("Searching please wait...");
-        progressDialog.show();
-        if (checker) {
-
-
-            firebaseDatabaseRides.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot rideSnapshot : dataSnapshot.getChildren()) {
-                        ride = rideSnapshot.getValue(Carpool.class);
-                        checkDates = validator.matchDates(ride.getDate(), date) &&
-                                validator.checkBetweenTime(ride.getStartTime(), date) &&
-                                validator.checkBetweenTime(date, endTime) &&
-                                validator.checkPrice(price, ride.getPrice()) &&
-                                ride.getSrc().equals(src) &&
-                                ride.getDst().equals(dst);
-                        if (checkDates) {
-                            carpoolList.add(ride);
-                        }
+        firebaseDatabaseRides.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot rideSnapshot : dataSnapshot.getChildren()) {
+                    ride = rideSnapshot.getValue(Carpool.class);
+                    checkDates = date.equals(ride.getDate()) &&
+                            validator.checkBetweenTime(ride.getStartTime(), startTime) &&
+                            validator.checkBetweenTime(ride.getEndTime(), endTime) &&
+                            validator.checkPrice(price, ride.getPrice()) &&
+                            ride.getSrc().equals(src) &&
+                            ride.getDst().equals(dst);
+                    if (checkDates) {
+                        carpoolList.add(ride);
                     }
-                    progressDialog.dismiss();
-                    if (carpoolList.isEmpty()) {
-                        Toast.makeText(ResultActivity.this, "No rides were found", Toast.LENGTH_LONG).show();
-                    } else {
-                        carpoolAdapter = new RideInfoAdapter(ResultActivity.this, carpoolList);
-                        carpoolListView.setAdapter(carpoolAdapter);
-                    }
-
                 }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Failed to read value
-                    Log.w("Failed to read value.", databaseError.toException());
-
+                progressDialog.dismiss();
+                if (carpoolList.isEmpty()) {
+                    Toast.makeText(ResultActivity.this, "No rides were found", Toast.LENGTH_LONG).show();
+                } else {
+                    carpoolAdapter = new RideInfoAdapter(ResultActivity.this, carpoolList);
+                    carpoolListView.setAdapter(carpoolAdapter);
                 }
-            });
-        }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Failed to read value
+                Log.w("Failed to read value.", databaseError.toException());
+
+            }
+        });
     }
 }
