@@ -12,12 +12,72 @@
     tools:context="johannt.carpool_2.Login_Phase.ProfileSettingActivity"
     android:background="@drawable/pavements1">
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="368dp"
-            android:layout_height="495dp"
-            android:layout_centerInParent="true"
-            android:orientation="vertical">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
+<<<<<<< HEAD
+        <EditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="26dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginStart="26dp"
+            android:ems="10"
+            android:hint="Lastname"
+            android:inputType="textPersonName"
+            android:singleLine="false"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextFirstName"
+            tools:layout_conversion_absoluteHeight="46dp"
+            tools:layout_conversion_absoluteWidth="152dp" />
+
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="26dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Firstname"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
+            app:layout_constraintBottom_toTopOf="@+id/editTextLastName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="46dp"
+            tools:layout_conversion_absoluteWidth="149dp" />
+
+        <EditText
+            android:id="@+id/editTextPhoneNumber"
+            android:layout_width="300dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="2dp"
+            android:hint="Phone number"
+            android:inputType="phone"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPhoneRequired"
+            tools:layout_conversion_absoluteHeight="46dp"
+            tools:layout_conversion_absoluteWidth="322dp" />
+=======
             <EditText
                 android:id="@+id/editTextLastName"
                 android:layout_width="300dp"
@@ -75,29 +135,49 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewPhoneRequired"
                 tools:layout_conversion_absoluteHeight="46dp"
                 tools:layout_conversion_absoluteWidth="322dp" />
+>>>>>>> 6dbd4e2c5fef113b6cf59a0f40ca059c6488d40a
 
-                <Spinner
-                    android:id="@+id/spinnerCity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="26dp"
-                    android:layout_marginStart="26dp"
-                    android:layout_marginTop="8dp"
-                    android:entries="@array/city_array"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumber" />
+        <Spinner
+            android:id="@+id/spinnerCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/city_array"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumber" />
 
-                <Spinner
-                    android:id="@+id/spinnerUniversity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:entries="@array/university_array"
-                    app:layout_constraintStart_toEndOf="@+id/spinnerCity"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumber" />
+        <Spinner
+            android:id="@+id/spinnerUniversity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/university_array"
+            app:layout_constraintStart_toEndOf="@+id/spinnerCity"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumber" />
 
+<<<<<<< HEAD
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="0dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginStart="60dp"
+            android:background="#f0c074"
+            android:text="Save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_conversion_absoluteHeight="1dp"
+            tools:layout_conversion_absoluteWidth="322dp" />
+=======
             <Button
                 android:id="@+id/buttonSave"
                 android:layout_width="0dp"
@@ -114,19 +194,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_conversion_absoluteHeight="1dp"
                 tools:layout_conversion_absoluteWidth="322dp" />
+>>>>>>> 6dbd4e2c5fef113b6cf59a0f40ca059c6488d40a
 
-                <TextView
-                    android:id="@+id/textViewPhoneRequired"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="26dp"
-                    android:layout_marginStart="26dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Phone is required to publish a drive !"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextLastName" />
+        <TextView
+            android:id="@+id/textViewPhoneRequired"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="8dp"
+            android:text="Phone is required to publish a drive !"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextLastName" />
 
 
-        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </RelativeLayout>
