@@ -12,7 +12,7 @@ import java.util.List;
 
 import johannt.carpool_2.R;
 
-public class CarpoolList extends ArrayAdapter<Carpool> {
+public class CarpoolListAdapter extends ArrayAdapter<Carpool> {
 
     private Activity context;
      List<Carpool> carpools;
@@ -20,7 +20,7 @@ public class CarpoolList extends ArrayAdapter<Carpool> {
      private Carpool carpool;
 
 
-    public CarpoolList(@NonNull Activity context, List<Carpool> carpools) {
+    public CarpoolListAdapter(@NonNull Activity context, List<Carpool> carpools) {
         super(context, R.layout.carpool_list, carpools);
         this.carpools = carpools;
         this.context = context;
