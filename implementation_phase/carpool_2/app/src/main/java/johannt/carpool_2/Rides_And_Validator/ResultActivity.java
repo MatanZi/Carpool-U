@@ -43,6 +43,7 @@ public class ResultActivity extends AppCompatActivity {
     private DatabaseReference firebaseDatabaseRides;
     private FirebaseDatabase databaseCarPool;
     private FirebaseUser firebaseUser;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +60,12 @@ public class ResultActivity extends AppCompatActivity {
         firebaseUser = firebaseAuth.getCurrentUser();
         databaseCarPool = FirebaseDatabase.getInstance();
         firebaseDatabaseRides = databaseCarPool.getReference("Rides");
+        userID = firebaseUser.getUid();
 
         carpoolListView = findViewById(R.id.list_view_carpool);
 
 
         carpoolList = new ArrayList<>();
-
 
         Intent intent = getIntent();
         date = intent.getStringExtra("date");
@@ -76,15 +77,11 @@ public class ResultActivity extends AppCompatActivity {
 
         ride = new Carpool();
         validator = new Validator();
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
         carpoolList.clear();
         firebaseDatabaseRides.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot rideSnapshot : dataSnapshot.getChildren()) {
                     ride = rideSnapshot.getValue(Carpool.class);
                     checkDates = date.equals(ride.getDate()) &&
@@ -114,5 +111,11 @@ public class ResultActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
     }
 }
