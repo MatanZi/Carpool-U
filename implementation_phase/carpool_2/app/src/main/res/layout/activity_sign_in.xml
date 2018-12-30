@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login_Phase.SignInActivity"
-    android:background="@drawable/carpool_signInBACKGRAOUND">
+    android:background="@drawable/carpool_signin_background">
 
 
     <LinearLayout
@@ -16,7 +16,9 @@
         android:layout_marginStart="0dp"
         android:layout_marginBottom="99dp"
         android:background="@color/common_google_signin_btn_text_light_disabled"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp">
 
         <TextView
             android:id="@+id/textView"
