@@ -19,7 +19,6 @@
         android:layout_centerVertical="true"
         android:orientation="vertical">
 
-<<<<<<< HEAD
         <EditText
             android:id="@+id/editTextLastName"
             android:layout_width="300dp"
@@ -77,7 +76,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewPhoneRequired"
             tools:layout_conversion_absoluteHeight="46dp"
             tools:layout_conversion_absoluteWidth="322dp" />
-=======
+
             <EditText
                 android:id="@+id/editTextLastName"
                 android:layout_width="300dp"
@@ -135,7 +134,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewPhoneRequired"
                 tools:layout_conversion_absoluteHeight="46dp"
                 tools:layout_conversion_absoluteWidth="322dp" />
->>>>>>> 6dbd4e2c5fef113b6cf59a0f40ca059c6488d40a
 
         <Spinner
             android:id="@+id/spinnerCity"
@@ -159,7 +157,6 @@
             app:layout_constraintStart_toEndOf="@+id/spinnerCity"
             app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumber" />
 
-<<<<<<< HEAD
         <Button
             android:id="@+id/buttonSave"
             android:layout_width="0dp"
@@ -177,7 +174,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_conversion_absoluteHeight="1dp"
             tools:layout_conversion_absoluteWidth="322dp" />
-=======
+
             <Button
                 android:id="@+id/buttonSave"
                 android:layout_width="0dp"
