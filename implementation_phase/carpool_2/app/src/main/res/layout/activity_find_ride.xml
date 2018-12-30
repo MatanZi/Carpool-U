@@ -71,6 +71,7 @@
         android:ems="10"
         android:hint="enter date"
         android:inputType="date"
+        android:text="DD/MM/YYYY"
         app:layout_constraintBottom_toTopOf="@+id/pickupTimeField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/calendarButton"

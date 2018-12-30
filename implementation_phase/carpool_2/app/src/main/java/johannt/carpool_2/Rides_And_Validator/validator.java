@@ -1,6 +1,7 @@
 package johannt.carpool_2.Rides_And_Validator;
 
 import android.content.Context;
+import android.support.v4.util.TimeUtils;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -10,10 +11,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validator {
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yy");
-
+    private SimpleDateFormat sdf;
+    Time24HoursValidator timeValidator;
     //constructor
     public Validator() {
+        sdf = new SimpleDateFormat("dd/mm/yyyy");
+        timeValidator = new Time24HoursValidator();
     }
 
 
@@ -40,7 +43,7 @@ public class Validator {
 
     //Between dates validator
     public  Boolean checkBetweenTime(String time1 , String time2){
-        return time1.compareTo(time2) >= 0;
+        return time1.equals(time2);
     }
 
     public Boolean matchDates(String date1 , String date2){
@@ -105,7 +108,10 @@ public class Validator {
             Toast.makeText(context , "Please enter arrival time and pickup time", Toast.LENGTH_LONG).show();
             return false;
         }
-        //Todo : time validator
+        if(timeValidator.validate(time)==false){
+            Toast.makeText(context , "Please enter a validate hour.(hh:mm): ", Toast.LENGTH_LONG).show();
+            return false;
+        }
         return true;
     }
 
@@ -202,6 +208,6 @@ public class Validator {
 
     //price validator
     public Boolean checkPrice(String price1 , String price2){
-        return price1.compareTo(price2) <= 0;
+        return price1.equals(price2);
     }
 }

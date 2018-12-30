@@ -48,8 +48,6 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         progressDialog = new ProgressDialog(this);
 
@@ -77,7 +75,13 @@ public class ResultActivity extends AppCompatActivity {
         dst = intent.getStringExtra("dst");
 
         ride = new Carpool();
+        validator = new Validator();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        carpoolList.clear();
         firebaseDatabaseRides.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -96,7 +100,7 @@ public class ResultActivity extends AppCompatActivity {
 
                 progressDialog.dismiss();
                 if (carpoolList.isEmpty()) {
-                    Toast.makeText(ResultActivity.this, "No rides were found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ResultActivity.this, "No rides were found", Toast.LENGTH_SHORT).show();
                 } else {
                     carpoolAdapter = new RideInfoAdapter(ResultActivity.this, carpoolList);
                     carpoolListView.setAdapter(carpoolAdapter);

@@ -17,9 +17,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import johannt.carpool_2.R;
 import johannt.carpool_2.Rides_And_Validator.Carpool;
@@ -90,7 +95,15 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onStart() {
         super.onStart();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String currDate = formatter.format(date);
+        editTextDate.setText(currDate);
         setCityToUniversity();
+
+        editTextStartTime.setText("7:00");
+        editTextEndTime.setText("9:00");
+
     }
 
     /**
@@ -174,11 +187,12 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
 
             try {
                 checker = validator.checkDate(date, this) &&
-                        validator.checkdst(dst, this) &&
-                        validator.checkSrc(src, this) &&
-                        validator.checkPrice(price, this) &&
                         validator.checkTime(endTime, this) &&
-                        validator.checkTime(startTime, this);
+                        validator.checkTime(startTime, this)&&
+                        validator.checkPrice(price, this) &&
+                        validator.checkdst(dst, this) &&
+                        validator.checkSrc(src, this) ;
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -192,7 +206,6 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
                 intent.putExtra("price", price);
                 intent.putExtra("src", src);
                 intent.putExtra("dst", dst);
-
                 startActivity(intent);
                 finish();
             }
