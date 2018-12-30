@@ -1,14 +1,25 @@
 package johannt.carpool_2.Rides_And_Validator;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +36,7 @@ import java.util.List;
 
 import johannt.carpool_2.Profile_Features.FindRideActivity;
 import johannt.carpool_2.R;
+import johannt.carpool_2.Users.User;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -33,6 +45,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private String date, endTime, startTime, price, src, dst;
     private Carpool ride;
+    private User driver;
     private boolean checker, checkDates;
     private Validator validator;
     private List<Carpool> carpoolList;
@@ -40,9 +53,8 @@ public class ResultActivity extends AppCompatActivity {
     private RideInfoAdapter carpoolAdapter;
 
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference firebaseDatabaseRides;
+    private DatabaseReference firebaseDatabaseRides,firebaseUsersRef,userRef;
     private FirebaseDatabase databaseCarPool;
-    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +68,10 @@ public class ResultActivity extends AppCompatActivity {
 
         // /getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
+        //firebaseUser = firebaseAuth.getCurrentUser();
         databaseCarPool = FirebaseDatabase.getInstance();
         firebaseDatabaseRides = databaseCarPool.getReference("Rides");
+        firebaseUsersRef = databaseCarPool.getReference("Users");
 
         carpoolListView = findViewById(R.id.list_view_carpool);
 
@@ -75,7 +88,37 @@ public class ResultActivity extends AppCompatActivity {
         dst = intent.getStringExtra("dst");
 
         ride = new Carpool();
+        driver = new User();
         validator = new Validator();
+
+
+        carpoolListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                Carpool carpool = carpoolList.get(i);
+                User driver = getDriver(carpool.getUID());
+                String name = carpool.getSrc()+" -> "+carpool.getDst()+"  "+carpool.getStartTime();
+                showContactDialog(carpool,driver,name);
+            }
+        });
+
+    }
+    /**
+     * @param uid
+     * @return driver corresponding to the carpool
+     */
+    public User getDriver(String uid) {
+        userRef = firebaseUsersRef.child(uid);
+        ValueEventListener valueEventListener = userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                driver = dataSnapshot.getValue(User.class);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        return  driver ;
     }
 
     @Override
@@ -116,5 +159,58 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
-    
+    private void showContactDialog(final Carpool carpool,final User actualDriver,String Name) {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.carpool_contact_dialog, null);
+        dialogBuilder.setView(dialogView);
+
+        final TextView fullName = (TextView) dialogView.findViewById(R.id.fullName);
+        final TextView numOfFreeplace = (TextView) dialogView.findViewById(R.id.numOfFreePlace);
+      //  final ImageView imageProfile = (ImageView) dialogView.findViewById(R.id.profilePict);
+        final ImageButton buttonSms = (ImageButton) dialogView.findViewById(R.id.smsButton);
+        final ImageButton buttonCall = (ImageButton) dialogView.findViewById(R.id.callButton);
+        final ImageButton buttonWhatsapp = (ImageButton) dialogView.findViewById(R.id.whatsappButton);
+
+        // setting the current values
+        fullName.setText(actualDriver.getFirstName()+" "+actualDriver.getLastName());
+        numOfFreeplace.setText((carpool.getFreeSits()));
+
+        dialogBuilder.setTitle(Name);
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+
+        buttonCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Call", Toast.LENGTH_SHORT).show();
+                b.dismiss();
+
+            }
+        });
+
+
+        buttonSms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "SMS", Toast.LENGTH_SHORT).show();
+
+                b.dismiss();
+
+            }
+        });
+
+        buttonWhatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "WhatsApp", Toast.LENGTH_SHORT).show();
+                b.dismiss();
+
+            }
+        });
+    }
+
+
 }
