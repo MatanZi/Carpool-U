@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minHeight="119dp">
+
+    <TextView
+        android:id="@+id/hourTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Hour :"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintBottom_toTopOf="@+id/numOfFreeplaceView"
+        app:layout_constraintEnd_toStartOf="@+id/editHour"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/numOfFreeplaceView"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="16dp"
+        android:text="Free places:"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDeleteCarpool"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerFreePlace"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hourTextView2" />
+
+    <EditText
+        android:id="@+id/editHour"
+        style="@style/Widget.AppCompat.AutoCompleteTextView"
+        android:layout_width="69dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="time"
+        android:text="00:00"
+        android:textSize="14sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerFreePlace"
+        app:layout_constraintEnd_toStartOf="@+id/buttonUpdateCarpool"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Spinner
+        android:id="@+id/spinnerFreePlace"
+        android:layout_width="80dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginStart="100dp"
+        android:entries="@array/numOfFreePLace"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDeleteCarpool"
+        app:layout_constraintEnd_toStartOf="@+id/buttonUpdateCarpool"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editHour" />
+
+    <Button
+        android:id="@+id/buttonUpdateCarpool"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:text="Update"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDeleteCarpool"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonDeleteCarpool"
+        android:layout_width="208dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="93dp"
+        android:layout_marginLeft="93dp"
+        android:layout_marginRight="93dp"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:background="#c4cbf5"
+        android:text="Delete the drive "
+        android:textColor="@android:color/holo_red_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerFreePlace" />
+
+</android.support.constraint.ConstraintLayout>

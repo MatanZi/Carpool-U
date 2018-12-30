@@ -109,6 +109,14 @@ public class Carpool {
         this.freeSits = freeSits;
     }
 
+    public String getDst() {
+        return dst;
+    }
+
+    public void setDst(String dst) {
+        this.dst = dst;
+    }
+
     public String getSrc() {
         return src;
     }
@@ -117,13 +125,7 @@ public class Carpool {
         this.src = src;
     }
 
-    public String getDst() {
-        return dst;
-    }
 
-    public void setDst(String dst) {
-        this.dst = dst;
-    }
 
 
 

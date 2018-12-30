@@ -29,6 +29,7 @@ import java.util.Date;
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
 import johannt.carpool_2.Rides_And_Validator.Carpool;
+import johannt.carpool_2.Rides_And_Validator.MyDrives;
 import johannt.carpool_2.Rides_And_Validator.Validator;
 import johannt.carpool_2.Users.User;
 
@@ -242,8 +243,9 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
                 firebaseDatabaseRides.child(id).setValue(carpool);
 
                 Toast.makeText(PublishActivity.this, "Ride added successfully", Toast.LENGTH_LONG).show();
-
+                startActivity(new Intent(this, ProfileActivity.class));
                 progressDialog.dismiss();
+                finish();
             }
         }
     }

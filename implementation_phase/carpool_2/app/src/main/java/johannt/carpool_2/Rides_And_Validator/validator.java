@@ -109,6 +109,20 @@ public class Validator {
         return true;
     }
 
+
+
+    //source validator
+    public boolean checkSrc(String src ,  Context context){
+
+        //checking if src is city = src is empty
+        if (src.equals("City")) {
+            Toast.makeText(context, "Please pick a city", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+
     //price validator
     public boolean checkPrice(String price ,  Context context){
 
@@ -119,17 +133,6 @@ public class Validator {
         }
         else if(price.compareTo("0")<0){
             Toast.makeText(context, "price cannot be less than 0", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
-    }
-
-    //source validator
-    public boolean checkSrc(String src ,  Context context){
-
-        //checking if src is city = src is empty
-        if (src.equals("City")) {
-            Toast.makeText(context, "Please pick a city", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

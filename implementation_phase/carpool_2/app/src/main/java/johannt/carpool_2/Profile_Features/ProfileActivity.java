@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import johannt.carpool_2.Login_Phase.ProfileSettingActivity;
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
+import johannt.carpool_2.Rides_And_Validator.MyDrives;
 import johannt.carpool_2.Users.User;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
@@ -150,7 +151,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(this, PublishActivity.class));
         }
         if(view == MyRideHistoyButton){
-            startActivity(new Intent(this, RidesHistory.class));
+            startActivity(new Intent(this, MyDrives.class));
         }
 }
 }

@@ -50,7 +50,7 @@
         <activity android:name=".Profile_Features.FindRideActivity" />
         <activity android:name=".Login_Phase.PasswordReset" />
         <activity
-            android:name=".Users.MyDrives"
+            android:name=".Rides_And_Validator.MyDrives"
             android:label="@string/title_activity_My_drives" />
         <activity
             android:name=".Login_Phase.ProfileSettingActivity"
