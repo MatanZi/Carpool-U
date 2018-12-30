@@ -91,7 +91,7 @@
         android:layout_marginStart="148dp"
         android:layout_marginLeft="148dp"
         android:layout_marginTop="7dp"
-        app:srcCompat="?android:attr/accessibilityFocusedDrawable"
-        tools:srcCompat="@mipmap/carpool_logo" />
+        tools:srcCompat="@mipmap/carpool_logo"
+        tools:ignore="ContentDescription" />
 
 </RelativeLayout>
