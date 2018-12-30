@@ -54,7 +54,6 @@ public class MyDrives extends AppCompatActivity {
         carpools = new ArrayList<>();
 
 
-
         carpoolListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
