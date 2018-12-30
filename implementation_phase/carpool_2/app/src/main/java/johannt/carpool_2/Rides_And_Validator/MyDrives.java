@@ -50,7 +50,7 @@ public class MyDrives extends AppCompatActivity {
         firebaseDatabaseRides = databaseCarPool.getReference("Rides");
         currentUserUid = firebaseUser.getUid();
 
-        carpoolListView = (ListView)findViewById(R.id.list);
+        carpoolListView = findViewById(R.id.list);
         carpools = new ArrayList<>();
 
 
@@ -140,11 +140,11 @@ public class MyDrives extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.update_dialog_drive, null);
         dialogBuilder.setView(dialogView);
 
-        final EditText editDeparture = (EditText) dialogView.findViewById(R.id.editDepartureTime);
-        final EditText editArrival = (EditText) dialogView.findViewById(R.id.editArrivalTime);
-        final Spinner spinnerFreePlaces = (Spinner) dialogView.findViewById(R.id.spinnerFreePlace);
-        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateCarpool);
-        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteCarpool);
+        final EditText editDeparture = dialogView.findViewById(R.id.editDepartureTime);
+        final EditText editArrival = dialogView.findViewById(R.id.editArrivalTime);
+        final Spinner spinnerFreePlaces = dialogView.findViewById(R.id.spinnerFreePlace);
+        final Button buttonUpdate = dialogView.findViewById(R.id.buttonUpdateCarpool);
+        final Button buttonDelete = dialogView.findViewById(R.id.buttonDeleteCarpool);
 
         // setting the current values
         editDeparture.setText(carpool.getStartTime());

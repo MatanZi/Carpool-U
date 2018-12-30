@@ -21,7 +21,7 @@ public class Validator {
 
 
     //Date Validator
-    public boolean checkDate(String date ,  Context context) throws ParseException {
+    public boolean checkDate(String date ,  Context context) {
         //checking if date is empty
         if (TextUtils.isEmpty(date)) {
             Toast.makeText(context, "Please enter date", Toast.LENGTH_LONG).show();
