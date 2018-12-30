@@ -63,7 +63,7 @@ public class MyDrives extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Carpool carpool = carpools.get(i);
                 String name = carpool.getSrc()+" -> "+carpool.getDst()+"  "+carpool.getStartTime();
-                showUpdateDeleteDialog(carpool.getId(), name);
+                showUpdateDeleteDialog(carpool, name);
                 return true;
             }
         });
@@ -109,12 +109,13 @@ public class MyDrives extends AppCompatActivity {
         });
     }
 
-    private boolean updateCarpool(String hour, String freeplaces,String id) {
+    private boolean updateCarpool(String departureHour,String arrivalHour, String freeplaces,String id) {
 
         DatabaseReference carpoolRef = firebaseDatabaseRides.child(id);
         //getting the specified user reference
         try {
-            carpoolRef.child("startTime").setValue(hour);
+            carpoolRef.child("startTime").setValue(departureHour);
+            carpoolRef.child("endTime").setValue(arrivalHour);
             carpoolRef.child("freeSits").setValue(freeplaces);
             Toast.makeText(getApplicationContext(), "updated successfully", Toast.LENGTH_SHORT).show();
 
@@ -135,17 +136,25 @@ public class MyDrives extends AppCompatActivity {
         return true;
     }
 
-    private void showUpdateDeleteDialog(final String carpoolId, String Name) {
+    private void showUpdateDeleteDialog(final Carpool carpool, String Name) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.update_dialog_drive, null);
         dialogBuilder.setView(dialogView);
 
-        final EditText editHour = (EditText) dialogView.findViewById(R.id.editHour);
+        final EditText editDeparture = (EditText) dialogView.findViewById(R.id.editDepartureTime);
+        final EditText editArrival = (EditText) dialogView.findViewById(R.id.editArrivalTime);
         final Spinner spinnerFreePlaces = (Spinner) dialogView.findViewById(R.id.spinnerFreePlace);
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateCarpool);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteCarpool);
+
+        // setting the current values
+        editDeparture.setText(carpool.getStartTime());
+        editArrival.setText(carpool.getEndTime());
+        spinnerFreePlaces.setSelection(getIndex(spinnerFreePlaces,carpool.getFreeSits()));
+
+        carpoolId = carpool.getId();
 
         dialogBuilder.setTitle(Name);
         final AlertDialog b = dialogBuilder.create();
@@ -155,10 +164,11 @@ public class MyDrives extends AppCompatActivity {
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String hour = editHour.getText().toString().trim();
+                String departureHour = editDeparture.getText().toString().trim();
+                String arrivalHour = editArrival.getText().toString().trim();
                 String freeplaces = spinnerFreePlaces.getSelectedItem().toString();
-                if (!TextUtils.isEmpty(hour)) {
-                    updateCarpool(hour,freeplaces,carpoolId);
+                if (!TextUtils.isEmpty(departureHour) && !TextUtils.isEmpty(arrivalHour)) {
+                    updateCarpool(departureHour,arrivalHour,freeplaces,carpoolId);
                     b.dismiss();
                 }
             }
@@ -174,6 +184,20 @@ public class MyDrives extends AppCompatActivity {
 
             }
         });
+    }
+
+    /**
+     * @param spinner
+     * @param myString
+     * @return the index of the item corresponding to myString
+     */
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+        return 0;
     }
 
 }
