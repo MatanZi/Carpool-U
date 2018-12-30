@@ -33,13 +33,13 @@ public class RideInfoAdapter extends ArrayAdapter<Carpool> {
         LayoutInflater inflater = context.getLayoutInflater();
         listview = inflater.inflate(R.layout.ride_list_view,null,true);
 
-        TextView name = (TextView) listview.findViewById(R.id.driverName);
-        TextView src = (TextView) listview.findViewById(R.id.textViewSource);
-        TextView dst = (TextView) listview.findViewById(R.id.textViewDest);
-        TextView date = (TextView) listview.findViewById(R.id.textViewDate);
-        TextView hoursrc = (TextView) listview.findViewById(R.id.textViewHoursrc);
-        TextView hourdst = (TextView) listview.findViewById(R.id.textViewHourdst);
-        TextView freeplace = (TextView) listview.findViewById(R.id.textViewNumFreePlaces);
+        TextView name = listview.findViewById(R.id.driverName);
+        TextView src = listview.findViewById(R.id.textViewSource);
+        TextView dst = listview.findViewById(R.id.textViewDest);
+        TextView date = listview.findViewById(R.id.textViewDate);
+        TextView hoursrc = listview.findViewById(R.id.textViewHoursrc);
+        TextView hourdst = listview.findViewById(R.id.textViewHourdst);
+        TextView freeplace = listview.findViewById(R.id.textViewNumFreePlaces);
 
         carpool = carpoolList.get(position);
 

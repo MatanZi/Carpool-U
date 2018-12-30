@@ -224,16 +224,12 @@ public class PublishActivity extends AppCompatActivity  implements View.OnClickL
 
             Validator validator = new Validator();
             boolean checker = false;
-            try {
-                checker = validator.checkDate(date, this) &&
-                        validator.checkdst(dst, this) &&
-                        validator.checkSrc(src, this) &&
-                        validator.checkPrice(price, this) &&
-                        validator.checkTime(endTime, this) &&
-                        validator.checkTime(startTime, this);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            checker = validator.checkDate(date, this) &&
+                    validator.checkdst(dst, this) &&
+                    validator.checkSrc(src, this) &&
+                    validator.checkPrice(price, this) &&
+                    validator.checkTime(endTime, this) &&
+                    validator.checkTime(startTime, this);
 
             if (checker) {
                 progressDialog.setMessage("Loading Please Wait...");

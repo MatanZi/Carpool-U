@@ -171,12 +171,12 @@ public class ResultActivity extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.carpool_contact_dialog, null);
         dialogBuilder.setView(dialogView);
 
-        final TextView fullName = (TextView) dialogView.findViewById(R.id.fullName);
-        final TextView numOfFreeplace = (TextView) dialogView.findViewById(R.id.numOfFreePlace);
+        final TextView fullName = dialogView.findViewById(R.id.fullName);
+        final TextView numOfFreeplace = dialogView.findViewById(R.id.numOfFreePlace);
         //  final ImageView imageProfile = (ImageView) dialogView.findViewById(R.id.profilePict);
-        final ImageButton buttonSms = (ImageButton) dialogView.findViewById(R.id.smsButton);
-        final ImageButton buttonCall = (ImageButton) dialogView.findViewById(R.id.callButton);
-        final ImageButton buttonWhatsapp = (ImageButton) dialogView.findViewById(R.id.whatsappButton);
+        final ImageButton buttonSms = dialogView.findViewById(R.id.smsButton);
+        final ImageButton buttonCall = dialogView.findViewById(R.id.callButton);
+        final ImageButton buttonWhatsapp = dialogView.findViewById(R.id.whatsappButton);
 
         // setting the current values
         fullName.setText(actualDriver.getFirstName()+" "+actualDriver.getLastName());

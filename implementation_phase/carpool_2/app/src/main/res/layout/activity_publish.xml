@@ -195,7 +195,11 @@
         android:layout_marginTop="480dp"
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
+<<<<<<< HEAD
         android:background="#f0c074"
+=======
+        android:background="@color/colorAccent"
+>>>>>>> 6dbd4e2c5fef113b6cf59a0f40ca059c6488d40a
         android:text="Add Ride"
         android:textColorLink="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,10 +8,42 @@
         android:layout_height="match_parent"
         tools:context=".Login_Phase.SignInActivity"
         android:background="@drawable/carpool_signin_background">
+=======
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login_Phase.SignInActivity"
+    android:background="@drawable/carpool_signin_background">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="99dp"
+        android:background="@color/common_google_signin_btn_text_light_disabled"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Carpool-U"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#ffffff" />
+>>>>>>> 6dbd4e2c5fef113b6cf59a0f40ca059c6488d40a
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="99dp"
             android:background="@color/common_google_signin_btn_text_light_disabled"
@@ -74,6 +107,53 @@
                 android:textAlignment="center"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textStyle="bold" />
+=======
+            android:layout_margin="15dp"
+            android:background="@color/common_google_signin_btn_text_light_disabled"
+            android:hint="Enter email"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_default"
+            android:textColorLink="@color/common_google_signin_btn_text_dark_pressed" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/common_google_signin_btn_text_light_disabled"
+            android:hint="Enter password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_default" />
+
+        <TextView
+            android:id="@+id/textViewPasswordReset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="Forget the password? Password recovery"
+            android:textAlignment="center"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonSignin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/colorAccent"
+            android:text="@string/action_sign_in_short" />
+
+        <TextView
+            android:id="@+id/textViewSignin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="@string/action_sign_up"
+            android:textAlignment="center"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textColorHighlight="@color/common_google_signin_btn_text_light_disabled"
+            android:textStyle="bold" />
+>>>>>>> 6dbd4e2c5fef113b6cf59a0f40ca059c6488d40a
 
     </LinearLayout>
 
@@ -87,6 +167,11 @@
         android:layout_marginStart="148dp"
         android:layout_marginLeft="148dp"
         android:layout_marginTop="7dp"
+<<<<<<< HEAD
         tools:srcCompat="@mipmap/carpool_logo" />
+=======
+        tools:srcCompat="@mipmap/carpool_logo"
+        tools:ignore="ContentDescription" />
+>>>>>>> 6dbd4e2c5fef113b6cf59a0f40ca059c6488d40a
 
 </RelativeLayout>
