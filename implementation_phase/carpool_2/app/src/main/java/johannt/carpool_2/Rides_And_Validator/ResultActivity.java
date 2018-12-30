@@ -55,6 +55,11 @@ public class ResultActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference firebaseDatabaseRides,firebaseUsersRef,userRef;
     private FirebaseDatabase databaseCarPool;
+<<<<<<< HEAD
+=======
+    private FirebaseUser firebaseUser;
+    private String userID;
+>>>>>>> c5e7b72103358c2a6359465f2da3b9ddec4039ae
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +76,16 @@ public class ResultActivity extends AppCompatActivity {
         //firebaseUser = firebaseAuth.getCurrentUser();
         databaseCarPool = FirebaseDatabase.getInstance();
         firebaseDatabaseRides = databaseCarPool.getReference("Rides");
+<<<<<<< HEAD
         firebaseUsersRef = databaseCarPool.getReference("Users");
+=======
+        userID = firebaseUser.getUid();
+>>>>>>> c5e7b72103358c2a6359465f2da3b9ddec4039ae
 
         carpoolListView = findViewById(R.id.list_view_carpool);
 
 
         carpoolList = new ArrayList<>();
-
 
         Intent intent = getIntent();
         date = intent.getStringExtra("date");
@@ -90,6 +98,7 @@ public class ResultActivity extends AppCompatActivity {
         ride = new Carpool();
         driver = new User();
         validator = new Validator();
+<<<<<<< HEAD
 
 
         carpoolListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -120,14 +129,13 @@ public class ResultActivity extends AppCompatActivity {
         });
         return  driver ;
     }
+=======
+>>>>>>> c5e7b72103358c2a6359465f2da3b9ddec4039ae
 
-    @Override
-    protected void onStart() {
-        super.onStart();
         carpoolList.clear();
         firebaseDatabaseRides.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot rideSnapshot : dataSnapshot.getChildren()) {
                     ride = rideSnapshot.getValue(Carpool.class);
                     checkDates = date.equals(ride.getDate()) &&
@@ -158,6 +166,7 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
     }
+<<<<<<< HEAD
 
     private void showContactDialog(final Carpool carpool,final User actualDriver,String Name) {
 
@@ -213,4 +222,6 @@ public class ResultActivity extends AppCompatActivity {
     }
 
 
+=======
+>>>>>>> c5e7b72103358c2a6359465f2da3b9ddec4039ae
 }
