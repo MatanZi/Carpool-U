@@ -58,8 +58,8 @@
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="fdfdfd" />
                                       <entry key="backgroundLayerName" value="ic_launcher_background_car" />
-                                      <entry key="foregroundImage" value="$PROJECT_DIR$/../../../../../../carpoolU_starting.png" />
-                                      <entry key="foregroundLayerName" value="Carpool_starting_Layer" />
+                                      <entry key="foregroundImage" value="$PROJECT_DIR$/../../../../../../icon_whatsapp.png" />
+                                      <entry key="foregroundLayerName" value="whatsapp_layer" />
                                       <entry key="legacyIconShape" value="NONE" />
                                       <entry key="outputName" value="Carpool_starting" />
                                       <entry key="showSafeZone" value="false" />
@@ -114,7 +114,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_settings_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_textsms_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -124,7 +124,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_settings_black_24dp" />
+                            <entry key="outputName" value="ic_textsms_black_24dp" />
                             <entry key="sourceFile" value="$PROJECT_DIR$/../../../../../../baseline-settings-20px.svg" />
                           </map>
                         </option>

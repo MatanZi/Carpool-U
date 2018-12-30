@@ -112,10 +112,4 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
 }

@@ -33,14 +33,23 @@ public class RideInfoAdapter extends ArrayAdapter<Carpool> {
         LayoutInflater inflater = context.getLayoutInflater();
         listview = inflater.inflate(R.layout.ride_list_view,null,true);
 
-        fullName = listview.findViewById(R.id.textViewFullName);
-        freeSits = listview.findViewById(R.id.textViewFreeSits);
-        phoneNumber = listview.findViewById(R.id.textViewPhoneNumber);
+        TextView name = (TextView) listview.findViewById(R.id.driverName);
+        TextView src = (TextView) listview.findViewById(R.id.textViewSource);
+        TextView dst = (TextView) listview.findViewById(R.id.textViewDest);
+        TextView date = (TextView) listview.findViewById(R.id.textViewDate);
+        TextView hoursrc = (TextView) listview.findViewById(R.id.textViewHoursrc);
+        TextView hourdst = (TextView) listview.findViewById(R.id.textViewHourdst);
+        TextView freeplace = (TextView) listview.findViewById(R.id.textViewNumFreePlaces);
 
         carpool = carpoolList.get(position);
-        fullName.setText("Full name: "+ carpool.getFirstName() +" "+ carpool.getLastName());
-        freeSits.setText("Free sits: "+ carpool.getFreeSits());
-        phoneNumber.setText("Phone Number: "+ carpool.getPhoneNumber());
+
+        name.setText(carpool.getFirstName());
+        src.setText(carpool.getSrc());
+        dst.setText(carpool.getDst());
+        date.setText(carpool.getDate());
+        hoursrc.setText(carpool.getStartTime());
+        hourdst.setText(carpool.getEndTime());
+        freeplace.setText(carpool.getFreeSits());
 
         return listview;
     }
