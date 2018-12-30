@@ -19,7 +19,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$PROJECT_DIR$/../../../../../../icon_whatsapp.png" />
+                                      <entry key="imageAsset" value="$PROJECT_DIR$/../../../../../../capool-U_logo.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -46,7 +46,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="68" />
+                                                <entry key="scalingPercent" value="82" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -70,11 +70,10 @@
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="fdfdfd" />
                                       <entry key="backgroundLayerName" value="ic_launcher_background_car" />
-                                      <entry key="foregroundImage" value="$PROJECT_DIR$/../../../../../../icon_whatsapp.png" />
-                                      <entry key="foregroundLayerName" value="whatsapp_layer" />
+                                      <entry key="foregroundImage" value="$PROJECT_DIR$/../../../../../../capool-U_logo.png" />
+                                      <entry key="foregroundLayerName" value="logo_carpool_u" />
                                       <entry key="legacyIconShape" value="NONE" />
                                       <entry key="outputName" value="Carpool_starting" />
-                                      <entry key="showSafeZone" value="false" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -101,11 +100,6 @@
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

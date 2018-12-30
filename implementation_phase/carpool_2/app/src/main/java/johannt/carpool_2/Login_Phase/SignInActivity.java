@@ -126,9 +126,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-
-
-
     @Override
     public void onClick(View view) {
         if(view == buttonSignIn){

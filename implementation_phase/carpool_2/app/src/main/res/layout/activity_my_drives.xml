@@ -8,12 +8,16 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/pavements1"
     tools:context=".Rides_And_Validator.MyDrives">
 
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" ></ListView>
+        android:layout_height="wrap_content"
+        android:background="@color/mdtp_accent_color_focused"
+        android:cacheColorHint="@color/colorAccent"
+        android:scrollbars="none"></ListView>
 
 
 </RelativeLayout>
