@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:minHeight="119dp">
+    android:minHeight="119dp"
+    android:background="@drawable/pavements1">
 
     <EditText
         android:id="@+id/editArrivalTime"
@@ -114,14 +115,14 @@
         android:id="@+id/buttonDeleteCarpool"
         android:layout_width="208dp"
         android:layout_height="27dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="93dp"
-        android:layout_marginLeft="93dp"
-        android:layout_marginRight="93dp"
         android:layout_marginStart="93dp"
+        android:layout_marginLeft="93dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="93dp"
+        android:layout_marginRight="93dp"
+        android:layout_marginBottom="16dp"
         android:layout_weight="1"
-        android:background="#c4cbf5"
+        android:background="@color/colorAccent"
         android:text="Delete the drive "
         android:textColor="@android:color/holo_red_light"
         app:layout_constraintBottom_toBottomOf="parent"

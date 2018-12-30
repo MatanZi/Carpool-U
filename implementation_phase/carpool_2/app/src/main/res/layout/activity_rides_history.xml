@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Profile_Features.RidesHistory">
+    tools:context=".Profile_Features.RidesHistory"
+    android:background="@drawable/pavements1">
 
     <ListView
         android:id="@+id/list_view_carpool_history"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/mdtp_accent_color_focused" />
 
 </android.support.design.widget.CoordinatorLayout>
