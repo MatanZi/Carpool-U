@@ -17,7 +17,8 @@
         android:layout_height="495dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentRight="true">
 
         <EditText
             android:id="@+id/editTextLastName"
@@ -36,7 +37,8 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_conversion_absoluteHeight="46dp"
             tools:layout_conversion_absoluteWidth="152dp"
-            tools:layout_editor_absoluteY="54dp" />
+            tools:layout_editor_absoluteY="54dp"
+            tools:ignore="MissingConstraints" />
 
         <EditText
             android:id="@+id/editTextFirstName"
@@ -84,7 +86,8 @@
             android:layout_marginLeft="26dp"
             android:entries="@array/city_array"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="179dp" />
+            tools:layout_editor_absoluteY="179dp"
+            tools:ignore="MissingConstraints" />
 
         <Spinner
             android:id="@+id/spinnerUniversity"
@@ -94,7 +97,8 @@
             android:layout_marginLeft="16dp"
             android:entries="@array/university_array"
             app:layout_constraintStart_toEndOf="@+id/spinnerCity"
-            tools:layout_editor_absoluteY="179dp" />
+            tools:layout_editor_absoluteY="179dp"
+            tools:ignore="MissingConstraints" />
 
         <Button
                 android:id="@+id/buttonSave"
@@ -121,7 +125,8 @@
             android:layout_marginLeft="26dp"
             android:text="Phone is required to publish a drive !"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="107dp" />
+            tools:layout_editor_absoluteY="107dp"
+            tools:ignore="MissingConstraints" />
 
 
     </android.support.constraint.ConstraintLayout>
