@@ -67,7 +67,7 @@
             android:label="@string/title_activity_rides_history"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <service android:name="Firebase_Messaging.MyFirebaseInstanceIdService">
+        <service android:name=".Firebase_Messaging.MyFirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

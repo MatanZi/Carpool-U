@@ -49,27 +49,27 @@ public class chatService extends AppCompatActivity {
             }
         });
 
-        displayChatMessage();
+    //    displayChatMessage();
     }
 
-    private void displayChatMessage() {
-        ListView listViewMessage = (ListView)findViewById(R.id.list_of_messages);
-        adapter = new FirebaseListAdapter<chatMessage>(this,chatMessage.class,R.layout.list_info_message,FirebaseDatabase.getInstance().getReference("Messages")){
-            @Override
-            protected void populateView(View v,  chatMessage model, int position) {
-
-                messageText = (TextView)v.findViewById(R.id.message_text);
-                messageUser = (TextView)v.findViewById(R.id.message_user);
-                messageTime = (TextView)v.findViewById(R.id.message_time);
-
-                messageText.setText(model.getMessageText());
-                messageUser.setText(model.getMessageUser());
-                messageTime.setText(android.text.format.DateFormat.format("dd-mm-yyyy (HH:mm:ss)" , model.getMessageTime()));
-            }
-        };
-        listViewMessage.setAdapter(adapter);
-
-    }
+//    private void displayChatMessage() {
+//        ListView listViewMessage = (ListView)findViewById(R.id.list_of_messages);
+//        adapter = new FirebaseListAdapter<chatMessage>(this,chatMessage.class,R.layout.list_info_message,FirebaseDatabase.getInstance().getReference("Messages")){
+//            @Override
+//            protected void populateView(View v,  chatMessage model, int position) {
+//
+//                messageText = (TextView)v.findViewById(R.id.message_text);
+//                messageUser = (TextView)v.findViewById(R.id.message_user);
+//                messageTime = (TextView)v.findViewById(R.id.message_time);
+//
+//                messageText.setText(model.getMessageText());
+//                messageUser.setText(model.getMessageUser());
+//                messageTime.setText(android.text.format.DateFormat.format("dd-mm-yyyy (HH:mm:ss)" , model.getMessageTime()));
+//            }
+//        };
+//        listViewMessage.setAdapter(adapter);
+//
+//    }
 
 
 }
