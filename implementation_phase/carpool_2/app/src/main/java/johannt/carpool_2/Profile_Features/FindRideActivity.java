@@ -206,11 +206,6 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
             }
         }
     }
-
-/**    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }**/
 }
 
 
