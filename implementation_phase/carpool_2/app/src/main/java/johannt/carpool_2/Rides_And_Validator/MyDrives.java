@@ -24,8 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import johannt.carpool_2.R;
 import johannt.carpool_2.Users.User;
+import johannt.carpool_2.R;
 
 public class MyDrives extends AppCompatActivity {
 
