@@ -1,12 +1,28 @@
 package johannt.carpool_2.Login_Phase;
 
+
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -15,11 +31,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import johannt.carpool_2.Profile_Features.ProfileActivity;
 import johannt.carpool_2.R;
 import johannt.carpool_2.Rides_And_Validator.Validator;
 import johannt.carpool_2.Users.User;
 
+import static android.graphics.BitmapFactory.decodeFile;
 import static johannt.carpool_2.Profile_Features.ProfileActivity.firstName;
 
 public class ProfileSettingActivity extends AppCompatActivity implements View.OnClickListener{
@@ -27,6 +50,8 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
 
 
     private String id;
+    final private int PICK_IMAGE = 2;
+    final private int CAPTURE_IMAGE = 1;
     private Boolean checker;
     //defining view objects
     private EditText editTextFirstName;
@@ -35,7 +60,9 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
     private Spinner spinnerCity;
     private Spinner spinnerUniversity;
     private Button buttonSave;
+    private ImageButton uploadPicProfile;
     private ProgressDialog progressDialog;
+    private ImageView profilePict ;
 
 
     //defining firebaseauth object
@@ -45,6 +72,7 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
     private FirebaseUser firebaseUser;
     private User user;
     private Validator validator;
+    private File file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +89,114 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         editTextLastName = findViewById(R.id.editTextLastName);
         editTextPhoneNumber = findViewById(R.id.editTextPhoneNumber);
         spinnerCity = findViewById(R.id.spinnerCity);
+        profilePict = (ImageView) findViewById(R.id.imageViewProfile);
         spinnerUniversity = findViewById(R.id.spinnerUniversity);
-
-
-        // FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        uploadPicProfile = findViewById(R.id.uploadPicProfileButton);
         buttonSave = findViewById(R.id.buttonSave);
 
-        progressDialog = new ProgressDialog(this);
 
         //attaching listener to button
+
+        progressDialog = new ProgressDialog(this);
         buttonSave.setOnClickListener(this);
+        uploadPicProfile.setOnClickListener(this);
+
     }
+
+
+    private void showPictureSettingDialog() {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_set_profile_picture, null);
+        dialogBuilder.setView(dialogView);
+
+        final ImageButton btnTakePicure = dialogView.findViewById(R.id.takePictureButton);
+        final ImageButton btnImportPicture = dialogView.findViewById(R.id.importPictureButton);
+
+
+        dialogBuilder.setTitle("Profile picture Setting");
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        btnTakePicure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               takePicture();
+                b.dismiss();
+
+            }
+        });
+
+        btnImportPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               importPicture();
+                b.dismiss();
+            }
+        });
+    }
+
+    /**
+     * This method upload the image from our database.
+     */
+    private void uploadImage() {
+
+        profilePict.setDrawingCacheEnabled(true);
+        profilePict.buildDrawingCache();
+        Bitmap bitmap = profilePict.getDrawingCache();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//        byte[] data = baos.toByteArray();
+//        ref.putBytes(data);
+//        Log.e("trying to upload image", "success");
+//        FireBaseQuery.updateUserPictureUri();
+
+    }
+
+    private void takePicture() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent,CAPTURE_IMAGE );
+        }
+    }
+
+    private void importPicture(){
+
+        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        getIntent.setType("image/*");
+
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setType("image/*");
+
+        Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+
+        startActivityForResult(chooserIntent, PICK_IMAGE);
+    }
+
+@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+        switch(requestCode) {
+            case PICK_IMAGE:
+                if(resultCode == RESULT_OK){
+                    Bitmap selectedImage = (Bitmap)imageReturnedIntent.getExtras().get("data");
+                    profilePict.setImageBitmap(selectedImage);
+                //    uploadImage();
+                }
+                break;
+            case CAPTURE_IMAGE:
+                if(resultCode == RESULT_OK){
+                    Bitmap selectedImage = (Bitmap)imageReturnedIntent.getExtras().get("data");
+                    profilePict.setImageBitmap(selectedImage);
+                  //  uploadImage();
+                }
+                break;
+        }
+    }
+
+
 
     /**
      * @param spinner
@@ -143,6 +268,10 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
+
+        if (v == uploadPicProfile){
+            showPictureSettingDialog();
+        }
 
         if (v == buttonSave) {
 
