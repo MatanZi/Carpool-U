@@ -13,10 +13,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -73,8 +81,9 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
     //defining firebaseauth object
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseUsersRef;
-    private FirebaseDatabase databaseCarPool;
     private FirebaseUser firebaseUser;
+    private FirebaseStorage storage;
+    private StorageReference imgProfileRef,imgCarRef;
     private User user;
     private Validator validator;
     private File file;
@@ -86,8 +95,10 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
 
         //initializing firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
-        //Carpool = new Firebase("https://carpool-u.firebaseio.com/");
+         storage = FirebaseStorage.getInstance();
+         imgProfileRef = storage.getReference().child("images/" + ProfileActivity.email + "/profile");
 
+        //Carpool = new Firebase("https://carpool-u.firebaseio.com/");
 
         //initializing views
         editTextFirstName = findViewById(R.id.editTextFirstName);
@@ -107,6 +118,20 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         uploadPicProfile.setOnClickListener(this);
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        databaseUsersRef = FirebaseDatabase.getInstance().getReference("Users");
+        firebaseUser = firebaseAuth.getCurrentUser();
+        id = firebaseUser.getUid();
+        //updateUI(currentUser);
+        setCurrentsValues();
+        // set image profile
+        Glide.with(this).load(imgProfileRef).into(profilePict);
+    }
+
 
     private void showPictureSettingDialog() {
 
@@ -141,24 +166,20 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         });
     }
 
-//    /**
-//     * This method upload the image from our database.
-//     */
-//    private void updateImageProfil() {
-//        FirebaseStorage storage = FirebaseStorage.getInstance();
-//        StorageReference storageReference = storage.getReference();
-//        StorageReference ref = storageReference.child("images/" + email.getMail() + "/profile");
-//        profilePict.setDrawingCacheEnabled(true);
-//        profilePict.buildDrawingCache();
-//        Bitmap bitmap = profilePict.getDrawingCache();
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-//        byte[] data = baos.toByteArray();
-//        ref.putBytes(data);
-//        Log.e("trying to upload image", "success");
-//        FireBaseQuery.updateUserPictureUri();
-//
-//    }
+    /**
+     * This method upload the image from our database.
+     */
+    private void updateImageProfil() {
+        profilePict.setDrawingCacheEnabled(true);
+        profilePict.buildDrawingCache();
+        Bitmap bitmap = profilePict.getDrawingCache();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] data = baos.toByteArray();
+        imgProfileRef.putBytes(data);
+        Log.e("trying to upload image", "success");
+    }
+
 
 
     private void takePicture() {
@@ -192,9 +213,7 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
     if(resultCode == RESULT_OK) {
              switch (requestCode) {
                  case PICK_IMAGE:
-
                      Uri imageUri = imageReturnedIntent.getData();
-
                      InputStream inputStream;
 
                      try {
@@ -209,15 +228,14 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
                          // show a message to the user indictating that the image is unavailable.
                          Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG).show();
                      }
-                //    uploadImage();
                 break;
                  case CAPTURE_IMAGE:
                 Bitmap selectedImage = (Bitmap) imageReturnedIntent.getExtras().get("data");
                 profilePict.setImageBitmap(selectedImage);
-                //  uploadImage();
                 break;
             }
         }
+
     }
 
 
@@ -244,16 +262,6 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         spinnerUniversity.setSelection(getIndex(spinnerUniversity, ProfileActivity.university));
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        databaseUsersRef = FirebaseDatabase.getInstance().getReference("Users");
-        firebaseUser = firebaseAuth.getCurrentUser();
-        id = firebaseUser.getUid();
-        //updateUI(currentUser);
-        setCurrentsValues();
-    }
 
     @Override
     protected void onResume() {
@@ -319,6 +327,8 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
                 progressDialog.setMessage("Updating...");
                 progressDialog.show();
                 updateUser(firstname,lastname,phoneNumber,city,university);
+                updateImageProfil();
+
 
                 startActivity(new Intent(this, ProfileActivity.class));
 
