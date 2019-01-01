@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -30,10 +31,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -103,7 +108,6 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
 
     }
 
-
     private void showPictureSettingDialog() {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -137,22 +141,25 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         });
     }
 
-    /**
-     * This method upload the image from our database.
-     */
-    private void uploadImage() {
-
-        profilePict.setDrawingCacheEnabled(true);
-        profilePict.buildDrawingCache();
-        Bitmap bitmap = profilePict.getDrawingCache();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//    /**
+//     * This method upload the image from our database.
+//     */
+//    private void updateImageProfil() {
+//        FirebaseStorage storage = FirebaseStorage.getInstance();
+//        StorageReference storageReference = storage.getReference();
+//        StorageReference ref = storageReference.child("images/" + email.getMail() + "/profile");
+//        profilePict.setDrawingCacheEnabled(true);
+//        profilePict.buildDrawingCache();
+//        Bitmap bitmap = profilePict.getDrawingCache();
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
 //        byte[] data = baos.toByteArray();
 //        ref.putBytes(data);
 //        Log.e("trying to upload image", "success");
 //        FireBaseQuery.updateUserPictureUri();
+//
+//    }
 
-    }
 
     private void takePicture() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -163,36 +170,53 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
 
     private void importPicture(){
 
-        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        getIntent.setType("image/*");
+        // invoke the image gallery using an implict intent.
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 
-        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        pickIntent.setType("image/*");
+        // where do we want to find the data?
+        File pictureDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        String pictureDirectoryPath = pictureDirectory.getPath();
+        // finally, get a URI representation
+        Uri data = Uri.parse(pictureDirectoryPath);
 
-        Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+        // set the data and type.  Get all image types.
+        photoPickerIntent.setDataAndType(data, "image/*");
 
-        startActivityForResult(chooserIntent, PICK_IMAGE);
+        // we will invoke this activity, and get something back from it.
+        startActivityForResult(photoPickerIntent, PICK_IMAGE);
     }
 
 @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        switch(requestCode) {
-            case PICK_IMAGE:
-                if(resultCode == RESULT_OK){
-                    Bitmap selectedImage = (Bitmap)imageReturnedIntent.getExtras().get("data");
-                    profilePict.setImageBitmap(selectedImage);
+    if(resultCode == RESULT_OK) {
+             switch (requestCode) {
+                 case PICK_IMAGE:
+
+                     Uri imageUri = imageReturnedIntent.getData();
+
+                     InputStream inputStream;
+
+                     try {
+                         inputStream = getContentResolver().openInputStream(imageUri);
+
+                         Bitmap image = BitmapFactory.decodeStream(inputStream);
+                         // show the image to the user
+                         profilePict.setImageBitmap(image);
+
+                     } catch (FileNotFoundException e) {
+                         e.printStackTrace();
+                         // show a message to the user indictating that the image is unavailable.
+                         Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG).show();
+                     }
                 //    uploadImage();
-                }
                 break;
-            case CAPTURE_IMAGE:
-                if(resultCode == RESULT_OK){
-                    Bitmap selectedImage = (Bitmap)imageReturnedIntent.getExtras().get("data");
-                    profilePict.setImageBitmap(selectedImage);
-                  //  uploadImage();
-                }
+                 case CAPTURE_IMAGE:
+                Bitmap selectedImage = (Bitmap) imageReturnedIntent.getExtras().get("data");
+                profilePict.setImageBitmap(selectedImage);
+                //  uploadImage();
                 break;
+            }
         }
     }
 
