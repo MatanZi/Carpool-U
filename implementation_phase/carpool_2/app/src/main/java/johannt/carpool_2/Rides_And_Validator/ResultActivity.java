@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -30,16 +29,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import johannt.carpool_2.Firebase_Messaging.chatService;
 import johannt.carpool_2.Profile_Features.ProfileActivity;
-import johannt.carpool_2.Users.User;
 import johannt.carpool_2.R;
+import johannt.carpool_2.Users.User;
 
 public class ResultActivity extends AppCompatActivity{
 
 
+    private ImageButton ButtonChat;
     private ListView carpoolListView;
-    private FloatingActionButton chatBtn;
 
     private String date, endTime, startTime, price, src, dst;
     private Carpool ride;
@@ -89,16 +87,16 @@ public class ResultActivity extends AppCompatActivity{
         ride = new Carpool();
         driver = new User();
         validator = new Validator();
+        ButtonChat = findViewById(R.id.chatButton);
 
 
         carpoolListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
                 Carpool carpool = carpoolList.get(i);
-                Toast.makeText(getApplicationContext(),"Reached",Toast.LENGTH_LONG).show();
                 User driver = getDriver(carpool.getUID());
                 String name = carpool.getSrc()+" -> "+carpool.getDst()+"  "+carpool.getStartTime();
-                String fullName = carpool.getFirstName() +" "+carpool.getLastName();
+                String fullName = carpool.getFirstName();
                 showContactDialog(carpool,driver,name , fullName);
             }
         });
@@ -173,7 +171,7 @@ public class ResultActivity extends AppCompatActivity{
         final ImageButton buttonSms = dialogView.findViewById(R.id.smsButton);
         final ImageButton buttonCall = dialogView.findViewById(R.id.callButton);
         final ImageButton buttonWhatsapp = dialogView.findViewById(R.id.whatsappButton);
-        final ImageButton buttonChat = findViewById(R.id.chatButton);
+
 
         // setting the current values
         fullName.setText(fullname);
@@ -234,17 +232,6 @@ public class ResultActivity extends AppCompatActivity{
 
             }
         });
-
-
-        buttonChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent chatIntent = new Intent(ResultActivity.this , chatService.class);
-                startActivity(chatIntent);
-                Toast.makeText(getApplicationContext(), "Chat", Toast.LENGTH_SHORT).show();
-                b.dismiss();
-            }
-        });
     }
 
 
@@ -267,6 +254,5 @@ public class ResultActivity extends AppCompatActivity{
                     "SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
         }
     }
-
 
 }
