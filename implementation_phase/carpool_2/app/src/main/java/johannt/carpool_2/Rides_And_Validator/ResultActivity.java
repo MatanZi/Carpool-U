@@ -8,45 +8,38 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import johannt.carpool_2.Profile_Features.FindRideActivity;
+import johannt.carpool_2.Firebase_Messaging.chatService;
 import johannt.carpool_2.Profile_Features.ProfileActivity;
 import johannt.carpool_2.R;
 import johannt.carpool_2.Users.User;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity extends AppCompatActivity{
 
 
     private ListView carpoolListView;
+    private FloatingActionButton chatBtn;
 
     private String date, endTime, startTime, price, src, dst;
     private Carpool ride;
@@ -67,6 +60,7 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         progressDialog = new ProgressDialog(this);
+
 
         progressDialog.setMessage("Searching please wait...");
         progressDialog.show();
@@ -101,9 +95,11 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
                 Carpool carpool = carpoolList.get(i);
+                Toast.makeText(getApplicationContext(),"Reached",Toast.LENGTH_LONG).show();
                 User driver = getDriver(carpool.getUID());
                 String name = carpool.getSrc()+" -> "+carpool.getDst()+"  "+carpool.getStartTime();
-                showContactDialog(carpool,driver,name);
+                String fullName = carpool.getFirstName() +" "+carpool.getLastName();
+                showContactDialog(carpool,driver,name , fullName);
             }
         });
 
@@ -164,7 +160,7 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
-    private void showContactDialog(final Carpool carpool,final User actualDriver,String Name) {
+    private void showContactDialog(final Carpool carpool,final User actualDriver,String Name , String fullname) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -177,9 +173,10 @@ public class ResultActivity extends AppCompatActivity {
         final ImageButton buttonSms = dialogView.findViewById(R.id.smsButton);
         final ImageButton buttonCall = dialogView.findViewById(R.id.callButton);
         final ImageButton buttonWhatsapp = dialogView.findViewById(R.id.whatsappButton);
+        final ImageButton buttonChat = findViewById(R.id.chatButton);
 
         // setting the current values
-        fullName.setText(actualDriver.getFirstName()+" "+actualDriver.getLastName());
+        fullName.setText(fullname);
         numOfFreeplace.setText((carpool.getFreeSits()));
 
         dialogBuilder.setTitle(Name);
@@ -237,7 +234,20 @@ public class ResultActivity extends AppCompatActivity {
 
             }
         });
+
+
+        buttonChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent chatIntent = new Intent(ResultActivity.this , chatService.class);
+                startActivity(chatIntent);
+                Toast.makeText(getApplicationContext(), "Chat", Toast.LENGTH_SHORT).show();
+                b.dismiss();
+            }
+        });
     }
+
+
 
     protected void sendSMS(String number,String content) {
         Log.i("Send SMS", "");

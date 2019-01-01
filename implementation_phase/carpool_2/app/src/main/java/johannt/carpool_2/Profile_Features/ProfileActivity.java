@@ -56,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         //that means current user will return null
 
         //getting current user
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //initializing views
         textViewUserEmail = findViewById(R.id.textViewUserEmail);
@@ -74,6 +74,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
         } else {
+            textViewUserEmail.setText("Welcome " + user.getDisplayName());
 
             // /getting firebase auth object
             firebaseAuth = FirebaseAuth.getInstance();
@@ -95,7 +96,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             university = secondUser.getUniversity();
                             phoneNumber = secondUser.getPhoneNumber();
                             email = secondUser.getEmail();
-                            textViewUserEmail.setText("Welcome " + firstName +" "+ lastName);
                             break;
                         }
                     }
