@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,9 +24,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import johannt.carpool_2.Profile_Features.ProfileActivity;
-import johannt.carpool_2.R;
 import johannt.carpool_2.Rides_And_Validator.Validator;
 import johannt.carpool_2.Users.User;
+import johannt.carpool_2.R;
 
 /**
  * A login screen that offers login via email/password.

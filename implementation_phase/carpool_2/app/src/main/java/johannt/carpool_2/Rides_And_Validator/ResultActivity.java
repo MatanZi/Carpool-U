@@ -32,8 +32,8 @@ import java.util.List;
 
 import johannt.carpool_2.Firebase_Messaging.chatService;
 import johannt.carpool_2.Profile_Features.ProfileActivity;
-import johannt.carpool_2.R;
 import johannt.carpool_2.Users.User;
+import johannt.carpool_2.R;
 
 public class ResultActivity extends AppCompatActivity{
 

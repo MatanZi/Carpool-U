@@ -19,9 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import johannt.carpool_2.R;
 import johannt.carpool_2.Rides_And_Validator.Carpool;
 import johannt.carpool_2.Rides_And_Validator.RideHistoryAdapter;
+import johannt.carpool_2.R;
 
 public class RidesHistory extends AppCompatActivity {
 

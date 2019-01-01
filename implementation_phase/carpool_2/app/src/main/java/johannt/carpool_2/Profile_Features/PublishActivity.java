@@ -22,18 +22,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
 import johannt.carpool_2.Login_Phase.SignInActivity;
 import johannt.carpool_2.R;
 import johannt.carpool_2.Rides_And_Validator.Carpool;
-import johannt.carpool_2.Rides_And_Validator.MyDrives;
 import johannt.carpool_2.Rides_And_Validator.Validator;
 import johannt.carpool_2.Users.User;
-
-import static johannt.carpool_2.Profile_Features.ProfileActivity.firstName;
 
 public class PublishActivity extends AppCompatActivity  implements View.OnClickListener {
 

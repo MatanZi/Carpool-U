@@ -17,19 +17,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import johannt.carpool_2.R;
 import johannt.carpool_2.Rides_And_Validator.Carpool;
 import johannt.carpool_2.Rides_And_Validator.ResultActivity;
 import johannt.carpool_2.Rides_And_Validator.Validator;
+import johannt.carpool_2.R;
 
 public class FindRideActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -98,6 +94,19 @@ public class FindRideActivity extends AppCompatActivity implements View.OnClickL
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String currDate = formatter.format(date);
+        if(currDate.charAt(0) == '0' && currDate.charAt(3) == '0'){
+            formatter.applyPattern("d/M/yyyy");
+            currDate = formatter.format(date);
+        }
+        else if(currDate.charAt(0) == '0'){
+            formatter.applyPattern("d/MM/yyyy");
+            currDate = formatter.format(date);
+        }
+        else{
+            formatter.applyPattern("dd/M/yyyy");
+            currDate = formatter.format(date);
+
+        }
         editTextDate.setText(currDate);
         setCityToUniversity();
 

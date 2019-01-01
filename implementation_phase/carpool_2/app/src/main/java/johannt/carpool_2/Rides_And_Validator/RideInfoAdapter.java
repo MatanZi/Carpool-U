@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.List;
-
 import johannt.carpool_2.R;
 
 public class RideInfoAdapter extends ArrayAdapter<Carpool> {
