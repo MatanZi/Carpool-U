@@ -11,6 +11,8 @@ public class User {
     private String university;
     private String id; // id =0 reserved for admin.
     private String UID;
+    private String ImgProfile;
+    private String ImgCar;
 
 
     //--------------------------------- Constractor ---------------------------------
@@ -30,6 +32,8 @@ public class User {
         this.university = university;
         this.id = id;
         this.UID = UID;
+        ImgProfile = "";
+        ImgCar = "";
     }
 
 
@@ -106,5 +110,16 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getImgProfile(){ return ImgProfile ;}
+
+    public void setImgProfile(String imgProfile){ ImgProfile = imgProfile;}
+
+    public String getImgCar() {
+        return ImgCar;
+    }
+    public void setImgCar(String imgCar) {
+        ImgCar = imgCar;
     }
 }

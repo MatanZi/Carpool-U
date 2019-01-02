@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,9 +42,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public Button FindRideBtn ,PostRideBtn;
     private ImageButton settingProfileBtn;
     private Button MyRideHistoyButton;
+    private ImageView imageProfile;
 
     private User secondUser;
-    public static String  firstName, lastName, city, university, phoneNumber, email;
+    private FirebaseUser user;
+    public static boolean profilPicIsSet ;
+    public static String  firstName, lastName, city, university, phoneNumber, email, picture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,41 +59,52 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         //if the user is not logged in
         //that means current user will return null
-
         //getting current user
-        final FirebaseUser user = firebaseAuth.getCurrentUser();
+          user = firebaseAuth.getCurrentUser();
 
         //initializing views
         textViewUserEmail = findViewById(R.id.textViewUserEmail);
+        imageProfile = findViewById(R.id.imageProfile);
         buttonLogout = findViewById(R.id.buttonLogout);
         FindRideBtn = findViewById(R.id.FindRideBtn);
         PostRideBtn = findViewById(R.id.PostRideBtn);
         settingProfileBtn = findViewById(R.id.settingProfileButton);
         MyRideHistoyButton = findViewById(R.id.MyRideHistoyButton);
 
+
+        //adding listener to button
+        buttonLogout.setOnClickListener(this);
+        FindRideBtn.setOnClickListener(this);
+        PostRideBtn.setOnClickListener(this);
+        settingProfileBtn.setOnClickListener(this);
+        MyRideHistoyButton.setOnClickListener(this);
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         if (user == null) {
             //closing this activity
             finish();
             //starting login activity
             startActivity(new Intent(this, SignInActivity.class));
 
-
         } else {
-            textViewUserEmail.setText("Welcome " + user.getDisplayName());
-
             // /getting firebase auth object
             firebaseAuth = FirebaseAuth.getInstance();
             firebaseUser = firebaseAuth.getCurrentUser();
             databaseCarPool = FirebaseDatabase.getInstance();
             firebaseDatabaseUsers = databaseCarPool.getReference("Users");
 
-            secondUser= new User();
+            secondUser = new User();
             firebaseDatabaseUsers.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for(DataSnapshot userSnapshot : dataSnapshot.getChildren()){
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                         secondUser = userSnapshot.getValue(User.class);
-                        if(firebaseUser.getUid().equals(secondUser.getUID())){
+                        if (firebaseUser.getUid().equals(secondUser.getUID())) {
                             //displaying logged in user name
                             firstName = secondUser.getFirstName();
                             lastName = secondUser.getLastName();
@@ -96,6 +112,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             university = secondUser.getUniversity();
                             phoneNumber = secondUser.getPhoneNumber();
                             email = secondUser.getEmail();
+                            picture = secondUser.getImgProfile();
+
+                            textViewUserEmail.setText("Welcome " + firstName);
+                            // load the picture profile
+                            if(picture != null && picture.length() > 10)
+                                Glide.with(getApplicationContext()).load(picture).into(imageProfile);
+                            else imageProfile.setImageResource(R.drawable.user_icon);
                             break;
                         }
                     }
@@ -110,22 +133,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             });
 
 
-            //adding listener to button
-            buttonLogout.setOnClickListener(this);
-            FindRideBtn.setOnClickListener(this);
-            PostRideBtn.setOnClickListener(this);
-            settingProfileBtn.setOnClickListener(this);
-            MyRideHistoyButton.setOnClickListener(this);
         }
     }
-
 
     @Override
     public void onClick(View view) {
         //if logout is pressed
         if (view == settingProfileBtn ){
             startActivity(new Intent(this, ProfileSettingActivity.class));
-
         }
 
         if(view == buttonLogout){

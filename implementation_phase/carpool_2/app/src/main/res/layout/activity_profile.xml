@@ -8,26 +8,6 @@
     android:background="@drawable/pavements1"
     tools:context=".Profile_Features.ProfileActivity">
 
-    <TextView
-        android:id="@+id/textViewUserEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="87dp"
-        android:autoText="true"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="25sp"
-        android:visibility="visible"
-        app:autoSizeMaxTextSize="@dimen/mdtp_date_picker_header_text_size"
-        tools:text="@string/pref_header_general" />
-
     <Button
         android:id="@+id/buttonLogout"
         android:layout_width="99dp"
@@ -44,21 +24,22 @@
 
     <Button
         android:id="@+id/FindRideBtn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="313dp"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/PostRideBtn"
+        android:layout_marginStart="31dp"
         android:background="@color/colorAccent"
         android:text="Find Ride" />
 
     <Button
         android:id="@+id/PostRideBtn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/FindRideBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="68dp"
+        android:layout_marginEnd="31dp"
         android:background="@color/colorAccent"
         android:text="Post Ride" />
 
@@ -67,24 +48,57 @@
         style="@android:style/Widget.ImageButton"
         android:layout_width="55dp"
         android:layout_height="46dp"
-        android:layout_alignTop="@+id/buttonLogout"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="-5dp"
+        android:layout_alignTop="@+id/buttonLogout"
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/mdtp_material_button_selected"
+        android:layout_marginTop="-5dp"
+        android:background="@android:color/transparent"
         app:srcCompat="@drawable/ic_settings_black_24dp" />
 
     <Button
         android:id="@+id/MyRideHistoyButton"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="234dp"
+        android:layout_marginBottom="149dp"
         android:background="@color/colorAccent"
         android:text="Rides History" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="243dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/buttonLogout"
+        android:layout_marginTop="-18dp"
+        android:gravity="top|center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewUserEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="68dp"
+            android:autoText="true"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="25sp"
+            android:visibility="visible"
+            app:autoSizeMaxTextSize="@dimen/mdtp_date_picker_header_text_size"
+            tools:text="@string/pref_header_general" />
+
+        <ImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="370dp"
+            android:layout_height="136dp"
+            app:srcCompat="@drawable/user_icon" />
+    </LinearLayout>
 
 
 </RelativeLayout>

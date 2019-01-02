@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,8 +31,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -46,14 +50,16 @@ import johannt.carpool_2.Rides_And_Validator.Validator;
 import johannt.carpool_2.Users.User;
 
 import static johannt.carpool_2.Profile_Features.ProfileActivity.firstName;
+import static johannt.carpool_2.Profile_Features.ProfileActivity.picture;
 
 public class ProfileSettingActivity extends AppCompatActivity implements View.OnClickListener{
 
 
 
-    private String id;
+    private String id, uriImgProfile;
     final private int PICK_IMAGE = 2;
     final private int CAPTURE_IMAGE = 1;
+    final private int EMPTY_SIZE = 10;
     private Boolean checker;
     //defining view objects
     private EditText editTextFirstName;
@@ -69,13 +75,12 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
 
     //defining firebaseauth object
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseUsersRef;
+    private DatabaseReference databaseUsersRef,userRef;
     private FirebaseUser firebaseUser;
     private FirebaseStorage storage;
     private StorageReference imgProfileRef,imgCarRef;
     private User user;
     private Validator validator;
-    private File file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +88,7 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_profile_setting);
 
         //initializing firebase auth object
-        firebaseAuth = FirebaseAuth.getInstance();
-         storage = FirebaseStorage.getInstance();
-         imgProfileRef = storage.getReference().child("images/" + ProfileActivity.email + "/profile");
+
 
         //Carpool = new Firebase("https://carpool-u.firebaseio.com/");
 
@@ -105,6 +108,7 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         progressDialog = new ProgressDialog(this);
         buttonSave.setOnClickListener(this);
         uploadPicProfile.setOnClickListener(this);
+        setCurrentsValues();
 
     }
 
@@ -112,14 +116,42 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
+        //  setUser(id);
+        firebaseAuth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
         databaseUsersRef = FirebaseDatabase.getInstance().getReference("Users");
         firebaseUser = firebaseAuth.getCurrentUser();
         id = firebaseUser.getUid();
-        //updateUI(currentUser);
-        setCurrentsValues();
-        // set image profile
-        Glide.with(this).load(imgProfileRef).into(profilePict);
+        imgProfileRef = storage.getReference().child("images/" + ProfileActivity.email + "/profile");
+
+        // /getting firebase auth object
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        user = new User();
+
+//        databaseUsersRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+//                    user = userSnapshot.getValue(User.class);
+//                    if (firebaseUser.getUid().equals(user.getUID())) {
+//                        uriImgProfile = user.getImgProfile();
+//                        break;
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                // Failed to read value
+//                Log.w("Failed to read value.", databaseError.toException());
+//            }
+//        });
+
     }
+
+        //updateUI(currentUser);
 
 
     private void showPictureSettingDialog() {
@@ -167,10 +199,32 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         byte[] data = baos.toByteArray();
         imgProfileRef.putBytes(data);
         Log.e("trying to upload image", "success");
+        setImgUrlToUser();
+        ProfileActivity.profilPicIsSet = true ;
     }
 
+    /**
+     * download Image url from Storage firebase
+     * @return
+     */
+    public void setImgUrlToUser(){
+        imgProfileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
 
-
+                final Uri Furi = uri;
+                databaseUsersRef.child(id).child("picture").setValue(Furi.toString());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.e("downloadImage", "failed");
+            }
+        });
+    }
+    /**
+     * take a new picture with camera
+     */
     private void takePicture() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -178,6 +232,9 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         }
     }
 
+    /**
+     * import from gallery
+     */
     private void importPicture(){
 
         // invoke the image gallery using an implict intent.
@@ -227,8 +284,6 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
 
     }
 
-
-
     /**
      * @param spinner
      * @param myString
@@ -242,20 +297,49 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
         }
         return 0;
     }
+    /**
+     * @param uid
+     * @return user corresponding to the UID
+     */
+    public User setUser(String uid) {
+        user = new User();
+        databaseUsersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    user = userSnapshot.getValue(User.class);
+                    if (firebaseUser.getUid().equals(user.getUID())){
+                        uriImgProfile = user.getFirstName();
+                        break;
+                    }
 
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Failed to read value
+                Log.w("Failed to read value.", databaseError.toException());
+            }
+        });
+        return  user ;
+    }
+
+    /**
+     * set current values of the user
+     */
     public void setCurrentsValues(){
         editTextFirstName.setText(firstName);
         editTextLastName.setText(ProfileActivity.lastName);
         editTextPhoneNumber.setText(ProfileActivity.phoneNumber);
         spinnerCity.setSelection(getIndex(spinnerCity, ProfileActivity.city));
         spinnerUniversity.setSelection(getIndex(spinnerUniversity, ProfileActivity.university));
-    }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setCurrentsValues();
+        // set picture profile if exist
+        //setUser(id);
+        if(picture.length() > EMPTY_SIZE)
+        Glide.with(this).load(picture).into(profilePict);
+        else profilePict.setImageResource(R.drawable.user_icon);
     }
 
 
@@ -316,6 +400,7 @@ public class ProfileSettingActivity extends AppCompatActivity implements View.On
                 progressDialog.setMessage("Updating...");
                 progressDialog.show();
                 updateUser(firstname,lastname,phoneNumber,city,university);
+
                 updateImageProfil();
 
 
